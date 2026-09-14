@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Image, Spinner, Alert } from 'react-bootstrap';
 import { uploadService } from '../api/upload.service'; 
 
-const ImageUpload = ({ value, onChange, label = "Cover Image", disabled = false }) => {
+const ImageUpload = ({ value, onChange, label = "Cover Image", disabled = false, required = false }) => {
 
     const [previewUrl, setPreviewUrl] = useState('');
 
@@ -39,7 +39,7 @@ const ImageUpload = ({ value, onChange, label = "Cover Image", disabled = false 
 
   return (
     <Form.Group className="mb-3">
-      <Form.Label>{label}</Form.Label>
+      <Form.Label>{label}{required && <span className="text-danger"> *</span>}</Form.Label>
       
       {/* PREVIEW STATE (If URL exists) */}
       {previewUrl ? (
@@ -68,6 +68,7 @@ const ImageUpload = ({ value, onChange, label = "Cover Image", disabled = false 
             accept="image/*"
             onChange={handleFileChange} 
             disabled={disabled} 
+            required={required}
           />
           <Form.Text className="text-muted">
             Supported formats: JPG, PNG, WEBP

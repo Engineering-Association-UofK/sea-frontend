@@ -1,0 +1,6 @@
+.role-check {
+    padding-left: calc(2.5em + 12px);
+}
+.tableWrapper {
+    height: calc(100dvh - 55px - 48px - 42px - 48px - 68px);
+}

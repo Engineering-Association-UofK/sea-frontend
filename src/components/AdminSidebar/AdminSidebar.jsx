@@ -78,6 +78,20 @@ const AdminSidebar = ({ onNavigate }) => {
                             <span className="fw-medium">Passcodes</span>
                         </NavLink>
                     </li>
+
+                    <li className="nav-item text-muted small fw-bold px-3 py-2 mt-3 text-uppercase letter-spacing-1">Certificates Management</li>
+                    <li className="nav-item">
+                        <NavLink to="/admin/certificates" className="nav-link text-dark rounded-3" onClick={handleLinkClick}>
+                            <i className="bi bi-patch-check me-3 fs-5"></i>
+                            <span className="fw-medium">Certificates</span>
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/admin/certificate-templates" className="nav-link text-dark rounded-3" onClick={handleLinkClick}>
+                            <i className="bi bi-file-earmark-richtext me-3 fs-5"></i>
+                            <span className="fw-medium">Templates</span>
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
 

@@ -16,6 +16,7 @@ export const roles = [
 ]
 
 export const ADMIN_ROLES = roles.map((role) => role.value); //["sys:admin", "sys:super_admin", "sys:user_manager", "sys:tech_support", "content:editor", "content:blog_manager", "content:event_manager", "content:form_manager", "cert:certifier", "cert:manager", "cert:viewer"];
+export const ADMIN_ROLES_NAMES = roles.map((role) => role.name);
 
 export const displayRole = (roleValue) => {
     const filteredRoles = roles.filter((role) => role.value == roleValue)
