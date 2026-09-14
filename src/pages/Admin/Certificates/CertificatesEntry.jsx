@@ -19,14 +19,14 @@ import { ADMIN_ROLES_NAMES } from '../../../utils/roles';
 import ImageUpload from '../../../components/ImageUpload';
  
 const EMPTY_FORM = {
-  event_id:                NaN,
+  event_id:                null,
   recipient_email:         '',
   recipient_name:          '',
-  recipient_user_id:       NaN,
+  recipient_user_id:       null,
   signer_name_one:         '',
   signer_name_two:         '',
-  signer_role_one:         ADMIN_ROLES_NAMES[0],
-  signer_role_two:         ADMIN_ROLES_NAMES[0],
+  signer_role_one:         '',
+  signer_role_two:         '',
   signer_signature_one:    null,
   signer_signature_two:    null,
   template_id:             NaN
@@ -71,17 +71,17 @@ const CertificatesEntry = () => {
   useEffect(() => {
     if (isEditMode && certificateFromState) {
       setFormData({
-        event_id:                certificateFromState.event_id        ?? 0,
+        event_id:                certificateFromState.event_id        ?? null,
         recipient_email:         certificateFromState.recipient_email      ?? '',
         recipient_name:          certificateFromState.recipient_name      ?? '',
-        recipient_user_id:       certificateFromState.recipient_user_id    ?? 0,
+        recipient_user_id:       certificateFromState.recipient_user_id    ?? null,
         signer_name_one:         certificateFromState.signer_name_one         ?? '',
         signer_name_two:         certificateFromState.signer_name_two         ?? '',
         signer_role_one:         certificateFromState.signer_role_one         ?? '',
         signer_role_two:         certificateFromState.signer_role_two         ?? '',
         signer_signature_one:    certificateFromState.signer_signature_one    ?? null,
         signer_signature_two:    certificateFromState.signer_signature_two    ?? null,
-        template_id:             certificateFromState.template_id             ?? 0,
+        template_id:             certificateFromState.template_id             ?? NaN,
       });
     }
   }, [isEditMode, certificateFromState]);
@@ -306,178 +306,192 @@ const CertificatesEntry = () => {
   
         {/* ── Form body ── */}
         <div className="scrollable-container">
-  
-          {/* Recipient name */}
-          <Form.Group className="mb-3">
-            <Form.Label>Recipient name <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              name="recipient_name"
-              type="text"
-              placeholder="Enter recipient name"
-              value={formData.recipient_name}
-              onChange={handleChange}
-              minLength={3}
-              maxLength={255}
-              required
-              disabled={isPending || isEditMode}
-            />
-          </Form.Group>
-  
-          {/* Recipient email */}
-          <Form.Group className="mb-3">
-            <Form.Label>Recipient email <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              name="recipient_email"
-              type="email"
-              placeholder="Enter recipient email"
-              value={formData.recipient_email}
-              onChange={handleChange}
-              minLength={3}
-              maxLength={255}
-              required
-              disabled={isPending}
-            />
-          </Form.Group>
-  
-          {/* Recipient ID */}
-          <Form.Group className="mb-3">
-            <Form.Label>Recipient ID <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              name="recipient_user_id"
-              type="number"
-              placeholder="Enter recipient ID"
-              value={formData.recipient_user_id}
-              onChange={handleChange}
-              minLength={3}
-              maxLength={255}
-              required
-              disabled={isPending}
-            />
-          </Form.Group>
-  
-          {/* Event ID */}
-          <Form.Group className="mb-3">
-            <Form.Label>Event ID <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              name="event_id"
-              type="number"
-              placeholder="Enter event ID"
-              value={formData.event_id}
-              onChange={handleChange}
-              minLength={3}
-              maxLength={255}
-              required
-              disabled={isPending}
-            />
-          </Form.Group>
-  
-          {/* Template ID */}
-          <Form.Group className="mb-3">
-            <Form.Label>Template ID <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              name="template_id"
-              type="number"
-              placeholder="Enter template ID"
-              value={formData.template_id}
-              onChange={handleChange}
-              minLength={3}
-              maxLength={255}
-              required
-              disabled={isPending || isEditMode}
-            />
-          </Form.Group>
+          <Row>
+            <Col sm={6} className='mb-5'>
+              {/* Recipient name */}
+              <Form.Group className="mb-3">
+                <Form.Label>Recipient name <span className="text-danger">*</span></Form.Label>
+                <Form.Control
+                  name="recipient_name"
+                  type="text"
+                  placeholder="Enter recipient name"
+                  value={formData.recipient_name}
+                  onChange={handleChange}
+                  minLength={3}
+                  maxLength={255}
+                  required
+                  disabled={isPending || isEditMode}
+                />
+              </Form.Group>
+      
+              {/* Recipient email */}
+              <Form.Group className="mb-3">
+                <Form.Label>Recipient email <span className="text-danger">*</span></Form.Label>
+                <Form.Control
+                  name="recipient_email"
+                  type="email"
+                  placeholder="Enter recipient email"
+                  value={formData.recipient_email}
+                  onChange={handleChange}
+                  minLength={3}
+                  maxLength={255}
+                  required
+                  disabled={isPending}
+                />
+              </Form.Group>
+      
+              {/* Recipient ID */}
+              <Form.Group className="mb-3">
+                <Form.Label>Recipient ID</Form.Label>
+                <Form.Control
+                  name="recipient_user_id"
+                  type="number"
+                  placeholder="Enter recipient ID"
+                  value={formData.recipient_user_id}
+                  onChange={handleChange}
+                  minLength={3}
+                  maxLength={255}
+                  disabled={isPending}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col sm={6} className='mb-5'>
+              {/* Event ID */}
+              <Form.Group className="mb-3">
+                <Form.Label>Event ID</Form.Label>
+                <Form.Control
+                  name="event_id"
+                  type="number"
+                  placeholder="Enter event ID"
+                  value={formData.event_id}
+                  onChange={handleChange}
+                  minLength={3}
+                  maxLength={255}
+                  disabled={isPending}
+                />
+              </Form.Group>
+      
+              {/* Template ID */}
+              <Form.Group className="mb-3">
+                <Form.Label>Template ID <span className="text-danger">*</span></Form.Label>
+                <Form.Control
+                  name="template_id"
+                  type="number"
+                  placeholder="Enter template ID"
+                  value={formData.template_id}
+                  onChange={handleChange}
+                  minLength={3}
+                  maxLength={255}
+                  required
+                  disabled={isPending || isEditMode}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
 
           {!isEditMode && (
-            <>
-              {/* First signer’s name */}
-              <Form.Group className="mb-3">
-                <Form.Label>First signer’s name <span className="text-danger">*</span></Form.Label>
-                <Form.Control
-                  name="signer_name_one"
-                  type="text"
-                  placeholder="Enter first signer’s name"
-                  value={formData.signer_name_one}
-                  onChange={handleChange}
-                  minLength={3}
-                  maxLength={255}
-                  required
-                  disabled={isPending || isEditMode}
-                />
-              </Form.Group>
-      
-              {/* First signer’s role */}
-              <Form.Group className="mb-3">
-                <Form.Label>First signer’s role <span className="text-danger">*</span></Form.Label>
-                <Form.Select
-                  name="signer_role_one"
-                  value={formData.signer_role_one}
-                  onChange={handleChange}
-                  required
-                  disabled={isPending || isEditMode}
-                >
-                  {ADMIN_ROLES_NAMES.map((role) => (
-                    <option key={role} value={role}>{role}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
+            <Row>
+              <Col sm={6} className='mb-5'>
+                {/* First signer’s name */}
+                <Form.Group className="mb-3">
+                  <Form.Label>First signer’s name <span className="text-danger">*</span></Form.Label>
+                  <Form.Control
+                    name="signer_name_one"
+                    type="text"
+                    placeholder="Enter first signer’s name"
+                    value={formData.signer_name_one}
+                    onChange={handleChange}
+                    minLength={3}
+                    maxLength={255}
+                    required
+                    disabled={isPending || isEditMode}
+                  />
+                </Form.Group>
 
-              {/* First signer’s signature */}
-              <Form.Group className="mb-3">
-                <ImageUpload 
-                  label="First signer’s signature"
-                  name="signer_signature_one"
-                  value={formData.signer_signature_one}
-                  onChange={(val) => {console.log("val", val); setFormData(prev => ({...prev, signer_signature_one: val}))}}
-                  disabled={isPending || isEditMode}
-                  required
-                />
-              </Form.Group>
-      
-              {/* Second signer’s name */}
-              <Form.Group className="mb-3">
-                <Form.Label>Second signer’s name <span className="text-danger">*</span></Form.Label>
-                <Form.Control
-                  name="signer_name_two"
-                  type="text"
-                  placeholder="Enter second signer’s name"
-                  value={formData.signer_name_two}
-                  onChange={handleChange}
-                  minLength={3}
-                  maxLength={255}
-                  required
-                  disabled={isPending || isEditMode}
-                />
-              </Form.Group>
-      
-              {/* Second signer’s role */}
-              <Form.Group className="mb-3">
-                <Form.Label>Second signer’s role <span className="text-danger">*</span></Form.Label>
-                <Form.Select
-                  name="signer_role_two"
-                  value={formData.signer_role_two}
-                  onChange={handleChange}
-                  required
-                  disabled={isPending || isEditMode}
-                >
-                  {ADMIN_ROLES_NAMES.map((role) => (
-                    <option key={role} value={role}>{role}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
+                {/* First signer’s role */}
+                <Form.Group className="mb-3">
+                  <Form.Label>First signer’s role <span className="text-danger">*</span></Form.Label>
+                  <Form.Control
+                    name="signer_role_one"
+                    type="text"
+                    placeholder="Enter first signer’s role"
+                    value={formData.signer_role_one}
+                    onChange={handleChange}
+                    minLength={3}
+                    maxLength={255}
+                    required
+                    disabled={isPending || isEditMode}
+                  />
+                </Form.Group>
 
-              {/* Second signer’s signature */}
-              <Form.Group className="mb-3">
-                <ImageUpload 
-                  label="Second signer’s signature"
-                  name="signer_signature_two"
-                  value={formData.signer_signature_two}
-                  onChange={(val) => setFormData(prev => ({...prev, signer_signature_two: val}))}
-                  disabled={isPending || isEditMode}
-                  required
-                />
-              </Form.Group>
-            </>
+                {/* First signer’s signature */}
+                <Form.Group className="mb-3">
+                  <ImageUpload 
+                    label="First signer’s signature"
+                    name="signer_signature_one"
+                    value={formData.signer_signature_one}
+                    onChange={(val) => {console.log("val", val); setFormData(prev => ({...prev, signer_signature_one: val}))}}
+                    disabled={isPending || isEditMode}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+
+              <Col sm={6}>
+                {/* Second signer’s name */}
+                <Form.Group className="mb-3">
+                  <Form.Label>Second signer’s name <span className="text-danger">*</span></Form.Label>
+                  <Form.Control
+                    name="signer_name_two"
+                    type="text"
+                    placeholder="Enter second signer’s name"
+                    value={formData.signer_name_two}
+                    onChange={handleChange}
+                    minLength={3}
+                    maxLength={255}
+                    required
+                    disabled={isPending || isEditMode}
+                  />
+                </Form.Group>
+
+                {/* Second signer’s role */}
+                <Form.Group className="mb-3">
+                  <Form.Label>Second signer’s role <span className="text-danger">*</span></Form.Label>
+                  <Form.Control
+                    name="signer_role_two"
+                    type="text"
+                    placeholder="Enter second signer’s role"
+                    value={formData.signer_role_two}
+                    onChange={handleChange}
+                    minLength={3}
+                    maxLength={255}
+                    required
+                    disabled={isPending || isEditMode}
+                  />
+                </Form.Group>
+
+                {/* Second signer’s signature */}
+                <Form.Group className="mb-3">
+                  <ImageUpload 
+                    label="Second signer’s signature"
+                    name="signer_signature_two"
+                    value={formData.signer_signature_two}
+                    onChange={(val) => setFormData(prev => ({...prev, signer_signature_two: val}))}
+                    disabled={isPending || isEditMode}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
           )}
+
+          {/* {!isEditMode && (
+            <>
+      
+            </>
+          )} */}
 
         </div>
       </Form>

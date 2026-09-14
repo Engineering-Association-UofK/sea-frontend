@@ -12,7 +12,7 @@ import { useTemplate, useCreateTemplate, useUpdateTemplate } from '../../../feat
 import ImageUpload from '../../../components/ImageUpload';
  
 const EMPTY_FORM = {
-  language:     '',
+  language:     'en',
   name:         '',
   version:      '',
   layout: {
@@ -22,7 +22,7 @@ const EMPTY_FORM = {
   },
 };
 
-const LANGUAGES = [{value: 'English', name: 'en'}, {value: 'العربية', name: 'ar'}];
+const LANGUAGES = [{value: 'en', name: 'English'}, {value: 'ar', name: 'العربية'}];
 
 
 const TemplatesEntry = () => {
@@ -47,7 +47,7 @@ const TemplatesEntry = () => {
   useEffect(() => {
     if (isEditMode && fetchedTemplate) {
       setFormData({
-        language:     fetchedTemplate.language           ?? '',
+        language:     fetchedTemplate.language           ?? 'en',
         name:         fetchedTemplate.name               ?? '',
         version:      fetchedTemplate.version            ?? '',
         statement:    fetchedTemplate.layout?.statement  ?? '',
