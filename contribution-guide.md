@@ -238,9 +238,6 @@ Create a `.env` file in the project root:
 # Backend API (without /api suffix)
 VITE_API_NEW_BASE_URL_RAW=http://localhost:8000
 
-# Monitoring service (separate backend)
-VITE_API_MONITOR_URL=http://localhost:8888
-
 ```
 
 ---

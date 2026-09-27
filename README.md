@@ -207,9 +207,6 @@ Create a `.env` file in the project root based on `.env.example`:
 ```env
 # Primary backend API base URL (no trailing slash, no /api suffix)
 VITE_API_NEW_BASE_URL_RAW="http://localhost:8000"
-
-# Monitoring service URL (separate backend)
-VITE_API_MONITOR_URL="http://localhost:8888"
 ```
 
 ---
