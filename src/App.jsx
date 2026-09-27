@@ -26,7 +26,6 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicOnlyRoute from "./components/PublicOnlyRoute.jsx";
 import AdminUsersDashboard from "./pages/Admin/Admin Users/AdminUsersDashboard.jsx";
 import AdminUsersEntry from "./pages/Admin/Admin Users/AdminUsersEntry.jsx";
-import Dashboard from "./pages/Admin/Dashboard/Dashboard.jsx";
 import ImageStorageDashboard from "./pages/Admin/Image Storage/ImageStorageDashboard.jsx";
 import { CONFIG } from "./config";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
@@ -43,13 +42,15 @@ import PostsDashboard from "./pages/Admin/Posts/PostsDashboard.jsx";
 import FormAnalysisView from './pages/forms/FormAnalysisView';
 import AnalysisGallery from './pages/forms/AnalysisGallery';
 import ApplicationView from './pages/forms/ApplicationView';
-import CategoryView from './pages/forms/CategoryView'; // Make sure this is here!
+import CategoryView from './pages/forms/CategoryView';
 import Events from "./pages/Events/Events.jsx";
 import EventsDashboard from "./pages/Admin/Events/EventsDashboard.jsx";
 import EventsEntry from "./pages/Admin/Events/EventsEntry.jsx";
 import AdminRoleGuard from "./components/AdminRoleGuard.jsx";
 import VerifyCertificate from "./components/verification/VerifyCertificate.jsx";
 import VerifyDocument from "./components/verification/VerifyDocument.jsx";
+import ElectionPage from "./pages/election/ElectionPage.jsx";
+import DashboardPage from "./pages/Admin/dashboard/DashboardPage.jsx";
 import TeamsDashboard from "./pages/Admin/Teams/TeamsDashboard.jsx";
 import PasscodeLookup from "./pages/Admin/passcode/PasscodeLookup.jsx";
 import InitialRegister from "./pages/auth/InitialRegister.jsx";
@@ -112,6 +113,7 @@ function App() {
                 <Route path="/register" element={<InitialRegister />} />
                 <Route path="/register/:code" element={<RegistrationFlow />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/election" element={<ElectionPage />} />
               </Route>
             </Route>
 
@@ -123,7 +125,7 @@ function App() {
                 {/* <Route index element={<Navigate to="dashboard" replace />} /> */}
                 
                 {/* Dashboard: Open to all admins */}
-                {/* <Route path="dashboard" element={<Dashboard />} /> */}
+                <Route path="dashboard" element={<DashboardPage />} />
                 
                 {/* Content: Posts */}
                 <Route path="posts" element={<AdminRoleGuard allowedRoles={["content:blog_manager"]}><PostsDashboard /></AdminRoleGuard>} />

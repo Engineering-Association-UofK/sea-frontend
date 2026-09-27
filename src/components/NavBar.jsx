@@ -184,7 +184,7 @@ const NavigationBar = () => {
             />
           </Navbar.Brand>
 
-          {/* DESKTOP NAVIGATION - Hidden on mobile, horizontal layout */}
+          {/* DESKTOP NAVIGATION */}
           <div className="d-none d-lg-flex align-items-center desktop-nav">
             <Nav.Link as={NavLink} to="/" end className="fw-medium text-dark">
               {translations.navbar.home}
@@ -193,6 +193,9 @@ const NavigationBar = () => {
             {renderDesktopDropdown(translations.navbar.blogs, postsItems, 'posts')}
             <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark">
               {translations.navbar.events}
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/election" className="fw-medium text-dark">
+              {translations.navbar.election}
             </Nav.Link>
             {isAdmin && (
               <Nav.Link as={NavLink} to="/admin" className="fw-medium text-dark">
@@ -265,6 +268,9 @@ const NavigationBar = () => {
                 <MobileCollapsibleSection title={translations.navbar.blogs} items={postsItems} />
                 <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark fs-5" onClick={handleClose}>
                   {translations.navbar.events}
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/election" className="fw-medium text-dark fs-5" onClick={handleClose}>
+                  {translations.navbar.election}
                 </Nav.Link>
                 {isAdmin && (
                   <Nav.Link as={NavLink} to="/admin" className="fw-medium text-dark fs-5" onClick={handleClose}>
