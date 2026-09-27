@@ -59,6 +59,8 @@ const DashboardPage = () => {
     ? Object.values(analysis).reduce((acc, curr) => acc + (Number(curr) || 0), 0)
     : 0;
 
+  const getPct = (val) => (totalEntities > 0 ? (val / totalEntities) * 100 : 0);
+
   return (
     <div className="dashboard-container pb-4">
       {/* Header */}
@@ -114,7 +116,7 @@ const DashboardPage = () => {
           <Row className="g-3 mb-4">
             {METRICS_MAP.map((item) => {
               const count = analysis[item.key] ?? 0;
-              const percentage = totalEntities > 0 ? ((count / totalEntities) * 100).toFixed(1) : 0;
+              const percentage = getPct(count).toFixed(1);
 
               return (
                 <Col key={item.key} xs={12} sm={6} lg={4} xl={2.4}>
@@ -162,41 +164,58 @@ const DashboardPage = () => {
             })}
           </Row>
 
-          {/* Breakdown Bar */}
+          {/* Breakdown Bar Card */}
           <Card className="border-0 shadow-sm mb-4">
-            <Card.Body className="p-4">
-              <div className="d-flex justify-content-between align-items-center mb-3">
+            <Card.Body className="p-3 p-md-4">
+              {/* Card Header */}
+              <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-3">
                 <div>
                   <h6 className="fw-bold mb-0 text-dark">Platform Entity Breakdown</h6>
                   <span className="text-muted small">
-                    Relative ratio of recorded records across systems ({totalEntities} total)
+                    Relative ratio of records across systems ({totalEntities.toLocaleString()} total)
                   </span>
                 </div>
-                <Badge bg="dark" className="font-monospace px-2 py-1">
+                <Badge bg="dark" className="font-monospace px-2 py-1 align-self-start align-self-sm-auto">
                   System Health: Nominal
                 </Badge>
               </div>
 
-              <ProgressBar className="rounded-3 overflow-hidden mb-3" style={{ height: '14px' }}>
-                <ProgressBar variant="primary" now={(analysis.users / totalEntities) * 100} key={1} />
-                <ProgressBar variant="success" now={(analysis.certificates / totalEntities) * 100} key={2} />
-                <ProgressBar variant="warning" now={(analysis.events / totalEntities) * 100} key={3} />
-                <ProgressBar variant="info" now={(analysis.posts / totalEntities) * 100} key={4} />
-                <ProgressBar variant="dark" now={(analysis.forms / totalEntities) * 100} key={5} />
+              {/* Stacked Progress Bar */}
+              <ProgressBar className="rounded-3 overflow-hidden mb-3" style={{ height: '12px' }}>
+                <ProgressBar variant="primary" now={getPct(analysis.users)} key={1} />
+                <ProgressBar variant="success" now={getPct(analysis.certificates)} key={2} />
+                <ProgressBar variant="warning" now={getPct(analysis.events)} key={3} />
+                <ProgressBar variant="info" now={getPct(analysis.posts)} key={4} />
+                <ProgressBar variant="dark" now={getPct(analysis.forms)} key={5} />
               </ProgressBar>
 
-              <div className="d-flex flex-wrap gap-3 pt-2 border-top">
-                {METRICS_MAP.map((m) => (
-                  <div key={m.key} className="d-flex align-items-center gap-2 small">
-                    <span
-                      className={`rounded-circle d-inline-block ${m.badgeBg}`}
-                      style={{ width: '8px', height: '8px' }}
-                    ></span>
-                    <span className="text-secondary">{m.label}:</span>
-                    <strong className="text-dark font-monospace">{analysis[m.key] ?? 0}</strong>
-                  </div>
-                ))}
-              </div>
+              {/* Legend Grid */}
+              <Row className="g-2 pt-3 border-top">
+                {METRICS_MAP.map((m) => {
+                  const count = analysis[m.key] ?? 0;
+                  const pct = getPct(count).toFixed(1);
+
+                  return (
+                    <Col key={m.key} xs={6} sm={4} lg="auto" className="flex-grow-1">
+                      <div className="p-2 rounded bg-light border d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-1 h-100">
+                        <div className="d-flex align-items-center gap-2 min-w-0">
+                          <span
+                            className={`rounded-circle d-inline-block flex-shrink-0 ${m.badgeBg}`}
+                            style={{ width: '8px', height: '8px' }}
+                          ></span>
+                          <span className="text-secondary small text-truncate">{m.label}</span>
+                        </div>
+                        <div className="d-flex align-items-baseline gap-1 ms-1 ms-sm-2">
+                          <strong className="text-dark font-monospace small">
+                            {count.toLocaleString()}
+                          </strong>
+                          <span className="text-muted fs-7">({pct}%)</span>
+                        </div>
+                      </div>
+                    </Col>
+                  );
+                })}
+              </Row>
             </Card.Body>
           </Card>
         </>
@@ -211,7 +230,7 @@ const DashboardPage = () => {
           box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
         }
         .fs-7 {
-          font-size: 0.78rem;
+          font-size: 0.75rem;
         }
         .spin {
           animation: spin 1s linear infinite;
