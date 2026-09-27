@@ -20,7 +20,11 @@
         "admin": "المسؤول",
         "login": "تسجيل الدخول",
         "logout": "تسجيل الخروج",
-        "language": "English"
+        "language": "English",
+        "userMenu": {
+            "profile": "الحساب"
+        },
+        "election": "الانتخابات"
     },
     "home": {
         "hero": {

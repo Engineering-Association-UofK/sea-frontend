@@ -22,7 +22,8 @@
         "language": "العربية",
         "userMenu": {
             "profile": "Profile"
-        }
+        },
+        "election": "Election"
     },
     "home": {
         "hero": {

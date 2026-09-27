@@ -192,6 +192,12 @@ body {
   border-bottom: none !important;
 }
 
+/* Prevent Flexbox columns from expanding beyond grid bounds */
+.row > [class*="col-"] {
+  min-width: 0;
+  max-width: 100%;
+}
+
 /* ==========================================================================
    4. Typography & Utility Classes
    ========================================================================== */
