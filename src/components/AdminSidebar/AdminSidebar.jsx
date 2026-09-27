@@ -78,6 +78,14 @@ const AdminSidebar = ({ onNavigate }) => {
                             <span className="fw-medium">Passcodes</span>
                         </NavLink>
                     </li>
+
+                    <li className="nav-item text-muted small fw-bold px-3 py-2 mt-3 text-uppercase letter-spacing-1">Elections</li>
+                    <li className="nav-item">
+                        <NavLink to="/admin/election" className="nav-link text-dark rounded-3" onClick={handleLinkClick}>
+                            <i className="bi bi-box-seam-fill me-3 fs-5"></i>
+                            <span className="fw-medium">Election</span>
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
 

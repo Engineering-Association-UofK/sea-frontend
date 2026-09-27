@@ -60,6 +60,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 
 import React, { useEffect } from 'react';
 import ReactGA from 'react-ga4';
+import ElectionAdminPage from "./pages/Admin/election/ElectionAdminPage.jsx";
 
 ReactGA.initialize('G-S8J4CN53DH');
 
@@ -161,6 +162,9 @@ function App() {
 
                 {/* USERS: Passcode lookup */}
                 <Route path="passcode" element={<AdminRoleGuard allowedRoles={["sys:user_manager"]}><PasscodeLookup /></AdminRoleGuard>} />
+
+                {/* Election */}
+                <Route path="election" element={<AdminRoleGuard allowedRoles={[]}><ElectionAdminPage /></AdminRoleGuard>} />
                 
                 <Route path="*" element={<Navigate to="/admin/dashboard" />} />
               </Route>
