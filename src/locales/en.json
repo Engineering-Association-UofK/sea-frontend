@@ -194,6 +194,58 @@
         }
     },
     "profile": {
+        "election": {
+            "title": "Voting Credentials",
+            "description": "Generate your secure election voting ticket to participate in the ongoing campus elections.",
+            "warningTitle": "CRITICAL INFORMATION - READ CAREFULLY",
+            "warning1": "This ticket can only be generated ONCE per year.",
+            "warning2": "DO NOT SHARE this code with anyone, not even association staff.",
+            "warning3": "If you lose this ticket, you WILL NOT be able to vote. It cannot be recovered.",
+            "confirmCheckbox": "I understand that I must save this ticket immediately and keep it strictly confidential.",
+            "generateBtn": "Generate Election Ticket",
+            "generating": "Generating...",
+            "ticketLabel": "Your Official Voting Ticket",
+            "copyBtn": "Copy Ticket Code",
+            "copied": "Copied to clipboard!",
+            "alreadyGotError": "You have already generated your ticket for this election.",
+            "saveWarning": "Please copy and save this code somewhere secure right now. It will not be shown again once the page reloads."
+        },
+        "info": {
+            "title": "Personal Details",
+            "nameEn": "English Name",
+            "nameAr": "Arabic Name",
+            "phone": "Phone",
+            "department": "Department",
+            "saveBtn": "Save Changes",
+            "saving": "Saving...",
+            "securityTitle": "Security",
+            "oldPassword": "Old Password",
+            "newPassword": "New Password",
+            "confirmPassword": "Confirm Password",
+            "updatePasswordBtn": "Update Password"
+        },
+        "certificates": {
+            "title": "Your Certificates",
+            "empty": "No certificates found.",
+            "issued": "Issued",
+            "downloadZip": "ZIP"
+        },
+        "notifications": {
+            "title": "Notifications",
+            "markAllRead": "Mark All as Read",
+            "empty": "No notifications.",
+            "markAsRead": "Mark as Read",
+            "delete": "Delete"
+        },
+        "tabs": {
+            "info": "Personal Info & Security",
+            "certificates": "Certificates",
+            "notifications": "Notifications",
+            "election": "Voting Ticket"
+        },
+        "failedToLoad": "Failed to load profile"
+    },
+    "profile-old": {
         "title": "PROFILE",
         "settings": "SETTINGS",
         "detailsTab": "Details",
