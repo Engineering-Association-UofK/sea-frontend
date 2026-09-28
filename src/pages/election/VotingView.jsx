@@ -7,7 +7,7 @@ const ALLOWED_REGEX = /^[2-9A-HJ-NP-Z]$/i;
 
 // Custom 8-box OTP-style ticket input with auto-formatting
 const TicketInput = ({ value, onChange }) => {
-  const { language } = useLanguage();
+  const { language, translations } = useLanguage();
   const inputRefs = useRef([]);
 
   // Extract valid characters only
@@ -96,18 +96,24 @@ const TicketInput = ({ value, onChange }) => {
         width: '42px',
         height: '50px',
         borderRadius: '8px',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        direction: 'ltr',
+        textAlign: 'center'
       }}
     />
   );
 
   return (
-    <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-1 gap-sm-2 dir-ltr">
-      <div className="d-flex gap-1 gap-sm-2">
+    <div 
+      dir="ltr"
+      className="d-flex align-items-center justify-content-center justify-content-md-start gap-1 gap-sm-2"
+      style={{ direction: 'ltr' }}
+    >
+      <div className="d-flex gap-1 gap-sm-2" style={{ direction: 'ltr' }}>
         {[0, 1, 2, 3].map((i) => renderBox(i))}
       </div>
       <span className="fs-3 fw-bold text-muted px-1">-</span>
-      <div className="d-flex gap-1 gap-sm-2">
+      <div className="d-flex gap-1 gap-sm-2" style={{ direction: 'ltr' }}>
         {[4, 5, 6, 7].map((i) => renderBox(i))}
       </div>
     </div>
@@ -115,7 +121,7 @@ const TicketInput = ({ value, onChange }) => {
 };
 
 const VotingView = ({ stats, onBack }) => {
-  const { language } = useLanguage();
+  const { language, translations } = useLanguage();
   const { data: candidates = [], isLoading, isError } = useCandidates();
   const { mutate: submitVote, isPending: isSubmitting, isError: submitError, error } = useSubmitVote();
 
@@ -144,7 +150,7 @@ const VotingView = ({ stats, onBack }) => {
       setSelectedVotes(selectedVotes.filter((v) => v !== id));
     } else {
       if (selectedVotes.length >= stats.vote_limit) {
-        alert(`You can only vote for up to ${stats.vote_limit} candidates.`);
+        alert(`${translations.election.vote.alertLimit}${stats.vote_limit}.`);
         return;
       }
       setSelectedVotes([...selectedVotes, id]);
@@ -159,24 +165,32 @@ const VotingView = ({ stats, onBack }) => {
       {
         onSuccess: () => {
           setShowConfirmModal(false);
-          alert('Vote submitted successfully!');
+          alert(translations.election.vote.alertSuccess);
           onBack();
         },
+        onError: (error) => {
+          if (error?.response?.status === 403) {
+            alert(translations.election.vote.alertForbidden);
+          } else {
+            alert(error.response.message);
+          }
+        }
       }
     );
   };
+
 
   if (isLoading) {
     return (
       <div className="text-center py-5">
         <Spinner animation="border" variant="primary" />
-        <p className="mt-2 text-muted">Loading candidate list...</p>
+        <p className="mt-2 text-muted">{translations.election.vote.loading}</p>
       </div>
     );
   }
 
   if (isError) {
-    return <Alert variant="danger">Failed to load candidates. Please try again.</Alert>;
+    return <Alert variant="danger">{translations.election.vote.error}</Alert>;
   }
 
   return (
@@ -186,20 +200,20 @@ const VotingView = ({ stats, onBack }) => {
         <Card.Body className="p-4">
           <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 pb-3 border-bottom">
             <Button variant="outline-secondary" size="sm" onClick={onBack}>
-              ← Back to Overview
+              ← {translations.election.vote.back}
             </Button>
 
             <div className="d-flex align-items-center gap-2 flex-grow-1 flex-md-grow-0 justify-content-end">
               <Form.Control
                 type="text"
-                placeholder="Search candidates..."
+                placeholder={translations.election.vote.search}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{ maxWidth: '280px' }}
                 size="sm"
               />
               <Badge bg="info" className="fs-6 py-2 px-3 flex-shrink-0">
-                Selected: {selectedVotes.length} / {stats.vote_limit}
+                {translations.election.vote.selected}: {selectedVotes.length} / {stats.vote_limit}
               </Badge>
             </div>
           </div>
@@ -207,7 +221,7 @@ const VotingView = ({ stats, onBack }) => {
           <div className="py-3 text-center">
             <Form.Group className="d-flex flex-column align-items-center">
               <Form.Label className="fw-bold fs-4 mb-3 text-dark">
-                Voting Ticket Code <span className="text-danger">*</span>
+                {translations.election.vote.ticketTitle} <span className="text-danger">*</span>
               </Form.Label>
               
               <div className="d-flex justify-content-center w-100">
@@ -215,7 +229,7 @@ const VotingView = ({ stats, onBack }) => {
               </div>
 
               <Form.Text className="text-muted mt-3 small">
-                Enter or paste your 8-character voting ticket code (e.g. <code>XXXX-XXXX</code>)
+                {translations.election.vote.ticketNotice}<code>XXXX-XXXX</code>)
               </Form.Text>
             </Form.Group>
           </div>
@@ -291,8 +305,8 @@ const VotingView = ({ stats, onBack }) => {
         style={{ zIndex: 1050 }}
       >
         <div>
-          <span className="fw-bold">{selectedVotes.length}</span> of{' '}
-          <span className="fw-bold">{stats.vote_limit}</span> candidates selected
+          <span className="fw-bold">{selectedVotes.length}</span> /{' '}
+          <span className="fw-bold">{stats.vote_limit}</span> {translations.election.vote.candidateSelected}
         </div>
         <Button
           variant="success"
@@ -300,24 +314,24 @@ const VotingView = ({ stats, onBack }) => {
           disabled={selectedVotes.length === 0 || !isTicketValid}
           onClick={() => setShowConfirmModal(true)}
         >
-          Submit Vote
+          {translations.election.vote.submit}
         </Button>
       </div>
 
       {/* Confirmation Modal */}
       <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title className="h5 fw-bold">Confirm Your Vote</Modal.Title>
+          <Modal.Title className="h5 fw-bold">{translations.election.vote.confirmTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {submitError && (
             <Alert variant="danger" className="py-2 small">
-              {error?.response?.data?.message || 'Failed to submit vote. Check your ticket code.'}
+              {error?.response?.data?.message || translations.election.vote.confirmError}
             </Alert>
           )}
-          <p>Are you sure you want to submit your votes for the following selected candidate(s)?</p>
+          <p>{translations.election.vote.confirmQ}</p>
           <p className="small text-muted mb-2">
-            Ticket: <span className="font-monospace fw-bold fs-6 text-dark">{ticket}</span>
+            {translations.election.vote.confirmTicket}: <span className="font-monospace fw-bold fs-6 text-dark">{ticket}</span>
           </p>
           <ul className="list-group list-group-flush mb-3 max-vh-50 overflow-auto">
             {selectedVotes.map((id) => {
@@ -331,15 +345,15 @@ const VotingView = ({ stats, onBack }) => {
             })}
           </ul>
           <Alert variant="warning" className="small mb-0">
-            <strong>Note:</strong> Once submitted, votes cannot be changed or reverted.
+            <strong>{translations.election.vote.confirmNote}:</strong> {translations.election.vote.confirmNotice}
           </Alert>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowConfirmModal(false)} disabled={isSubmitting}>
-            Cancel
+            {translations.election.vote.confirmCancel}
           </Button>
           <Button variant="success" onClick={handleConfirmSubmit} disabled={isSubmitting}>
-            {isSubmitting ? <Spinner animation="border" size="sm" /> : 'Confirm & Cast Votes'}
+            {isSubmitting ? <Spinner animation="border" size="sm" /> : translations.election.vote.confirm}
           </Button>
         </Modal.Footer>
       </Modal>

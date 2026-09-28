@@ -1,10 +1,23 @@
 import React, { useState, useMemo } from 'react';
 import { Card, Table, Button, Spinner, Alert, Badge, Collapse } from 'react-bootstrap';
 import { useElectionResults } from '../../features/election/hooks/useElection';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ResultsView = ({ cycle, onBack }) => {
+  const { language, translations } = useLanguage();
   const { data: results = [], isLoading, isError } = useElectionResults(cycle);
   const [expandedId, setExpandedId] = useState(null);
+
+  const DEPARTMENT_KEYS = {
+    mechanical: translations.constants.departments.mechanical,
+    civil: translations.constants.departments.civil,
+    electrical: translations.constants.departments.electrical,
+    chemical: translations.constants.departments.chemical,
+    petroleum: translations.constants.departments.petroleum,
+    agricultural: translations.constants.departments.agricultural,
+    mining: translations.constants.departments.mining,
+    surveying: translations.constants.departments.surveying,
+  };
 
   const sortedResults = useMemo(() => {
     return [...results].sort((a, b) => a.place - b.place);
@@ -25,13 +38,13 @@ const ResultsView = ({ cycle, onBack }) => {
     return (
       <div className="text-center py-5">
         <Spinner animation="border" variant="primary" />
-        <p className="mt-2 text-muted">Loading election results...</p>
+        <p className="mt-2 text-muted">{translations.election.results.loading}</p>
       </div>
     );
   }
 
   if (isError) {
-    return <Alert variant="danger">Failed to load election results.</Alert>;
+    return <Alert variant="danger">{translations.election.results.error}</Alert>;
   }
 
   return (
@@ -39,9 +52,9 @@ const ResultsView = ({ cycle, onBack }) => {
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-3">
         <Button variant="outline-secondary" size="sm" onClick={onBack}>
-          ← Back to Overview
+          ← {translations.election.results.back}
         </Button>
-        <h5 className="fw-bold mb-0">Election Cycle #{cycle} Results</h5>
+        <h5 className="fw-bold mb-0">{translations.election.results.title + cycle}</h5>
       </div>
 
       {/* DESKTOP VIEW: Standard Data Table */}
@@ -50,12 +63,12 @@ const ResultsView = ({ cycle, onBack }) => {
           <Table responsive hover className="align-middle mb-0">
             <thead className="table-light">
               <tr>
-                <th>Rank</th>
-                <th>Candidate Name</th>
-                <th>Department / Belonging</th>
-                <th>Votes Received</th>
-                <th>User ID</th>
-                <th>Resolved Date</th>
+                <th>{translations.election.results.columns.rank}</th>
+                <th>{translations.election.results.columns.name}</th>
+                <th>{translations.election.results.columns.department}</th>
+                <th>{translations.election.results.columns.voteCount}</th>
+                <th>{translations.election.results.columns.userId}</th>
+                <th>{translations.election.results.columns.date}</th>
               </tr>
             </thead>
             <tbody>
@@ -66,8 +79,8 @@ const ResultsView = ({ cycle, onBack }) => {
                       #{item.place}
                     </Badge>
                   </td>
-                  <td className="fw-bold">{item.name}</td>
-                  <td><span className="text-capitalize">{item.belonging}</span></td>
+                  <td className="fw-bold">{language === "ar" ? item.name_ar : item.name_en}</td>
+                  <td>{DEPARTMENT_KEYS[item.belonging]}</td>
                   <td className="fw-bold text-primary">{item.number_of_votes} votes</td>
                   <td><span className="font-monospace text-muted">{item.user_id}</span></td>
                   <td><small className="text-muted">{new Date(item.created_at).toLocaleDateString()}</small></td>
@@ -103,7 +116,7 @@ const ResultsView = ({ cycle, onBack }) => {
                     #{item.place}
                   </span>
                   <span className="fw-semibold text-dark text-truncate" style={{ fontSize: '0.875rem' }}>
-                    {item.name}
+                    {language === "ar" ? item.name_ar : item.name_en}
                   </span>
                 </div>
 
@@ -112,7 +125,8 @@ const ResultsView = ({ cycle, onBack }) => {
                   <span className="fw-bold text-primary" style={{ fontSize: '0.875rem' }}>
                     {item.number_of_votes}{' '}
                     <span className="text-muted fw-normal" style={{ fontSize: '0.7rem' }}>
-                      votes
+                      {language == "en" ? item.number_of_votes > 1 ? "Votes" : "Vote"
+                      :item.number_of_votes > 2 && item.number_of_votes < 11 ? "أصوات" : "صوت" }
                     </span>
                   </span>
                   <span className="text-muted" style={{ fontSize: '0.65rem' }}>
@@ -129,16 +143,16 @@ const ResultsView = ({ cycle, onBack }) => {
                     style={{ fontSize: '0.75rem' }}
                   >
                     <div className="mb-1">
-                      <span className="fw-semibold text-muted me-1">Belonging / Dept:</span>
-                      <span className="text-dark text-capitalize">{item.belonging}</span>
+                      <span className="fw-semibold text-muted me-1">{translations.election.results.columns.department}:</span>
+                      <span className="text-dark text-capitalize">{DEPARTMENT_KEYS[item.belonging]}</span>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
                       <div>
-                        <span className="fw-semibold text-muted me-1">INDEX:</span>
+                        <span className="fw-semibold text-muted me-1">{translations.election.results.columns.userId}:</span>
                         <span className="font-monospace text-dark">{item.user_id}</span>
                       </div>
                       <div>
-                        <span className="fw-semibold text-muted me-1">Resolved:</span>
+                        <span className="fw-semibold text-muted me-1">{translations.election.results.columns.date}:</span>
                         <span className="text-dark">
                           {new Date(item.created_at).toLocaleDateString()}
                         </span>

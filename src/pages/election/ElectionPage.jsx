@@ -4,8 +4,10 @@ import { useElectionPublicStatistics } from '../../features/election/hooks/useEl
 import CountdownTimer from './CountdownTimer';
 import VotingView from './VotingView';
 import ResultsView from './ResultsView';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ElectionPage = () => {
+  const { translations } = useLanguage();
   const { data: stats, isLoading, isError, refetch } = useElectionPublicStatistics();
   const [activeView, setActiveView] = useState('overview'); // 'overview' | 'voting' | 'results'
 
@@ -70,16 +72,16 @@ const ElectionPage = () => {
           <Card.Body>
             <div className="mb-3">
               <Badge bg="dark" className="px-3 py-2 fs-6">
-                Election Cycle #{stats.current_cycle}
+                {translations.election.main.badge}{stats.current_cycle}
               </Badge>
             </div>
 
-            <h2 className="fw-bold mb-3">Student Body Election</h2>
+            <h2 className="fw-bold mb-3">{translations.election.main.title}</h2>
 
             {/* PHASE 1: PRE-START */}
             {isPreStart && (
               <div className="my-4">
-                <h5 className="text-muted mb-3">Voting Begins In:</h5>
+                <h5 className="text-muted mb-3">{translations.election.main.timeStart}:</h5>
                 <div className="mb-4">
                   <CountdownTimer targetDate={stats.start_time} onEnd={() => refetch()} />
                 </div>
@@ -89,21 +91,21 @@ const ElectionPage = () => {
                     placement="bottom"
                     overlay={
                       <Tooltip id="ticket-countdown-tooltip">
-                        Ticket Release Countdown:{' '}
+                        {translations.election.main.timeTicket}:{' '}
                         <CountdownTimer targetDate={stats.tickets_start_time} noSeconds={true} />
                       </Tooltip>
                     }
                   >
                     <Alert variant="warning" className="d-inline-block border-warning text-dark px-4 py-3 cursor-pointer">
                       <i className="bi bi-clock-history me-2"></i>
-                      Voting tickets are not open yet. Release Date:{' '}
+                      {translations.election.main.ticketNotice1}:{' '}
                       <strong>{ticketsStartTime.toLocaleString()}</strong>
                     </Alert>
                   </OverlayTrigger>
                 ) : (
                   <Alert variant="success" className="d-inline-block border-success px-4 py-3">
                     <i className="bi bi-check-circle me-2"></i>
-                    Voting tickets are now available! Please <strong>Sign In</strong> to claim your ticket code.
+                    {translations.election.main.ticketNotice2}
                   </Alert>
                 )}
               </div>
@@ -113,16 +115,16 @@ const ElectionPage = () => {
             {isVotingActive && (
               <div className="my-4">
                 <Badge bg="danger" className="px-3 py-2 fs-6 mb-3 animate-pulse">
-                  • Voting Live
+                  • {translations.election.main.voteLive}
                 </Badge>
-                <h5 className="text-muted mb-3">Voting Ends In:</h5>
+                <h5 className="text-muted mb-3">{translations.election.main.timeEnd}:</h5>
                 <div className="mb-4">
                   <CountdownTimer targetDate={stats.end_time} onEnd={() => refetch()} />
                 </div>
 
                 <div className="mx-auto my-4" style={{ maxWidth: '400px' }}>
                   <div className="d-flex justify-content-between small fw-bold mb-1">
-                    <span>Student Voter Turnout</span>
+                    <span>{translations.election.main.percentageCurrentTitle}</span>
                     <span>{stats.vote_percentage}%</span>
                   </div>
                   <ProgressBar now={stats.vote_percentage} variant="success" animated style={{ height: '12px' }} />
@@ -134,7 +136,7 @@ const ElectionPage = () => {
                   className="px-5 rounded-pill fw-bold"
                   onClick={() => setActiveView('voting')}
                 >
-                  Vote Now
+                  {translations.election.main.vote}
                 </Button>
               </div>
             )}
@@ -143,12 +145,12 @@ const ElectionPage = () => {
             {isPostVoting && (
               <div className="my-4">
                 <Alert variant="secondary" className="d-inline-block px-4 py-2 mb-4">
-                  Voting for Cycle #{stats.current_cycle} has ended.
+                  {translations.election.main.voteEndTitle}{stats.current_cycle}.
                 </Alert>
 
                 <div className="mx-auto my-4" style={{ maxWidth: '400px' }}>
                   <div className="d-flex justify-content-between small fw-bold mb-1">
-                    <span>Final Voter Turnout</span>
+                    <span>{translations.election.main.percentagePostTitle}</span>
                     <span>{stats.vote_percentage}%</span>
                   </div>
                   <ProgressBar now={stats.vote_percentage} variant="secondary" style={{ height: '12px' }} />
@@ -160,7 +162,7 @@ const ElectionPage = () => {
                   className="px-5 rounded-pill fw-bold"
                   onClick={() => setActiveView('results')}
                 >
-                  View Election Results
+                  {translations.election.main.results}
                 </Button>
               </div>
             )}
