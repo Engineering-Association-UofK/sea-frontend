@@ -70,11 +70,6 @@
             "lastUpdated": "Last Updated"
         }
     },
-    "gallery": {
-        "title": "Photo Gallery",
-        "loading": "Loading photos...",
-        "noPhotos": "No photos currently available."
-    },
     "login": {
         "title": "Login",
         "username": "Username",
@@ -132,62 +127,71 @@
     "bot": {
         "needHelp": "Need help?"
     },
-    "feedback": {
-        "button": "Feedback",
-        "title": "Technical Support",
-        "messageLabel": "Message",
-        "messagePlaceholder": "Describe the issue or suggestion...",
-        "contactLabel": "Contact Information (Optional)",
-        "contactPlaceholder": "Email or Phone",
-        "send": "Send",
-        "sending": "Sending...",
-        "success": "Thank you! Your feedback has been received.",
-        "error": "Something went wrong. Please try again."
-    },
-    "secretariats": {
-        "title": "Association Secretariats",
-        "media": {
-            "name": "Media Secretariat",
-            "desc": "The secretariat dedicated to highlighting the association's identity and communicating its activities and initiatives creatively. It reflects the true image of the student environment and contributes to building effective communication with the university community and the outside world. It strives to create professional media content that expresses the spirit of the college, enhances its institutional presence, and acts as an incubator to develop its members' skills using the latest media technologies."
-        },
-        "academic": {
-            "name": "Academic Secretariat",
-            "desc": "The fundamental pillar concerned with supporting and enriching the educational journey of engineering students and overcoming academic obstacles. It also creates an integrated environment that goes beyond the classroom to develop research and practical skills, aiming for university and professional academic excellence."
-        },
-        "sports": {
-            "name": "Sports Secretariat",
-            "desc": "Responsible for activating and consolidating physical and mental culture within the college community. It manages all sports activities, directly supervises the teams representing the college in university tournaments, and spreads awareness about the importance of physical activity as an integral part of the quality of university life."
-        },
-        "external": {
-            "name": "External Relations",
-            "desc": "The interface that connects engineering students to the academic and professional world beyond the university's borders. It seeks to create real opportunities for students through partnerships with universities, international organizations, and professional institutions, as well as providing scholarships, internships, and developmental events to build a strong career path early on."
-        },
-        "cultural": {
-            "name": "Cultural Secretariat",
-            "desc": "The creative incubator that aims to enrich the university life experience by creating interactive spaces that bring students together around the values of art, literature, and knowledge. It serves as an umbrella organizing the work of specialized clubs, seeking to foster a sense of belonging and solidify free expression skills, acting as a bridge connecting the engineering community with its cultural surroundings."
-        },
-        "social": {
-            "name": "Social Secretariat",
-            "desc": "The human and service pillar of the association, promoting values of solidarity and cooperation within the college community. It works to improve the university environment both materially and morally through its various offices, contributing to the support of students in need and providing a conducive study environment governed by responsibility and synergy."
-        },
-        "financial": {
-            "name": "Financial Secretariat",
-            "desc": "Responsible for the complete supervision of financial resources and controlling incoming and outgoing cash flows. It aims to ensure the highest levels of transparency through budget preparation and accounting schedules, in addition to developing strategies to grow the association's financial resources to ensure the continuity of its activities."
-        },
-        "general": {
-            "name": "General Secretariat",
-            "desc": "Considered the beating heart of the Steering Engineering Association. It is responsible for coordinating between the various secretariats and the executive committee presidency, organizing relationships between departments, and approving their plans and programs. It is the most dynamic body, working to turn organizational visions into a cohesive institutional reality."
+    "constants": {
+        "departments": {
+            "mechanical": "Mechanical Engineering",
+            "civil": "Civil Engineering",
+            "electrical": "Electrical Engineering",
+            "chemical": "Chemical Engineering",
+            "petroleum": "Petroleum Engineering",
+            "agricultural": "Agricultural Engineering",
+            "mining": "Mining Engineering",
+            "surveying": "Surveying Engineering"
         }
     },
-    "statistics": {
-        "title": "Association Statistics",
-        "subtitle": "Numbers reflecting our impact and the growth of our engineering community",
-        "students": "Registered Student",
-        "workshops": "Workshops and Seminars",
-        "events": "Event",
-        "partners": "Partner",
-        "projects": "Student Project",
-        "volunteers": "Association's Members"
+    "election": {
+        "main": {
+            "error": "Failed to fetch election statistics.",
+            "badge": "Election Cycle #",
+            "title": "Engineering Association Election",
+            "timeStart": "Voting Begins In",
+            "timeEnd": "Voting Ends In",
+            "timeTicket": "Ticket Release Countdown",
+            "ticketNotice1": "Voting tickets are not open yet. Release Date",
+            "ticketNotice2": "Voting tickets are now available! Please Sign In to claim your ticket code",
+            "voteLive": "Voting Live",
+            "percentageCurrentTitle": "Student Voter Turnout",
+            "percentagePostTitle": "Final Voter Turnout",
+            "vote": "Vote Now",
+            "voteEndTitle": "Voting has ended: Cycle #",
+            "results": "View Election Results"
+        },
+        "vote": {
+            "back": "Back to Overview",
+            "loading": "Loading candidate list...",
+            "error": "Failed to load candidates. Please try again.",
+            "search": "Search candidates",
+            "selected": "Selected",
+            "ticketTitle": "Voting Ticket Code",
+            "ticketNotice": "Enter or paste your 8-character voting ticket code (e.g. ",
+            "candidateSelected": "candidates selected",
+            "submit": "Submit Vote",
+            "confirmTitle": "Confirm Your Vote",
+            "confirmQ": "Are you sure you want to submit your votes for the following selected candidate(s)?",
+            "confirmTicket": "Ticket",
+            "confirmNote": "Note",
+            "confirmNotice": "Once submitted, votes cannot be changed or reverted.",
+            "confirm": "Confirm & Cast Votes",
+            "confirmCancel": "Cancel",
+            "confirmError": "Failed to submit vote. Check your ticket code.",
+            "alertLimit": "You can only vote for up to ",
+            "alertSuccess": "Vote submitted successfully!",
+            "alertForbidden": "Vote ticket is not correct or already used!"
+        },
+        "results": {
+            "back": "Back to Overview",
+            "loading": "Loading election results...",
+            "error": "Failed to load election results.",
+            "title": "Election Results: Cycle #",
+            "columns": {
+                "rank": "Rank",
+                "name": "Candidate Name",
+                "department": "Department",
+                "voteCount": "Votes Received",
+                "userId": "Index",
+                "date": "Resolved Date"
+            }
+        }
     },
     "profile": {
         "title": "PROFILE",
