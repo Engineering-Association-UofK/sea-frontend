@@ -28,7 +28,7 @@ import AdminUsersDashboard from "./pages/Admin/Admin Users/AdminUsersDashboard.j
 import AdminUsersEntry from "./pages/Admin/Admin Users/AdminUsersEntry.jsx";
 import ImageStorageDashboard from "./pages/Admin/Image Storage/ImageStorageDashboard.jsx";
 import { CONFIG } from "./config";
-import ProfilePage from "./pages/Profile/ProfilePage.jsx";
+import { ProfilePage } from "./pages/Profile/ProfilePage.tsx";
 import UsersDashboard from './pages/Admin/Users/UsersDashboard.jsx';
 import UsersEntry from "./pages/Admin/Users/UsersEntry.jsx";
 import FormEntry from './pages/forms/FormEntry.jsx';
