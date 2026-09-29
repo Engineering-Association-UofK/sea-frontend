@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
 import { profileApi } from "../api/profile.api";
 import {
   UpdateProfileRequest,
@@ -14,8 +14,10 @@ export const PROFILE_KEYS = {
   summary: () => [...PROFILE_KEYS.all, "summary"] as const,
   ticket: () => [...PROFILE_KEYS.all, "ticket"] as const,
   certificates: (params?: CertListParams) => [...PROFILE_KEYS.all, "certificates", params] as const,
-  notifications: (page: number, limit: number) =>
+  notifications: (page?: number, limit?: number) =>
     [...PROFILE_KEYS.all, "notifications", page, limit] as const,
+  infiniteNotifications: (limit: number) =>
+    [...PROFILE_KEYS.all, "notifications", "infinite", limit] as const,
 };
 
 // --- Profile Hooks ---
@@ -128,6 +130,20 @@ export function useNotifications(page = 1, limit = 10) {
   return useQuery({
     queryKey: PROFILE_KEYS.notifications(page, limit),
     queryFn: () => profileApi.getNotifications(page, limit),
+  });
+}
+
+export function useInfiniteNotifications(limit = 10) {
+  return useInfiniteQuery({
+    queryKey: PROFILE_KEYS.infiniteNotifications(limit),
+    queryFn: ({ pageParam = 1 }) => profileApi.getNotifications(pageParam, limit),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.current_page < lastPage.total_pages) {
+        return lastPage.current_page + 1;
+      }
+      return undefined;
+    },
   });
 }
 

@@ -10,7 +10,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 import { ADMIN_ROLES } from '../utils/roles';
-import UserDropdownMenu from './UserDropdownMenu';
+import UserDropdownMenu from './Layout/UserDropdownMenu/UserDropdownMenu';
 
 const NavigationBar = () => {
   const { translations, switchLanguage, language } = useLanguage();
