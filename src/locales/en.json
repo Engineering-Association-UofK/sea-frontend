@@ -194,6 +194,25 @@
                 "userId": "Index",
                 "date": "Resolved Date"
             }
+        },
+        "ticketPage": {
+            "title": "Election Ticket & Info",
+            "cycle": "Election Cycle #",
+            "statusLive": "Elections Live",
+            "statusInactive": "Elections Inactive",
+            "howItWorksTitle": "How Election Works",
+            "guideLivePrefix": "The Engineering Association conducts electronic voting via secure voting tickets. Your voting ticket allows you to select up to",
+            "guideLiveSuffix": "candidate(s) at once on a single ticket. You must generate your ticket below to vote.",
+            "guideInactive": "Elections take place periodically during the academic year. Each student receives a secure single-use voting ticket to cast votes up to a candidate limit established when a new election cycle begins.",
+            "ticketsStart": "Ticket Claim Window",
+            "voteStart": "Voting Begins",
+            "voteEnd": "Voting Ends",
+            "perCycleNotice": "Announced per cycle",
+            "goToElection": "Go to Election Hall",
+            "ticketUnavailableTitle": "Ticket Generation Currently Unavailable",
+            "ticketUnavailableDesc": "Elections are not active at this time. Ticket generation will open automatically once the next election cycle goes live.",
+            "loadingStats": "Loading election details...",
+            "errorStats": "Unable to load election information. Please try again later."
         }
     },
     "profile": {
