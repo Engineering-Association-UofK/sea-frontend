@@ -194,9 +194,6 @@ const NavigationBar = () => {
             <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark">
               {translations.navbar.events}
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/election" className="fw-medium text-dark">
-              {translations.navbar.election}
-            </Nav.Link>
             {isAdmin && (
               <Nav.Link as={NavLink} to="/admin" className="fw-medium text-dark">
                 {translations.navbar.admin}
@@ -268,9 +265,6 @@ const NavigationBar = () => {
                 <MobileCollapsibleSection title={translations.navbar.blogs} items={postsItems} />
                 <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark fs-5" onClick={handleClose}>
                   {translations.navbar.events}
-                </Nav.Link>
-                <Nav.Link as={NavLink} to="/election" className="fw-medium text-dark fs-5" onClick={handleClose}>
-                  {translations.navbar.election}
                 </Nav.Link>
                 {isAdmin && (
                   <Nav.Link as={NavLink} to="/admin" className="fw-medium text-dark fs-5" onClick={handleClose}>
