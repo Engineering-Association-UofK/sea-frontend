@@ -62,6 +62,7 @@ import React, { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import ElectionAdminPage from "./pages/Admin/election/ElectionAdminPage.jsx";
 import ElectionsAbout from "./pages/About/elections/ElectionsAbout.jsx";
+import ElectionTicketPage from "./pages/Profile/ElectionTicketPage.tsx";
 
 ReactGA.initialize('G-S8J4CN53DH');
 
@@ -87,6 +88,7 @@ function App() {
             {/* Main Layout containing NavBar and Footer */}
             <Route element={<MainLayout />}  >
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/election" element={<ElectionTicketPage />} />
               <Route path="/" element={<Home />} />
               {/* Add other public routes here */}
               <Route path="/forms" element={<FormsGallery />} />
