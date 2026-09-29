@@ -61,6 +61,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 import React, { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import ElectionAdminPage from "./pages/Admin/election/ElectionAdminPage.jsx";
+import ElectionsAbout from "./pages/About/elections/ElectionsAbout.jsx";
 
 ReactGA.initialize('G-S8J4CN53DH');
 
@@ -94,6 +95,7 @@ function App() {
               <Route path="/about/association" element={<AssociationAbout />} />
               <Route path="/about/organization-structure" element={<OrganizationStructureAbout />} />
               <Route path="/about/council-of-thirty" element={<ThirtiethCouncilAbout />} />
+              <Route path="/about/elections" element={<ElectionsAbout />} />
               <Route path="/events" element={<Events />} />
               <Route path="/posts/announcements" element={<Blogs />} />
               <Route path="/posts/donations" element={<Donation />} />
@@ -114,8 +116,12 @@ function App() {
                 <Route path="/register" element={<InitialRegister />} />
                 <Route path="/register/:code" element={<RegistrationFlow />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/election" element={<ElectionPage />} />
               </Route>
+            </Route>
+
+
+            <Route element={<StandaloneLayout />}>
+              <Route path="/election" element={<ElectionPage />} />
             </Route>
 
             {/* ADMIN ROUTES (Protected)
@@ -126,7 +132,7 @@ function App() {
                 {/* <Route index element={<Navigate to="dashboard" replace />} /> */}
                 
                 {/* Dashboard: Open to all admins */}
-                <Route path="dashboard" element={<DashboardPage />} />
+                <Route path="" element={<DashboardPage />} />
                 
                 {/* Content: Posts */}
                 <Route path="posts" element={<AdminRoleGuard allowedRoles={["content:blog_manager"]}><PostsDashboard /></AdminRoleGuard>} />
