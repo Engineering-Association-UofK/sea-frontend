@@ -1,14 +1,19 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import { useIfLive } from '../../features/election/hooks/useElection';
 import heroImgV from '../../utils/images/home-page-hero-v.jpg';
 import heroImgH from '../../utils/images/home-page-hero-h.jpg';
-import { Link } from "react-router-dom";
 import './HeroSection.css';
 
 const HeroSection = () => {
     const { translations, language } = useLanguage();
     const isRtl = language === 'ar';
+
+    const { data: electionData } = useIfLive();
+    const isLive = Boolean(electionData?.live);
+    const cycle = electionData?.cycle;
 
     return (
         <section 
@@ -19,14 +24,30 @@ const HeroSection = () => {
             }}
         >
             <div className="hero-bg" />
-            
             <div className="hero-overlay" />
 
             <Container className="hero-container">
                 <div className="hero-content">
-                    {/* <div className="hero-badge animate-fade-in">
-                        {translations.home.hero.badge}
-                    </div> */}
+                    {/* Live Election Badge Header */}
+                    {isLive && (
+                        <Link 
+                            to="/election" 
+                            className="hero-badge-live animate-slide-up"
+                        >
+                            <span className="live-dot-container">
+                                <span className="live-dot-ping" />
+                                <span className="live-dot" />
+                            </span>
+                            <span className="badge-text">
+                                {translations.home.hero.electionLiveBadge} 
+                                {cycle ? ` (${translations.home.hero.cycleLabel} #${cycle})` : ''} 
+                                <span className="badge-cta-arrow">
+                                    {isRtl ? ' ← ' : ' → '}
+                                    {translations.home.hero.voteNow}
+                                </span>
+                            </span>
+                        </Link>
+                    )}
                     
                     <h1 className="hero-title animate-slide-up">
                         {translations.home.hero.title}
@@ -44,13 +65,6 @@ const HeroSection = () => {
                         >
                             {translations.home.hero.cta}
                         </Button>
-                        {/* <Button 
-                            as={Link} 
-                            to="/about/thirtiethCouncil" 
-                            className="hero-btn-outline"
-                        >
-                            {translations.home.hero.secondaryCta}
-                        </Button> */}
                     </div>
                 </div>
             </Container>

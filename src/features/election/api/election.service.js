@@ -6,6 +6,10 @@ const ACCOUNT_ENDPOINT = '/v1/account/election';
 
 export const electionService = {
   // Public & Statistics
+  getIfLive: async () => {
+    return await apiClient.get(PUBLIC_ENDPOINT);
+  },
+
   getPublicStatistics: async () => {
     return await apiClient.get(`${PUBLIC_ENDPOINT}/statistics`);
   },
