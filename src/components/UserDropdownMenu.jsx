@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
-import { useAccountSummary } from '../hooks/useProfile';
+import { useProfileSummary } from '../features/profile/hooks/useProfile';
 import './UserDropdownMenu.css';
 
 const UserDropdownMenu = ({ isMobile = false, onItemClick }) => {
@@ -12,7 +12,7 @@ const UserDropdownMenu = ({ isMobile = false, onItemClick }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
-    const { summary, loading } = useAccountSummary();
+    const { summary, loading } = useProfileSummary();
 
     const currentName = summary?.username || (language === 'ar'
         ? (user?.name_ar || user?.name_en || '')
