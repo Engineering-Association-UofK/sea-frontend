@@ -123,7 +123,7 @@ const Footer = () => {
                                 </li>
                                 <li className="mb-2">
                                     <Link to="/about/association" className="footer-link">
-                                        {translations.navbar.about}
+                                        {translations.navbar.about.title}
                                     </Link>
                                 </li>
                                 <li className="mb-2">

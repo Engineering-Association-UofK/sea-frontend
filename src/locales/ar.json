@@ -2,37 +2,37 @@
     "navbar": {
         "brand": "الجمعية الهندسية التسييرية",
         "home": "الرئيسية",
-        "forms": "النماذج",
-        "association": "الجمعية",
-        "organizationStructure": "هيكل المنظمة",
-        "councilOfThirty": "المجلس الثلاثيني",
-        "about": "من نحن",
-        "initiatives": "المبادرات",
-        "blogs": "المواضيع",
+        "about": {
+            "title": "من نحن",
+            "association": "الجمعية",
+            "organizationStructure": "هيكل المنظمة",
+            "councilOfThirty": "المجلس الثلاثيني",
+            "elections": "الانتخابات"
+        },
         "events": "الفعاليات",
         "posts": {
+            "title": "المواضيع",
             "news": "الأخبار",
             "issues": "القضايا",
             "blogs": "المدونة",
             "donations": "التبرعات"
         },
-        "gallery": "المعرض",
         "admin": "المسؤول",
         "login": "تسجيل الدخول",
         "logout": "تسجيل الخروج",
         "language": "English",
         "userMenu": {
             "profile": "الحساب"
-        },
-        "election": "الانتخابات"
+        }
     },
     "home": {
         "hero": {
-            "badge": "منذ 2019",
             "title": "الجمعية الهندسية التسييرية",
             "subtitle": "صوت الطالب، وروح الهندسة، ومستقبل الابتكار.",
             "cta": "اعرف المزيد",
-            "secondaryCta": "فريقنا"
+            "electionLiveBadge": "الانتخابات جارية الآن",
+            "cycleLabel": "الدورة",
+            "voteNow": "صوّت الآن"
         },
         "about": {
             "badge": "منذ 2019",
@@ -254,59 +254,5 @@
             "election": "بطاقة الانتخاب"
         },
         "failedToLoad": "فشل في تحميل الملف الشخصي"
-    },
-
-    "profile-old": {
-        "title": "الملف الشخصي",
-        "settings": "الإعدادات",
-        "detailsTab": "التفاصيل",
-        "certificatesTab": "الشهادات",
-        "personalInfo": "المعلومات الشخصية",
-        "nameAr": "الاسم (بالعربية)",
-        "email": "البريد الإلكتروني",
-        "phone": "رقم الهاتف",
-        "department": "القسم",
-        "loadingProfile": "جاري تحميل الملف الشخصي...",
-        "loadingCerts": "جاري تحميل الشهادات...",
-        "noCerts": "لا توجد شهادات بعد",
-        "exploreCourses": "استكشف الكورسات",
-        "certId": "رقم الشهادة",
-        "grade": "الدرجة",
-        "issueDate": "تاريخ الإصدار",
-        "UniversityID":"الرقم الجامعي",
-        "editProfile":"تعديل البيانات",
-        "cancel":"إلغاء",
-        "Gender":"الجنس",
-        "accountTab":"الحساب",
-        "securityTab": "الأمان",
-        "ussernameedit":"أدخل اسم المستخدم الجديد ",
-        "emailnew":"البريد الإلكتروني الجديد",
-        "enternewname":"تغيير البريد الإلكتروني ",
-        "UpdateName":"تغيير اسم المستخدم",
-        "Updateuse": "تحديث اسم المستخدم",
-        "Updateemail": "تحديث الايميل",
-        "saving":"جاري الحقظ...",
-        "save":"حفظ",
-        "Notifications":"الإشعارات",
-        "Nonotifications":"لا توجد إشعارات",
-        "Prev":"السابق",
-        "Next":"التالي",
-        "Marking":"جاري التحديث...",
-        "MarkAllAsRead":"تحديد الكل كمقروء",
-        "Delete":"حدف",
-        "MarkAsRead":"مقروء",
-        "crunt":"الحالي",
-        "password":{
-            "securityTab": "الأمان",
-            "securityTitle": "إعدادات الأمان",
-            "oldPassword": "كلمة المرور القديمة",
-            "newPassword": "كلمة المرور الجديدة",
-            "confirmPassword": "تأكيد كلمة المرور",
-            "updateBtn": "تحديث كلمة المرور",
-            "updatingBtn": "جاري التحديث...",
-            "passwordMismatch": "كلمات المرور الجديدة غير متطابقة",
-            "updateSuccess": "تم تحديث كلمة المرور بنجاح!",
-            "networkError": "حدث خطأ في الشبكة، حاول لاحقاً"
-        }
     }
 }

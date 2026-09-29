@@ -111,16 +111,17 @@ const NavigationBar = () => {
 
   // Define dropdown items
   const aboutItems = [
-    { to: '/about/association', end: true, label: translations.navbar.association },
-    { to: '/about/organization-structure', label: translations.navbar.organizationStructure },
-    { to: '/about/council-of-thirty', label: translations.navbar.councilOfThirty },
+    { to: '/about/association', end: true,  label: translations.navbar.about.association },
+    { to: '/about/organization-structure',  label: translations.navbar.about.organizationStructure },
+    { to: '/about/council-of-thirty',       label: translations.navbar.about.councilOfThirty },
+    { to: '/about/elections',               label: translations.navbar.about.elections },
   ];
 
   const postsItems = [
-    { to: '/posts/news', label: translations.navbar.posts.news },
-    { to: '/posts/issues', label: translations.navbar.posts.issues },
+    { to: '/posts/news',          label: translations.navbar.posts.news },
+    { to: '/posts/issues',        label: translations.navbar.posts.issues },
     { to: '/posts/announcements', label: translations.navbar.posts.blogs },
-    { to: '/posts/donations', label: translations.navbar.posts.donations },
+    { to: '/posts/donations',     label: translations.navbar.posts.donations },
   ];
 
   return (
@@ -189,8 +190,8 @@ const NavigationBar = () => {
             <Nav.Link as={NavLink} to="/" end className="fw-medium text-dark">
               {translations.navbar.home}
             </Nav.Link>
-            {renderDesktopDropdown(translations.navbar.about, aboutItems, 'about')}
-            {renderDesktopDropdown(translations.navbar.blogs, postsItems, 'posts')}
+            {renderDesktopDropdown(translations.navbar.about.title, aboutItems, 'about')}
+            {renderDesktopDropdown(translations.navbar.posts.title, postsItems, 'posts')}
             <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark">
               {translations.navbar.events}
             </Nav.Link>
@@ -261,8 +262,8 @@ const NavigationBar = () => {
                 <Nav.Link as={NavLink} to="/" end className="fw-medium text-dark fs-5" onClick={handleClose}>
                   {translations.navbar.home}
                 </Nav.Link>
-                <MobileCollapsibleSection title={translations.navbar.about} items={aboutItems} />
-                <MobileCollapsibleSection title={translations.navbar.blogs} items={postsItems} />
+                <MobileCollapsibleSection title={translations.navbar.about.title} items={aboutItems} />
+                <MobileCollapsibleSection title={translations.navbar.posts.title} items={postsItems} />
                 <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark fs-5" onClick={handleClose}>
                   {translations.navbar.events}
                 </Nav.Link>

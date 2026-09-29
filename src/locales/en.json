@@ -2,15 +2,16 @@
     "navbar": {
         "brand": "Steering Engineering Association",
         "home": "Home",
-        "about": "About Us",
-        "forms": "Forms",
-        "association": "The Association",
-        "organizationStructure": "Organizational Structure",
-        "councilOfThirty": "Council of Thirty",
-        "initiatives": "Initiatives",
-        "blogs": "Topics",
+        "about": {
+            "title": "About Us",
+            "association": "The Association",
+            "organizationStructure": "Organizational Structure",
+            "councilOfThirty": "Council of Thirty",
+            "elections": "Elections"
+        },
         "events": "Events",
         "posts": {
+            "title": "Topics",
             "news": "News",
             "issues": "Issues",
             "blogs": "Blog",
@@ -22,14 +23,16 @@
         "language": "العربية",
         "userMenu": {
             "profile": "Profile"
-        },
-        "election": "Election"
+        }
     },
     "home": {
         "hero": {
             "title": "Steering Engineering Association",
             "subtitle": "The voice of the student, the spirit of engineering, and the future of innovation.",
-            "cta": "Learn More"
+            "cta": "Learn More",
+            "electionLiveBadge": "Elections Live",
+            "cycleLabel": "Cycle",
+            "voteNow": "Vote Now"
         },
         "about": {
             "title": "About Us",
@@ -244,77 +247,5 @@
             "election": "Voting Ticket"
         },
         "failedToLoad": "Failed to load profile"
-    },
-    "profile-old": {
-        "title": "PROFILE",
-        "settings": "SETTINGS",
-        "detailsTab": "Details",
-        "certificatesTab": "Certificates",
-        "personalInfo": "Personal Info",
-        "nameAr": "Name (Arabic)",
-        "email": "Email",
-        "phone": "Phone",
-        "department": "Department",
-        "loadingProfile": "Loading Profile...",
-        "loadingCerts": "Loading Certificates...",
-        "noCerts": "No Certificates Yet",
-        "exploreCourses": "Explore Courses",
-        "certId": "Certificate ID",
-        "grade": "Grade",
-        "issueDate": "Issue Date",
-        "securityTab": "Security",
-        "UniversityID":"University ID",
-        "editProfile":"Edit Profile",
-        "cancel":"Cancel",
-        "Gender":"Gender",
-        "accountTab":"account",
-        "crunt":"Current",
-        "ussernameedit":"enter new username",
-        "emailnew":"enter new email",
-        "enternewname":"Update Email Address",
-        "UpdateName":"Update Username",
-        "Updateuse": "Update Username",
-        "Updateemail": "Update Email",
-        "saving":"saving",
-        "save":"save",
-        "Notifications":"Notifications",
-        "Nonotifications":"No notifications",
-        "Prev":"Prev",
-        "Next":"Next",
-        "Marking":"Marking...",
-
-        "MarkAllAsRead":"Mark all as read",
-        "Delete":"Delete",
-        "MarkAsRead":"MarkAsRead",
-        
-        "password":{
-            "securityTab": "Security",
-            "UniversityID":"University ID",
-            "editProfile":"Edit Profile",
-            "cancel":"Cancel",
-            "Gender":"Gender",
-            "accountTab":"account",
-            "crunt":"Current",
-            "ussernameedit":"enter new username",
-            "emailnew":"enter new email",
-            "enternewname":"Update Email Address",
-            "UpdateName":"Update Username",
-            "Updateuse": "Update Username",
-            "Updateemail": "Update Email",
-            "saving":"saving",
-            "save":"save",
-            "password":{
-                "securityTab": "Security",
-                "securityTitle": "Security Settings",
-                "oldPassword": "Old Password",
-                "newPassword": "New Password",
-                "confirmPassword": "Confirm Password",
-                "updateBtn": "Update Password",
-                "updatingBtn": "Updating...",
-                "passwordMismatch": "New passwords do not match",
-                "updateSuccess": "Password updated successfully!",
-                "networkError": "Network error, please try again later"
-            }
-        }
     }
 }
