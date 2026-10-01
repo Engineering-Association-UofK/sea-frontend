@@ -197,7 +197,7 @@ const VotingView = ({ stats, onBack }) => {
     <div>
       {/* Top Bar: Navigation, Ticket Entry & Search */}
       <Card className="w-100 bg-transparent mb-4 border-0">
-        <Card.Body className="p-4">
+        <Card.Body>
           <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 pb-3 border-bottom">
             <Button variant="outline-secondary" size="sm" onClick={onBack}>
               ← {translations.election.vote.back}

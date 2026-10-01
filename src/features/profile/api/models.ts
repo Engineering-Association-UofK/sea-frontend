@@ -32,6 +32,10 @@ export interface UserProfileSummaryResponse {
   username: string;
   email: string;
   profile_pic: string;
+  department: Department;
+  gender: Gender;
+  name_ar: string;
+  name_en: string;
 }
 
 export interface UpdateProfileRequest {
@@ -95,20 +99,34 @@ export interface CertListResponse {
   count: number;
 }
 
+// Notifications
+
+export enum NotificationType {
+  Basic = "basic",
+  Redirect = "redirect",
+}
+
 export interface NotificationResponse {
   id: number;
   title: string;
   message: string;
-  type: string;
-  data: unknown;
+  type: NotificationType;
+  data: DataType;
   created_at: string;
   is_read: boolean;
 }
+export interface DataType {}
+export interface DataBasic extends DataType {}
+export interface DataRedirect extends DataType {
+  title: string;
+  path: string;
+}
 
 export interface NotificationsListResponse {
-  notifications: NotificationResponse[];
-  pages: number;
-  current: number;
+  list: NotificationResponse[];
+  total_pages: number;
+  current_page: number;
+  count: number;
 }
 
 export interface TransactionResponse {

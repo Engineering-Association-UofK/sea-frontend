@@ -47,7 +47,6 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-      {/* Edit Profile Form */}
       <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm lg:col-span-2">
         <h2 className="mb-4 text-lg font-semibold text-gray-900">{t.title}</h2>
         <form onSubmit={handleProfileSubmit} className="space-y-4">
@@ -58,7 +57,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
                 type="text"
                 value={formData.name_en}
                 onChange={(e) => setFormData({ ...formData, name_en: e.target.value })}
-                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500"
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               />
             </div>
             <div>
@@ -68,7 +67,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
                 dir="rtl"
                 value={formData.name_ar}
                 onChange={(e) => setFormData({ ...formData, name_ar: e.target.value })}
-                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500"
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               />
             </div>
           </div>
@@ -80,7 +79,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
                 type="text"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500"
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               />
             </div>
             <div>
@@ -88,7 +87,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
               <select
                 value={formData.department}
                 onChange={(e) => setFormData({ ...formData, department: e.target.value as Department })}
-                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500"
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               >
                 {Object.values(Department).map((dept) => (
                   <option key={dept} value={dept}>
@@ -102,7 +101,8 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
           <button
             type="submit"
             disabled={updateProfileMutation.isPending}
-            className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-white transition-colors"
+            style={{ backgroundColor: "var(--primary-color)" }}
           >
             {updateProfileMutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             {updateProfileMutation.isPending ? t.saving : t.saveBtn}
@@ -110,7 +110,6 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
         </form>
       </div>
 
-      {/* Security Form */}
       <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
           <Key className="h-5 w-5 text-gray-500" /> {t.securityTitle}
@@ -122,7 +121,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
               type="password"
               value={passwordData.old_password}
               onChange={(e) => setPasswordData({ ...passwordData, old_password: e.target.value })}
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
             />
           </div>
           <div>
@@ -131,7 +130,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
               type="password"
               value={passwordData.new_password}
               onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
             />
           </div>
           <div>
@@ -140,7 +139,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
               type="password"
               value={passwordData.confirm_password}
               onChange={(e) => setPasswordData({ ...passwordData, confirm_password: e.target.value })}
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
             />
           </div>
           <button

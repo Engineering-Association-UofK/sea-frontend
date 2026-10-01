@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Card, Button, ProgressBar, Alert, Spinner, Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { useElectionPublicStatistics } from '../../features/election/hooks/useElection';
+import { useElectionPublicStatistics, useIfLive } from '../../features/election/hooks/useElection';
 import CountdownTimer from './CountdownTimer';
 import VotingView from './VotingView';
 import ResultsView from './ResultsView';
@@ -8,26 +8,65 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const ElectionPage = () => {
   const { translations } = useLanguage();
-  const { data: stats, isLoading, isError, refetch } = useElectionPublicStatistics();
+  const t = translations.election.main;
+  
+  const { data: liveData, isLoading: isLiveLoading } = useIfLive();
+  const isLive = Boolean(liveData?.live);
+
+  const { data: stats, isLoading: isStatsLoading, isError, refetch } = useElectionPublicStatistics({ enabled: isLive });
+  
   const [activeView, setActiveView] = useState('overview'); // 'overview' | 'voting' | 'results'
 
-  if (isLoading) {
+  // Loading state while checking live status or fetching statistics
+  if (isLiveLoading || (isLive && isStatsLoading)) {
     return (
       <div className="election-page-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5">
         <div className="text-center">
           <Spinner animation="border" variant="primary" />
-          <p className="mt-2 text-muted">Checking election status...</p>
+          <p className="mt-2 text-muted">{t.checkingStatus}</p>
         </div>
       </div>
     );
   }
 
+  // Inactive / Not Live State
+  if (!isLive) {
+    return (
+      <div className="h-100 election-page-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5">
+        <Container style={{ maxWidth: '680px' }}>
+          <Card className="border-0 shadow text-center p-4 w-100">
+            <Card.Body className="py-4">
+              <div className="mb-3">
+                <Badge bg="secondary" className="px-3 py-2 fs-6">
+                  {t.statusInactive}
+                </Badge>
+              </div>
+
+              <h2 className="fw-bold mb-3">{t.title}</h2>
+
+              <Alert variant="info" className="my-4 p-4 border-0 shadow-sm text-center">
+                <i className="bi bi-info-circle fs-1 text-info d-block mb-2"></i>
+                <h5 className="fw-bold mb-2">
+                  {t.inactiveTitle}
+                </h5>
+                <p className="mb-0 text-muted">
+                  {t.inactiveDesc}
+                </p>
+              </Alert>
+            </Card.Body>
+          </Card>
+        </Container>
+      </div>
+    );
+  }
+
+  // Error state when live stats query fails
   if (isError || !stats) {
     return (
       <div className="election-page-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5">
         <Container style={{ maxWidth: '600px' }}>
           <Alert variant="danger" className="text-center shadow-sm">
-            Failed to fetch election statistics.
+            {t.error}
           </Alert>
         </Container>
       </div>
@@ -72,16 +111,16 @@ const ElectionPage = () => {
           <Card.Body>
             <div className="mb-3">
               <Badge bg="dark" className="px-3 py-2 fs-6">
-                {translations.election.main.badge}{stats.current_cycle}
+                {t.badge}{stats.current_cycle}
               </Badge>
             </div>
 
-            <h2 className="fw-bold mb-3">{translations.election.main.title}</h2>
+            <h2 className="fw-bold mb-3">{t.title}</h2>
 
             {/* PHASE 1: PRE-START */}
             {isPreStart && (
               <div className="my-4">
-                <h5 className="text-muted mb-3">{translations.election.main.timeStart}:</h5>
+                <h5 className="text-muted mb-3">{t.timeStart}:</h5>
                 <div className="mb-4">
                   <CountdownTimer targetDate={stats.start_time} onEnd={() => refetch()} />
                 </div>
@@ -91,21 +130,21 @@ const ElectionPage = () => {
                     placement="bottom"
                     overlay={
                       <Tooltip id="ticket-countdown-tooltip">
-                        {translations.election.main.timeTicket}:{' '}
+                        {t.timeTicket}:{' '}
                         <CountdownTimer targetDate={stats.tickets_start_time} noSeconds={true} />
                       </Tooltip>
                     }
                   >
                     <Alert variant="warning" className="d-inline-block border-warning text-dark px-4 py-3 cursor-pointer">
                       <i className="bi bi-clock-history me-2"></i>
-                      {translations.election.main.ticketNotice1}:{' '}
+                      {t.ticketNotice1}:{' '}
                       <strong>{ticketsStartTime.toLocaleString()}</strong>
                     </Alert>
                   </OverlayTrigger>
                 ) : (
                   <Alert variant="success" className="d-inline-block border-success px-4 py-3">
                     <i className="bi bi-check-circle me-2"></i>
-                    {translations.election.main.ticketNotice2}
+                    {t.ticketNotice2}
                   </Alert>
                 )}
               </div>
@@ -115,16 +154,16 @@ const ElectionPage = () => {
             {isVotingActive && (
               <div className="my-4">
                 <Badge bg="danger" className="px-3 py-2 fs-6 mb-3 animate-pulse">
-                  • {translations.election.main.voteLive}
+                  • {t.voteLive}
                 </Badge>
-                <h5 className="text-muted mb-3">{translations.election.main.timeEnd}:</h5>
+                <h5 className="text-muted mb-3">{t.timeEnd}:</h5>
                 <div className="mb-4">
                   <CountdownTimer targetDate={stats.end_time} onEnd={() => refetch()} />
                 </div>
 
                 <div className="mx-auto my-4" style={{ maxWidth: '400px' }}>
                   <div className="d-flex justify-content-between small fw-bold mb-1">
-                    <span>{translations.election.main.percentageCurrentTitle}</span>
+                    <span>{t.percentageCurrentTitle}</span>
                     <span>{stats.vote_percentage}%</span>
                   </div>
                   <ProgressBar now={stats.vote_percentage} variant="success" animated style={{ height: '12px' }} />
@@ -136,7 +175,7 @@ const ElectionPage = () => {
                   className="px-5 rounded-pill fw-bold"
                   onClick={() => setActiveView('voting')}
                 >
-                  {translations.election.main.vote}
+                  {t.vote}
                 </Button>
               </div>
             )}
@@ -145,12 +184,12 @@ const ElectionPage = () => {
             {isPostVoting && (
               <div className="my-4">
                 <Alert variant="secondary" className="d-inline-block px-4 py-2 mb-4">
-                  {translations.election.main.voteEndTitle}{stats.current_cycle}.
+                  {t.voteEndTitle}{stats.current_cycle}.
                 </Alert>
 
                 <div className="mx-auto my-4" style={{ maxWidth: '400px' }}>
                   <div className="d-flex justify-content-between small fw-bold mb-1">
-                    <span>{translations.election.main.percentagePostTitle}</span>
+                    <span>{t.percentagePostTitle}</span>
                     <span>{stats.vote_percentage}%</span>
                   </div>
                   <ProgressBar now={stats.vote_percentage} variant="secondary" style={{ height: '12px' }} />
@@ -162,7 +201,7 @@ const ElectionPage = () => {
                   className="px-5 rounded-pill fw-bold"
                   onClick={() => setActiveView('results')}
                 >
-                  {translations.election.main.results}
+                  {t.results}
                 </Button>
               </div>
             )}

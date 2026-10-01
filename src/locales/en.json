@@ -2,15 +2,16 @@
     "navbar": {
         "brand": "Steering Engineering Association",
         "home": "Home",
-        "about": "About Us",
-        "forms": "Forms",
-        "association": "The Association",
-        "organizationStructure": "Organizational Structure",
-        "councilOfThirty": "Council of Thirty",
-        "initiatives": "Initiatives",
-        "blogs": "Topics",
+        "about": {
+            "title": "About Us",
+            "association": "The Association",
+            "organizationStructure": "Organizational Structure",
+            "councilOfThirty": "Council of Thirty",
+            "elections": "Elections"
+        },
         "events": "Events",
         "posts": {
+            "title": "Topics",
             "news": "News",
             "issues": "Issues",
             "blogs": "Blog",
@@ -22,14 +23,16 @@
         "language": "العربية",
         "userMenu": {
             "profile": "Profile"
-        },
-        "election": "Election"
+        }
     },
     "home": {
         "hero": {
             "title": "Steering Engineering Association",
             "subtitle": "The voice of the student, the spirit of engineering, and the future of innovation.",
-            "cta": "Learn More"
+            "cta": "Learn More",
+            "electionLiveBadge": "Elections Live",
+            "cycleLabel": "Cycle",
+            "voteNow": "Vote Now"
         },
         "about": {
             "title": "About Us",
@@ -154,7 +157,12 @@
             "percentagePostTitle": "Final Voter Turnout",
             "vote": "Vote Now",
             "voteEndTitle": "Voting has ended: Cycle #",
-            "results": "View Election Results"
+            "results": "View Election Results",
+            
+            "statusInactive": "Elections Inactive",
+            "inactiveTitle": "No Active Election",
+            "inactiveDesc": "There are no active elections at this moment. Please check back during the next election cycle.",
+            "checkingStatus": "Checking election status..."
         },
         "vote": {
             "back": "Back to Overview",
@@ -191,6 +199,25 @@
                 "userId": "Index",
                 "date": "Resolved Date"
             }
+        },
+        "ticketPage": {
+            "title": "Election Ticket & Info",
+            "cycle": "Election Cycle #",
+            "statusLive": "Elections Live",
+            "statusInactive": "Elections Inactive",
+            "howItWorksTitle": "How Election Works",
+            "guideLivePrefix": "The Engineering Association conducts electronic voting via secure voting tickets. Your voting ticket allows you to select up to",
+            "guideLiveSuffix": "candidate(s) at once on a single ticket. You must generate your ticket below to vote.",
+            "guideInactive": "Elections take place periodically during the academic year. Each student receives a secure single-use voting ticket to cast votes up to a candidate limit established when a new election cycle begins.",
+            "ticketsStart": "Ticket Claim Window",
+            "voteStart": "Voting Begins",
+            "voteEnd": "Voting Ends",
+            "perCycleNotice": "Announced per cycle",
+            "goToElection": "Go to Election Hall",
+            "ticketUnavailableTitle": "Ticket Generation Currently Unavailable",
+            "ticketUnavailableDesc": "Elections are not active at this time. Ticket generation will open automatically once the next election cycle goes live.",
+            "loadingStats": "Loading election details...",
+            "errorStats": "Unable to load election information. Please try again later."
         }
     },
     "profile": {
@@ -244,77 +271,5 @@
             "election": "Voting Ticket"
         },
         "failedToLoad": "Failed to load profile"
-    },
-    "profile-old": {
-        "title": "PROFILE",
-        "settings": "SETTINGS",
-        "detailsTab": "Details",
-        "certificatesTab": "Certificates",
-        "personalInfo": "Personal Info",
-        "nameAr": "Name (Arabic)",
-        "email": "Email",
-        "phone": "Phone",
-        "department": "Department",
-        "loadingProfile": "Loading Profile...",
-        "loadingCerts": "Loading Certificates...",
-        "noCerts": "No Certificates Yet",
-        "exploreCourses": "Explore Courses",
-        "certId": "Certificate ID",
-        "grade": "Grade",
-        "issueDate": "Issue Date",
-        "securityTab": "Security",
-        "UniversityID":"University ID",
-        "editProfile":"Edit Profile",
-        "cancel":"Cancel",
-        "Gender":"Gender",
-        "accountTab":"account",
-        "crunt":"Current",
-        "ussernameedit":"enter new username",
-        "emailnew":"enter new email",
-        "enternewname":"Update Email Address",
-        "UpdateName":"Update Username",
-        "Updateuse": "Update Username",
-        "Updateemail": "Update Email",
-        "saving":"saving",
-        "save":"save",
-        "Notifications":"Notifications",
-        "Nonotifications":"No notifications",
-        "Prev":"Prev",
-        "Next":"Next",
-        "Marking":"Marking...",
-
-        "MarkAllAsRead":"Mark all as read",
-        "Delete":"Delete",
-        "MarkAsRead":"MarkAsRead",
-        
-        "password":{
-            "securityTab": "Security",
-            "UniversityID":"University ID",
-            "editProfile":"Edit Profile",
-            "cancel":"Cancel",
-            "Gender":"Gender",
-            "accountTab":"account",
-            "crunt":"Current",
-            "ussernameedit":"enter new username",
-            "emailnew":"enter new email",
-            "enternewname":"Update Email Address",
-            "UpdateName":"Update Username",
-            "Updateuse": "Update Username",
-            "Updateemail": "Update Email",
-            "saving":"saving",
-            "save":"save",
-            "password":{
-                "securityTab": "Security",
-                "securityTitle": "Security Settings",
-                "oldPassword": "Old Password",
-                "newPassword": "New Password",
-                "confirmPassword": "Confirm Password",
-                "updateBtn": "Update Password",
-                "updatingBtn": "Updating...",
-                "passwordMismatch": "New passwords do not match",
-                "updateSuccess": "Password updated successfully!",
-                "networkError": "Network error, please try again later"
-            }
-        }
     }
 }

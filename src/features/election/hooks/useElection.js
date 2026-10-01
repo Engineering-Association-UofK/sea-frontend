@@ -3,6 +3,7 @@ import { electionService } from '../api/election.service';
 
 export const ELECTION_KEYS = {
   all: ['election'],
+  live: () => [...ELECTION_KEYS.all, 'live'],
   publicStatistics: () => [...ELECTION_KEYS.all, 'public-statistics'],
   privateStatistics: () => [...ELECTION_KEYS.all, 'private-statistics'],
   candidates: () => [...ELECTION_KEYS.all, 'candidates'],
@@ -13,6 +14,14 @@ export const ELECTION_KEYS = {
 // ==========================================
 // Queries (Data Fetching)
 // ==========================================
+
+// Check if election is live
+export const useIfLive = () => {
+  return useQuery({
+    queryKey: ELECTION_KEYS.live(),
+    queryFn: () => electionService.getIfLive(),
+  });
+};
 
 // Real-time public metrics
 export const useElectionPublicStatistics = () => {

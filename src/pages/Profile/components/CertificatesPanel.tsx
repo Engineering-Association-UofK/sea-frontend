@@ -9,7 +9,7 @@ export function CertificatesPanel() {
   const { data: certData, isLoading } = useCertificates();
   const downloadMutation = useDownloadCertificate();
 
-  if (isLoading) return <Loader2 className="mx-auto h-6 w-6 animate-spin text-blue-600" />;
+  if (isLoading) return <Loader2 className="mx-auto h-6 w-6 animate-spin [color:var(--primary-color)]" />;
 
   return (
     <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
