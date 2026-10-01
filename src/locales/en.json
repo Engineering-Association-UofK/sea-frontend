@@ -157,7 +157,12 @@
             "percentagePostTitle": "Final Voter Turnout",
             "vote": "Vote Now",
             "voteEndTitle": "Voting has ended: Cycle #",
-            "results": "View Election Results"
+            "results": "View Election Results",
+            
+            "statusInactive": "Elections Inactive",
+            "inactiveTitle": "No Active Election",
+            "inactiveDesc": "There are no active elections at this moment. Please check back during the next election cycle.",
+            "checkingStatus": "Checking election status..."
         },
         "vote": {
             "back": "Back to Overview",

@@ -72,7 +72,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const data: LoginResponse = await authService.login({ username, password });
 
-      // Handle "Account not verified" special case via LoginResponse model
+      // Handle "Account not verified" special case
       if (data && (!data.is_verified || !data.token)) {
         return {
           success: false,
