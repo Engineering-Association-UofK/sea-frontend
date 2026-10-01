@@ -71,7 +71,7 @@ const Statistics = () => {
     <section className={`statistics-section ${isRtl ? 'rtl' : 'ltr'}`} ref={sectionRef}>
       <Container>
         <div className="statistics-header">
-          <h2>{translations.statistics?.title || 'Our Impact'}</h2>
+          <h2>{translations.home.statistics.title || 'Our Impact'}</h2>
           <div className="underline" />
         </div>
 
@@ -88,7 +88,7 @@ const Statistics = () => {
                     {formatNumber(counts[stat.key])}{stat.suffix}
                   </div>
                   <div className="stat-label">
-                    {translations.statistics?.[stat.key] || stat.key}
+                    {translations.home.statistics?.[stat.key] || stat.key}
                   </div>
                 </div>
               </Col>
