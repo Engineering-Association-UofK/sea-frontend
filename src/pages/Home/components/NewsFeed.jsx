@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, Card, Alert, Button } from 'react-bootstrap';
-import { useLanguage } from '../../context/LanguageContext.jsx';
+import { useLanguage } from '@/context/LanguageContext.jsx';
 import { Link } from 'react-router-dom';
-import { useBlogs } from '../../features/blogs/hooks/useBlogs.js';
+import { useBlogs } from '@/features/blogs/hooks/useBlogs.js';
 import { NewsSkeleton } from './NewsSkeleton.jsx';
-import './NewsFeed.css';
+import '@/styles/HomePage.css';
 
 const NewsFeed = ({ start = 0, end = 3 }) => {
     const { translations, language } = useLanguage();
@@ -18,7 +18,7 @@ const NewsFeed = ({ start = 0, end = 3 }) => {
             <section className="news-feed-section py-5 bg-light">
                 <Container>
                     <div className="d-flex justify-content-between align-items-center mb-5">
-                        <h2 className="section-title fw-bold mb-0">{translations.home.news?.title || "Latest News"}</h2>
+                        <h2 className="section-title mb-0">{translations.home.news?.title || "Latest News"}</h2>
                     </div>
                     <NewsSkeleton />
                 </Container>
@@ -43,12 +43,12 @@ const NewsFeed = ({ start = 0, end = 3 }) => {
             <Container>
                 <div className="d-flex justify-content-between align-items-end mb-5">
                     <div>
-                        <h2 className="section-title fw-bold mb-2">
+                        <h2 className="section-title mb-0">
                             {translations.home.news?.title || "Latest News"}
                         </h2>
-                        <div className="title-underline"></div>
+                        <span className="title-underline" />
                     </div>
-                    {/* View All Button (Desktop) */}
+                    
                     <Button 
                         as={Link} 
                         to="/posts/news" 
@@ -135,7 +135,6 @@ const NewsFeed = ({ start = 0, end = 3 }) => {
                         <p className="text-center text-muted py-4 mb-0">No news right now</p>
                     )}
                     
-                    {/* View All Button (Mobile) */}
                     {newsItems.length > 0 && (
                         <div className="text-center mt-3">
                             <Button as={Link} to="/posts/news" variant="outline-primary" className="w-100 rounded-pill py-2 fw-semibold btn-view-all-mobile">

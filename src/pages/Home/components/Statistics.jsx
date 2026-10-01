@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useLanguage } from '../../context/LanguageContext';
-import { FaUsers, FaLaptop, FaCalendarAlt, FaAward, FaHandshake, FaGlobe } from 'react-icons/fa';
-import './Statistics.css';
+import { useLanguage } from '@/context/LanguageContext';
+import { FaUsers, FaLaptop, FaCalendarAlt, FaGlobe } from 'react-icons/fa';
+import '@/styles/HomePage.css';
 
 const Statistics = () => {
   const { translations, language } = useLanguage();
@@ -21,8 +21,6 @@ const Statistics = () => {
     { key: 'students', icon: FaUsers, suffix: '+' },
     { key: 'workshops', icon: FaLaptop, suffix: '+' },
     { key: 'events', icon: FaCalendarAlt, suffix: '+' },
-    // { key: 'partners', icon: FaHandshake, suffix: '' },
-    // { key: 'projects', icon: FaAward, suffix: '' },
     { key: 'volunteers', icon: FaGlobe, suffix: '+' },
   ];
 
@@ -70,9 +68,9 @@ const Statistics = () => {
   return (
     <section className={`statistics-section ${isRtl ? 'rtl' : 'ltr'}`} ref={sectionRef}>
       <Container>
-        <div className="statistics-header">
-          <h2>{translations.home.statistics.title || 'Our Impact'}</h2>
-          <div className="underline" />
+        <div className="section-header">
+          <h2 className="section-title">{translations.home.statistics.title || 'Our Impact'}</h2>
+          <span className="title-underline" />
         </div>
 
         <Row className="justify-content-center g-5">

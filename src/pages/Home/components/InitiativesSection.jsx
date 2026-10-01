@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useLanguage } from '../../context/LanguageContext';
-import { FaRocket, FaLightbulb, FaUsers } from 'react-icons/fa'; // Context-relevant icons
-import './InitiativesSection.css';
+import { useLanguage } from '@/context/LanguageContext';
+import { FaRocket, FaLightbulb, FaUsers } from 'react-icons/fa';
+import '@/styles/HomePage.css';
 
 const InitiativesSection = () => {
     const { translations, language } = useLanguage();
@@ -14,12 +14,12 @@ const InitiativesSection = () => {
     return (
         <section className={`initiatives-section ${isRtl ? 'rtl' : 'ltr'}`}>
             <Container>
-                <div className="statistics-header">
-                    {/* <span className="pre-title">{translations.home.initiatives.badge || 'Current Projects'}</span> */}
-                    <h2 className="fw-bold">{translations.home.initiatives.title}</h2>
-                    <div className="title-underline" />
-                    <p></p>
-                    <p className="text-muted mx-auto">{translations.home.initiatives.subtitle}</p>
+                <div className="section-header">
+                    <h2 className="section-title">
+                        {translations.home.initiatives.title}
+                    </h2>
+                    <span className="title-underline" />
+                    <p className="section-subtitle">{translations.home.initiatives.subtitle}</p>
                 </div>
                 
                 <Row className="g-4">
@@ -38,12 +38,6 @@ const InitiativesSection = () => {
                                         <h4 className="fw-bold">{data.title}</h4>
                                         <p>{data.desc}</p>
                                     </div>
-                                    {/* <div className="initiative-footer">
-                                        <span className="explore-link">
-                                            {translations.home.initiatives.learnMore || 'Learn More'} 
-                                            <span className="arrow">→</span>
-                                        </span>
-                                    </div> */}
                                 </div>
                             </Col>
                         );

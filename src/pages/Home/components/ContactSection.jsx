@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
-import { useLanguage } from '../../context/LanguageContext';
-import api from '../../utils/api.js';
+import { useLanguage } from '@/context/LanguageContext.jsx';
+import api from '@/utils/api.js';
 
 const ContactSection = () => {
     const { translations } = useLanguage();

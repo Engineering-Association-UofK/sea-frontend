@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import { useLanguage } from '../../context/LanguageContext.jsx';
-import { useIfLive } from '../../features/election/hooks/useElection';
-import heroImgV from '../../utils/images/home-page-hero-v.jpg';
-import heroImgH from '../../utils/images/home-page-hero-h.jpg';
-import './HeroSection.css';
+import { useLanguage } from '@/context/LanguageContext.jsx';
+import { useIfLive } from '@/features/election/hooks/useElection.js';
+import heroImgV from '@/utils/images/home-page-hero-v.jpg';
+import heroImgH from '@/utils/images/home-page-hero-h.jpg';
+import '@/styles/HomePage.css';
 
 const HeroSection = () => {
     const { translations, language } = useLanguage();
@@ -28,7 +28,6 @@ const HeroSection = () => {
 
             <Container className="hero-container">
                 <div className="hero-content">
-                    {/* Live Election Badge Header */}
                     {isLive && (
                         <Link 
                             to="/election" 
