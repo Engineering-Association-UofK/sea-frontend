@@ -1,4 +1,3 @@
-
-.scrollableContainer{
-    height: calc(100dvh - 219px) !important;
+.scrollableContainer {
+  height: calc(100dvh - 219px) !important;
 }

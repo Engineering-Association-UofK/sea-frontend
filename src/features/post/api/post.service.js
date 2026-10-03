@@ -1,6 +1,6 @@
-import cmsApiClient from '../../../api/axiosClient';
+import cmsApiClient from "../../../api/axiosClient";
 
-const ENDPOINT = '/v1/cms/blogs';
+const ENDPOINT = "/v1/cms/blogs";
 
 export const postService = {
   getBySlug: (slug) => {

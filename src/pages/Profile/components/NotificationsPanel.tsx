@@ -1,6 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Check, CheckCheck, Trash2, Loader2, ExternalLink, ArrowRight } from "lucide-react";
+import {
+  Check,
+  CheckCheck,
+  Trash2,
+  Loader2,
+  ExternalLink,
+  ArrowRight,
+} from "lucide-react";
 import {
   useInfiniteNotifications,
   useMarkNotificationAsRead,
@@ -14,13 +21,8 @@ export function NotificationsPanel() {
   const { translations } = useLanguage();
   const t = translations.profile.notifications;
 
-  const {
-    data,
-    isLoading,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useInfiniteNotifications(10);
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useInfiniteNotifications(10);
 
   const markRead = useMarkNotificationAsRead();
   const markAllRead = useMarkAllNotificationsAsRead();
@@ -36,7 +38,7 @@ export function NotificationsPanel() {
           fetchNextPage();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     const currentRef = loadMoreRef.current;
@@ -52,7 +54,9 @@ export function NotificationsPanel() {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (isLoading) {
-    return <Loader2 className="mx-auto h-6 w-6 animate-spin [color:var(--primary-color)]" />;
+    return (
+      <Loader2 className="mx-auto h-6 w-6 animate-spin [color:var(--primary-color)]" />
+    );
   }
 
   const allNotifications = data?.pages.flatMap((page) => page.list) || [];
@@ -75,8 +79,12 @@ export function NotificationsPanel() {
       ) : (
         <div className="space-y-3">
           {allNotifications.map((item) => {
-            const isRedirect = item.type === NotificationType.Redirect || (item.type as string) === "redirect";
-            const redirectData = isRedirect ? (item.data as DataRedirect) : null;
+            const isRedirect =
+              item.type === NotificationType.Redirect ||
+              (item.type as string) === "redirect";
+            const redirectData = isRedirect
+              ? (item.data as DataRedirect)
+              : null;
             const path = redirectData?.path || "";
             const isExternal = /^https?:\/\//i.test(path);
             const buttonText = redirectData?.title || item.title;
@@ -86,13 +94,21 @@ export function NotificationsPanel() {
                 key={item.id}
                 className="flex flex-col gap-3 rounded-lg border p-3.5 transition-colors sm:flex-row sm:items-start sm:justify-between"
                 style={{
-                  borderColor: item.is_read ? "#f3f4f6" : "var(--primary-color)",
-                  backgroundColor: item.is_read ? "#ffffff" : "rgba(var(--primary-color), 0.05)",
+                  borderColor: item.is_read
+                    ? "#f3f4f6"
+                    : "var(--primary-color)",
+                  backgroundColor: item.is_read
+                    ? "#ffffff"
+                    : "rgba(var(--primary-color), 0.05)",
                 }}
               >
                 <div className="space-y-1.5 flex-1">
-                  <h4 className="text-sm font-semibold text-gray-900">{item.title}</h4>
-                  <p className="text-xs text-gray-600 leading-relaxed">{item.message}</p>
+                  <h4 className="text-sm font-semibold text-gray-900">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    {item.message}
+                  </p>
 
                   {/* Redirect Action Button */}
                   {isRedirect && path && (
@@ -131,8 +147,12 @@ export function NotificationsPanel() {
                     <button
                       onClick={() => markRead.mutate(item.id)}
                       className="text-gray-400 transition-colors p-1"
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary-color)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "#9ca3af")}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = "var(--primary-color)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "#9ca3af")
+                      }
                       title={t.markAsRead}
                     >
                       <Check className="h-4 w-4" />

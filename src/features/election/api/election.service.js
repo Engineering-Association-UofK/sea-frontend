@@ -1,8 +1,8 @@
-import apiClient from '../../../api/axiosClient';
+import apiClient from "../../../api/axiosClient";
 
-const PUBLIC_ENDPOINT = '/v1/election';
-const ADMIN_ENDPOINT = '/v1/admin/election';
-const ACCOUNT_ENDPOINT = '/v1/account/election';
+const PUBLIC_ENDPOINT = "/v1/election";
+const ADMIN_ENDPOINT = "/v1/admin/election";
+const ACCOUNT_ENDPOINT = "/v1/account/election";
 
 export const electionService = {
   // Public & Statistics

@@ -1,14 +1,14 @@
-import { useState, useCallback } from 'react';
-import { authService } from '../api/auth.service';
-import { useLanguage } from '../../../context/LanguageContext';
+import { useState, useCallback } from "react";
+import { authService } from "../api/auth.service";
+import { useLanguage } from "../../../context/LanguageContext";
 import {
   InitialRegistrationRequest,
   PasswordRegistrationRequest,
   DetailsRegistrationRequest,
   UsernameRegistrationRequest,
   Language,
-} from '../api/models';
-import { Department, Gender } from '@/features/profile/api/models';
+} from "../api/models";
+import { Department, Gender } from "@/features/profile/api/models";
 
 // Input types for callers (supports legacy camelCase JS calls)
 export interface InitialInput {
@@ -37,7 +37,7 @@ export interface UseRegistrationReturn {
     regCode: string,
     stepNumber: number | string,
     password: string,
-    confirmPassword: string
+    confirmPassword: string,
   ) => Promise<any>;
   submitDetails: (regCode: string, detailsData: DetailsInput) => Promise<any>;
   submitUsername: (regCode: string, username: string) => Promise<any>;
@@ -58,13 +58,13 @@ export const useRegistration = (): UseRegistrationReturn => {
     try {
       const response = await authService.checkRegistration(regCode);
       const step = response?.reg_step;
-      if (typeof step === 'number') {
+      if (typeof step === "number") {
         setCurrentStep(step);
       }
       return step;
     } catch (err: any) {
       const message =
-        err?.response?.data?.message || 'Failed to verify registration code.';
+        err?.response?.data?.message || "Failed to verify registration code.";
       setError(message);
       throw err;
     } finally {
@@ -86,7 +86,7 @@ export const useRegistration = (): UseRegistrationReturn => {
       return await authService.doRegistrationStep(0, payload);
     } catch (err: any) {
       const message =
-        err?.response?.data?.message || 'Initial registration failed.';
+        err?.response?.data?.message || "Initial registration failed.";
       setError(message);
       throw err;
     } finally {
@@ -99,7 +99,7 @@ export const useRegistration = (): UseRegistrationReturn => {
     regCode: string,
     stepNumber: number | string,
     password: string,
-    confirmPassword: string
+    confirmPassword: string,
   ) => {
     setLoading(true);
     setError(null);
@@ -112,7 +112,7 @@ export const useRegistration = (): UseRegistrationReturn => {
       return await authService.doRegistrationStep(stepNumber, payload);
     } catch (err: any) {
       const message =
-        err?.response?.data?.message || 'Password submission failed.';
+        err?.response?.data?.message || "Password submission failed.";
       setError(message);
       throw err;
     } finally {
@@ -121,10 +121,7 @@ export const useRegistration = (): UseRegistrationReturn => {
   };
 
   // Step 2: Student Details
-  const submitDetails = async (
-    regCode: string,
-    detailsData: DetailsInput
-  ) => {
+  const submitDetails = async (regCode: string, detailsData: DetailsInput) => {
     setLoading(true);
     setError(null);
     try {
@@ -135,12 +132,12 @@ export const useRegistration = (): UseRegistrationReturn => {
         gender: detailsData.gender as Gender,
         uni_id: String(detailsData.uniId),
         department: detailsData.department as Department,
-        phone: detailsData.phone || '',
+        phone: detailsData.phone || "",
       };
       return await authService.doRegistrationStep(2, payload);
     } catch (err: any) {
       const message =
-        err?.response?.data?.message || 'Details submission failed.';
+        err?.response?.data?.message || "Details submission failed.";
       setError(message);
       throw err;
     } finally {
@@ -160,7 +157,7 @@ export const useRegistration = (): UseRegistrationReturn => {
       return await authService.doRegistrationStep(3, payload);
     } catch (err: any) {
       const message =
-        err?.response?.data?.message || 'Username registration failed.';
+        err?.response?.data?.message || "Username registration failed.";
       setError(message);
       throw err;
     } finally {

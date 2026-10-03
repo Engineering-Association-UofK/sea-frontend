@@ -1,47 +1,47 @@
 /* Sidebar Link Base Styling */
 .admin-sidebar-nav .nav-link {
-    display: flex;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  padding: 10px 16px;
 }
 
 .admin-sidebar-nav .nav-link:hover {
-    background-color: #f8f9fa;
-    color: var(--primary-color) !important;
+  background-color: #f8f9fa;
+  color: var(--primary-color) !important;
 }
 
 /* Active State Override */
 .admin-sidebar-nav .nav-link.active {
-    background-color: var(--primary-color) !important;
-    color: #ffffff !important;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  background-color: var(--primary-color) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .admin-sidebar-nav .nav-link.active i {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .letter-spacing-1 {
-    letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 
 .table-wrapper {
-    overflow-x: auto;
-    overflow-y: auto;
-    max-height: calc(100dvh - 210px); 
-    background: #fff;
-    position: relative;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(100dvh - 210px);
+  background: #fff;
+  position: relative;
 }
 
 .table-wrapper thead th {
-    position: sticky; 
-    top: 0;
-    z-index: 10;
-    background-color: var(--bs-body-bg);
-    border-bottom: 2px solid var(--bs-border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bs-body-bg);
+  border-bottom: 2px solid var(--bs-border-color);
 }
 
 .flex-fill {
-    min-width: 0;
+  min-width: 0;
 }

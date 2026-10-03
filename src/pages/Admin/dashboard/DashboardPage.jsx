@@ -1,62 +1,71 @@
-import React from 'react';
-import { Row, Col, Card, Button, Badge, ProgressBar } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { useGetAdminAnalysis } from '../../../features/admin/hooks/useAdmin';
+import React from "react";
+import { Row, Col, Card, Button, Badge, ProgressBar } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useGetAdminAnalysis } from "../../../features/admin/hooks/useAdmin";
 
 const METRICS_MAP = [
   {
-    key: 'users',
-    label: 'Registered Users',
-    icon: 'bi-people-fill',
-    badgeBg: 'bg-primary',
-    borderAccent: '#0d6efd',
-    route: '/admin/users',
-    desc: 'Total active accounts',
+    key: "users",
+    label: "Registered Users",
+    icon: "bi-people-fill",
+    badgeBg: "bg-primary",
+    borderAccent: "#0d6efd",
+    route: "/admin/users",
+    desc: "Total active accounts",
   },
   {
-    key: 'certificates',
-    label: 'Certificates Issued',
-    icon: 'bi-award-fill',
-    badgeBg: 'bg-success',
-    borderAccent: '#198754',
-    route: '/admin/certificates',
-    desc: 'Verified PDF credentials',
+    key: "certificates",
+    label: "Certificates Issued",
+    icon: "bi-award-fill",
+    badgeBg: "bg-success",
+    borderAccent: "#198754",
+    route: "/admin/certificates",
+    desc: "Verified PDF credentials",
   },
   {
-    key: 'events',
-    label: 'Platform Events',
-    icon: 'bi-calendar-event-fill',
-    badgeBg: 'bg-warning',
-    borderAccent: '#ffc107',
-    route: '/admin/events',
-    desc: 'Scheduled activities',
+    key: "events",
+    label: "Platform Events",
+    icon: "bi-calendar-event-fill",
+    badgeBg: "bg-warning",
+    borderAccent: "#ffc107",
+    route: "/admin/events",
+    desc: "Scheduled activities",
   },
   {
-    key: 'posts',
-    label: 'Published Posts',
-    icon: 'bi-journal-text',
-    badgeBg: 'bg-info',
-    borderAccent: '#0dcaf0',
-    route: '/admin/posts',
-    desc: 'News & announcements',
+    key: "posts",
+    label: "Published Posts",
+    icon: "bi-journal-text",
+    badgeBg: "bg-info",
+    borderAccent: "#0dcaf0",
+    route: "/admin/posts",
+    desc: "News & announcements",
   },
   {
-    key: 'forms',
-    label: 'Form Responses',
-    icon: 'bi-ui-checks-grid',
-    badgeBg: 'bg-dark',
-    borderAccent: '#212529',
-    route: '/admin/forms',
-    desc: 'Feedback & submissions',
+    key: "forms",
+    label: "Form Responses",
+    icon: "bi-ui-checks-grid",
+    badgeBg: "bg-dark",
+    borderAccent: "#212529",
+    route: "/admin/forms",
+    desc: "Feedback & submissions",
   },
 ];
 
 const DashboardPage = () => {
   const navigate = useNavigate();
-  const { data: analysis, isLoading, isError, refetch, isFetching } = useGetAdminAnalysis();
+  const {
+    data: analysis,
+    isLoading,
+    isError,
+    refetch,
+    isFetching,
+  } = useGetAdminAnalysis();
 
   const totalEntities = analysis
-    ? Object.values(analysis).reduce((acc, curr) => acc + (Number(curr) || 0), 0)
+    ? Object.values(analysis).reduce(
+        (acc, curr) => acc + (Number(curr) || 0),
+        0,
+      )
     : 0;
 
   const getPct = (val) => (totalEntities > 0 ? (val / totalEntities) * 100 : 0);
@@ -78,8 +87,10 @@ const DashboardPage = () => {
           onClick={() => refetch()}
           disabled={isFetching}
         >
-          <i className={`bi bi-arrow-clockwise ${isFetching ? 'spin' : ''}`}></i>
-          {isFetching ? 'Refreshing...' : 'Sync Telemetry'}
+          <i
+            className={`bi bi-arrow-clockwise ${isFetching ? "spin" : ""}`}
+          ></i>
+          {isFetching ? "Refreshing..." : "Sync Telemetry"}
         </Button>
       </div>
 
@@ -123,9 +134,9 @@ const DashboardPage = () => {
                   <Card
                     className="w-100 border-0 shadow-sm h-100 position-relative overflow-hidden metric-card"
                     style={{
-                      cursor: 'pointer',
+                      cursor: "pointer",
                       borderLeft: `4px solid ${item.borderAccent}`,
-                      backgroundColor: '#ffffff',
+                      backgroundColor: "#ffffff",
                     }}
                     onClick={() => navigate(item.route)}
                   >
@@ -137,7 +148,7 @@ const DashboardPage = () => {
                           </span>
                           <div
                             className={`rounded-2 text-white p-2 d-flex align-items-center justify-content-center ${item.badgeBg}`}
-                            style={{ width: '32px', height: '32px' }}
+                            style={{ width: "32px", height: "32px" }}
                           >
                             <i className={`bi ${item.icon} fs-6`}></i>
                           </div>
@@ -154,7 +165,9 @@ const DashboardPage = () => {
                       </div>
 
                       <div className="mt-3 pt-2 border-top d-flex justify-content-between align-items-center">
-                        <span className="text-muted fs-7 text-truncate">{item.desc}</span>
+                        <span className="text-muted fs-7 text-truncate">
+                          {item.desc}
+                        </span>
                         <i className="bi bi-chevron-right text-muted fs-7"></i>
                       </div>
                     </Card.Body>
@@ -170,23 +183,52 @@ const DashboardPage = () => {
               {/* Card Header */}
               <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-3">
                 <div>
-                  <h6 className="fw-bold mb-0 text-dark">Platform Entity Breakdown</h6>
+                  <h6 className="fw-bold mb-0 text-dark">
+                    Platform Entity Breakdown
+                  </h6>
                   <span className="text-muted small">
-                    Relative ratio of records across systems ({totalEntities.toLocaleString()} total)
+                    Relative ratio of records across systems (
+                    {totalEntities.toLocaleString()} total)
                   </span>
                 </div>
-                <Badge bg="dark" className="font-monospace px-2 py-1 align-self-start align-self-sm-auto">
+                <Badge
+                  bg="dark"
+                  className="font-monospace px-2 py-1 align-self-start align-self-sm-auto"
+                >
                   System Health: Nominal
                 </Badge>
               </div>
 
               {/* Stacked Progress Bar */}
-              <ProgressBar className="rounded-3 overflow-hidden mb-3" style={{ height: '12px' }}>
-                <ProgressBar variant="primary" now={getPct(analysis.users)} key={1} />
-                <ProgressBar variant="success" now={getPct(analysis.certificates)} key={2} />
-                <ProgressBar variant="warning" now={getPct(analysis.events)} key={3} />
-                <ProgressBar variant="info" now={getPct(analysis.posts)} key={4} />
-                <ProgressBar variant="dark" now={getPct(analysis.forms)} key={5} />
+              <ProgressBar
+                className="rounded-3 overflow-hidden mb-3"
+                style={{ height: "12px" }}
+              >
+                <ProgressBar
+                  variant="primary"
+                  now={getPct(analysis.users)}
+                  key={1}
+                />
+                <ProgressBar
+                  variant="success"
+                  now={getPct(analysis.certificates)}
+                  key={2}
+                />
+                <ProgressBar
+                  variant="warning"
+                  now={getPct(analysis.events)}
+                  key={3}
+                />
+                <ProgressBar
+                  variant="info"
+                  now={getPct(analysis.posts)}
+                  key={4}
+                />
+                <ProgressBar
+                  variant="dark"
+                  now={getPct(analysis.forms)}
+                  key={5}
+                />
               </ProgressBar>
 
               {/* Legend Grid */}
@@ -196,14 +238,22 @@ const DashboardPage = () => {
                   const pct = getPct(count).toFixed(1);
 
                   return (
-                    <Col key={m.key} xs={6} sm={4} lg="auto" className="flex-grow-1">
+                    <Col
+                      key={m.key}
+                      xs={6}
+                      sm={4}
+                      lg="auto"
+                      className="flex-grow-1"
+                    >
                       <div className="p-2 rounded bg-light border d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-1 h-100">
                         <div className="d-flex align-items-center gap-2 min-w-0">
                           <span
                             className={`rounded-circle d-inline-block flex-shrink-0 ${m.badgeBg}`}
-                            style={{ width: '8px', height: '8px' }}
+                            style={{ width: "8px", height: "8px" }}
                           ></span>
-                          <span className="text-secondary small text-truncate">{m.label}</span>
+                          <span className="text-secondary small text-truncate">
+                            {m.label}
+                          </span>
                         </div>
                         <div className="d-flex align-items-baseline gap-1 ms-1 ms-sm-2">
                           <strong className="text-dark font-monospace small">

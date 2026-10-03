@@ -17,7 +17,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    
+
     "allowJs": true,
     "checkJs": false,
     "esModuleInterop": true,

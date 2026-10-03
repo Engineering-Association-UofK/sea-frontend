@@ -1,7 +1,7 @@
-import apiClient from '../../../api/axiosClient';
+import apiClient from "../../../api/axiosClient";
 
-const ENDPOINT = '/v1/open/bot';
-const API_URL = '/v1/admin/bot';
+const ENDPOINT = "/v1/open/bot";
+const API_URL = "/v1/admin/bot";
 
 export const botService = {
   /**
@@ -15,7 +15,7 @@ export const botService = {
       session_id: sessionId,
       keyword: keyword,
       input: input,
-      language: language
+      language: language,
     });
   },
 

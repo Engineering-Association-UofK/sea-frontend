@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   useElectionPrivateStatistics,
   useCandidates,
@@ -6,17 +6,17 @@ import {
   useUpdateCandidate,
   useDeleteCandidate,
   useResolveElection,
-} from '../../../features/election/hooks/useElection';
+} from "../../../features/election/hooks/useElection";
 
-import { ElectionHeader } from './ElectionHeader';
-import { ElectionStats } from './ElectionStats';
-import { CandidateTable } from './CandidateTable';
+import { ElectionHeader } from "./ElectionHeader";
+import { ElectionStats } from "./ElectionStats";
+import { CandidateTable } from "./CandidateTable";
 import {
   CreateCandidateModal,
   EditCandidateModal,
   DeleteCandidateModal,
   ResolveElectionModal,
-} from './modals/CandidateModals';
+} from "./modals/CandidateModals";
 
 const ElectionAdminPage = () => {
   // Query Hooks
@@ -60,7 +60,7 @@ const ElectionAdminPage = () => {
   const handleCreateSubmit = async (formData) => {
     setActionError(null);
     if (!formData.user_id) {
-      setActionError('User ID is required.');
+      setActionError("User ID is required.");
       return;
     }
     try {
@@ -70,7 +70,9 @@ const ElectionAdminPage = () => {
       });
       setShowAddModal(false);
     } catch (err) {
-      setActionError(err?.response?.data?.message || 'Failed to add candidate.');
+      setActionError(
+        err?.response?.data?.message || "Failed to add candidate.",
+      );
     }
   };
 
@@ -83,7 +85,9 @@ const ElectionAdminPage = () => {
       });
       setShowEditModal(false);
     } catch (err) {
-      setActionError(err?.response?.data?.message || 'Failed to update candidate.');
+      setActionError(
+        err?.response?.data?.message || "Failed to update candidate.",
+      );
     }
   };
 
@@ -93,7 +97,9 @@ const ElectionAdminPage = () => {
       await deleteCandidateMutation.mutateAsync(selectedCandidate.id);
       setShowDeleteModal(false);
     } catch (err) {
-      setActionError(err?.response?.data?.message || 'Failed to delete candidate.');
+      setActionError(
+        err?.response?.data?.message || "Failed to delete candidate.",
+      );
     }
   };
 
@@ -103,7 +109,9 @@ const ElectionAdminPage = () => {
       await resolveElectionMutation.mutateAsync();
       setShowResolveModal(false);
     } catch (err) {
-      setActionError(err?.response?.data?.message || 'Failed to resolve election cycle.');
+      setActionError(
+        err?.response?.data?.message || "Failed to resolve election cycle.",
+      );
     }
   };
 

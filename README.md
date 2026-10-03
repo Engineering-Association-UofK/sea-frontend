@@ -1,6 +1,7 @@
 <div align="center">
 
 # 🏛️ Engineering Association — University of Khartoum
+
 ### Frontend Web Application
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
@@ -16,8 +17,9 @@
 ---
 
 ## 📋 Table of Contents
+
 - [🏛️ Engineering Association — University of Khartoum](#️-engineering-association--university-of-khartoum)
-    - [Frontend Web Application](#frontend-web-application)
+  - [Frontend Web Application](#frontend-web-application)
   - [📋 Table of Contents](#-table-of-contents)
   - [🔭 Overview](#-overview)
   - [✨ Features](#-features)
@@ -43,34 +45,34 @@ The application integrates with a **Go** backend API, uses **SeaweedFS** for ima
 
 ## ✨ Features
 
-| Area | Highlights |
-|------|-----------|
-| **Public Pages** | Home, About, Blogs, And Events with bilingual content |
-| **Authentication** | JWT-based login, email verification, role-based access |
-| **Blog Management** | Full CRUD with Markdown editor, live preview, image upload, draft/publish/archive status |
-| **Admin Dashboard** | Manage users, bot commands, images, and editable site content |
-| **Chat Bot** | Floating widget with options-based conversation tree, multi-language |
-| **Image Storage** | SeaweedFS integration with metadata management and reusable image picker |
-| **System Monitoring** | Real-time CPU, memory, disk usage with auto-refresh every 30 seconds |
-| **i18n & RTL** | Full English/Arabic support, direction auto-switching, JSON-based translations |
+| Area                  | Highlights                                                                               |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| **Public Pages**      | Home, About, Blogs, And Events with bilingual content                                    |
+| **Authentication**    | JWT-based login, email verification, role-based access                                   |
+| **Blog Management**   | Full CRUD with Markdown editor, live preview, image upload, draft/publish/archive status |
+| **Admin Dashboard**   | Manage users, bot commands, images, and editable site content                            |
+| **Chat Bot**          | Floating widget with options-based conversation tree, multi-language                     |
+| **Image Storage**     | SeaweedFS integration with metadata management and reusable image picker                 |
+| **System Monitoring** | Real-time CPU, memory, disk usage with auto-refresh every 30 seconds                     |
+| **i18n & RTL**        | Full English/Arabic support, direction auto-switching, JSON-based translations           |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technology |
-|----------|-----------|
-| **UI Framework** | React 19 |
-| **Build Tool** | Vite 7 |
-| **Routing** | React Router DOM 7 |
-| **UI Components** | React Bootstrap 5, Bootstrap Icons, FontAwesome |
-| **Server State** | TanStack React Query 5 |
-| **HTTP Client** | Axios (with interceptors) |
-| **Markdown** | React Markdown + custom editor component |
-| **Authentication** | JWT stored in `localStorage` / `sessionStorage` |
-| **Styling** | CSS Modules, Bootstrap, custom CSS |
-| **Linting** | ESLint |
-| **Package Manager** | pnpm |
+| Category            | Technology                                      |
+| ------------------- | ----------------------------------------------- |
+| **UI Framework**    | React 19                                        |
+| **Build Tool**      | Vite 7                                          |
+| **Routing**         | React Router DOM 7                              |
+| **UI Components**   | React Bootstrap 5, Bootstrap Icons, FontAwesome |
+| **Server State**    | TanStack React Query 5                          |
+| **HTTP Client**     | Axios (with interceptors)                       |
+| **Markdown**        | React Markdown + custom editor component        |
+| **Authentication**  | JWT stored in `localStorage` / `sessionStorage` |
+| **Styling**         | CSS Modules, Bootstrap, custom CSS              |
+| **Linting**         | ESLint                                          |
+| **Package Manager** | pnpm                                            |
 
 ---
 
@@ -213,12 +215,12 @@ VITE_API_NEW_BASE_URL_RAW="http://localhost:8000"
 
 ## 📜 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start Vite development server with HMR |
-| `pnpm build` | Create optimized production build |
-| `pnpm preview` | Preview the production build locally |
-| `pnpm lint` | Run ESLint across the codebase |
+| Command        | Description                            |
+| -------------- | -------------------------------------- |
+| `pnpm dev`     | Start Vite development server with HMR |
+| `pnpm build`   | Create optimized production build      |
+| `pnpm preview` | Preview the production build locally   |
+| `pnpm lint`    | Run ESLint across the codebase         |
 
 ---
 

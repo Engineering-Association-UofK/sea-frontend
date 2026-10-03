@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
-import { Container, Card, Button, ProgressBar, Alert, Spinner, Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { useElectionPublicStatistics, useIfLive } from '../../features/election/hooks/useElection';
-import CountdownTimer from './CountdownTimer';
-import VotingView from './VotingView';
-import ResultsView from './ResultsView';
-import { useLanguage } from '../../context/LanguageContext';
+import React, { useState } from "react";
+import {
+  Container,
+  Card,
+  Button,
+  ProgressBar,
+  Alert,
+  Spinner,
+  Badge,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
+import {
+  useElectionPublicStatistics,
+  useIfLive,
+} from "../../features/election/hooks/useElection";
+import CountdownTimer from "./CountdownTimer";
+import VotingView from "./VotingView";
+import ResultsView from "./ResultsView";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ElectionPage = () => {
   const { translations } = useLanguage();
   const t = translations.election.main;
-  
+
   const { data: liveData, isLoading: isLiveLoading } = useIfLive();
   const isLive = Boolean(liveData?.live);
 
-  const { data: stats, isLoading: isStatsLoading, isError, refetch } = useElectionPublicStatistics({ enabled: isLive });
-  
-  const [activeView, setActiveView] = useState('overview'); // 'overview' | 'voting' | 'results'
+  const {
+    data: stats,
+    isLoading: isStatsLoading,
+    isError,
+    refetch,
+  } = useElectionPublicStatistics({ enabled: isLive });
+
+  const [activeView, setActiveView] = useState("overview"); // 'overview' | 'voting' | 'results'
 
   // Loading state while checking live status or fetching statistics
   if (isLiveLoading || (isLive && isStatsLoading)) {
@@ -33,7 +51,7 @@ const ElectionPage = () => {
   if (!isLive) {
     return (
       <div className="h-100 election-page-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5">
-        <Container style={{ maxWidth: '680px' }}>
+        <Container style={{ maxWidth: "680px" }}>
           <Card className="border-0 shadow text-center p-4 w-100">
             <Card.Body className="py-4">
               <div className="mb-3">
@@ -44,14 +62,13 @@ const ElectionPage = () => {
 
               <h2 className="fw-bold mb-3">{t.title}</h2>
 
-              <Alert variant="info" className="my-4 p-4 border-0 shadow-sm text-center">
+              <Alert
+                variant="info"
+                className="my-4 p-4 border-0 shadow-sm text-center"
+              >
                 <i className="bi bi-info-circle fs-1 text-info d-block mb-2"></i>
-                <h5 className="fw-bold mb-2">
-                  {t.inactiveTitle}
-                </h5>
-                <p className="mb-0 text-muted">
-                  {t.inactiveDesc}
-                </p>
+                <h5 className="fw-bold mb-2">{t.inactiveTitle}</h5>
+                <p className="mb-0 text-muted">{t.inactiveDesc}</p>
               </Alert>
             </Card.Body>
           </Card>
@@ -64,7 +81,7 @@ const ElectionPage = () => {
   if (isError || !stats) {
     return (
       <div className="election-page-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5">
-        <Container style={{ maxWidth: '600px' }}>
+        <Container style={{ maxWidth: "600px" }}>
           <Alert variant="danger" className="text-center shadow-sm">
             {t.error}
           </Alert>
@@ -84,21 +101,24 @@ const ElectionPage = () => {
   const isTicketOpen = now >= ticketsStartTime;
 
   // View Routing Logic
-  if (activeView === 'voting') {
+  if (activeView === "voting") {
     return (
       <div className="election-page-wrapper min-vh-100 py-4 pb-5">
         <Container>
-          <VotingView stats={stats} onBack={() => setActiveView('overview')} />
+          <VotingView stats={stats} onBack={() => setActiveView("overview")} />
         </Container>
       </div>
     );
   }
 
-  if (activeView === 'results') {
+  if (activeView === "results") {
     return (
       <div className="election-page-wrapper min-vh-100 py-4">
         <Container>
-          <ResultsView cycle={stats.current_cycle} onBack={() => setActiveView('overview')} />
+          <ResultsView
+            cycle={stats.current_cycle}
+            onBack={() => setActiveView("overview")}
+          />
         </Container>
       </div>
     );
@@ -106,12 +126,13 @@ const ElectionPage = () => {
 
   return (
     <div className="h-100 election-page-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5">
-      <Container style={{ maxWidth: '680px' }}>
+      <Container style={{ maxWidth: "680px" }}>
         <Card className="border-0 shadow text-center p-4 w-100">
           <Card.Body>
             <div className="mb-3">
               <Badge bg="dark" className="px-3 py-2 fs-6">
-                {t.badge}{stats.current_cycle}
+                {t.badge}
+                {stats.current_cycle}
               </Badge>
             </div>
 
@@ -122,7 +143,10 @@ const ElectionPage = () => {
               <div className="my-4">
                 <h5 className="text-muted mb-3">{t.timeStart}:</h5>
                 <div className="mb-4">
-                  <CountdownTimer targetDate={stats.start_time} onEnd={() => refetch()} />
+                  <CountdownTimer
+                    targetDate={stats.start_time}
+                    onEnd={() => refetch()}
+                  />
                 </div>
 
                 {!isTicketOpen ? (
@@ -130,19 +154,28 @@ const ElectionPage = () => {
                     placement="bottom"
                     overlay={
                       <Tooltip id="ticket-countdown-tooltip">
-                        {t.timeTicket}:{' '}
-                        <CountdownTimer targetDate={stats.tickets_start_time} noSeconds={true} />
+                        {t.timeTicket}:{" "}
+                        <CountdownTimer
+                          targetDate={stats.tickets_start_time}
+                          noSeconds={true}
+                        />
                       </Tooltip>
                     }
                   >
-                    <Alert variant="warning" className="d-inline-block border-warning text-dark px-4 py-3 cursor-pointer">
+                    <Alert
+                      variant="warning"
+                      className="d-inline-block border-warning text-dark px-4 py-3 cursor-pointer"
+                    >
                       <i className="bi bi-clock-history me-2"></i>
-                      {t.ticketNotice1}:{' '}
+                      {t.ticketNotice1}:{" "}
                       <strong>{ticketsStartTime.toLocaleString()}</strong>
                     </Alert>
                   </OverlayTrigger>
                 ) : (
-                  <Alert variant="success" className="d-inline-block border-success px-4 py-3">
+                  <Alert
+                    variant="success"
+                    className="d-inline-block border-success px-4 py-3"
+                  >
                     <i className="bi bi-check-circle me-2"></i>
                     {t.ticketNotice2}
                   </Alert>
@@ -153,27 +186,38 @@ const ElectionPage = () => {
             {/* PHASE 2: VOTING ACTIVE */}
             {isVotingActive && (
               <div className="my-4">
-                <Badge bg="danger" className="px-3 py-2 fs-6 mb-3 animate-pulse">
+                <Badge
+                  bg="danger"
+                  className="px-3 py-2 fs-6 mb-3 animate-pulse"
+                >
                   • {t.voteLive}
                 </Badge>
                 <h5 className="text-muted mb-3">{t.timeEnd}:</h5>
                 <div className="mb-4">
-                  <CountdownTimer targetDate={stats.end_time} onEnd={() => refetch()} />
+                  <CountdownTimer
+                    targetDate={stats.end_time}
+                    onEnd={() => refetch()}
+                  />
                 </div>
 
-                <div className="mx-auto my-4" style={{ maxWidth: '400px' }}>
+                <div className="mx-auto my-4" style={{ maxWidth: "400px" }}>
                   <div className="d-flex justify-content-between small fw-bold mb-1">
                     <span>{t.percentageCurrentTitle}</span>
                     <span>{stats.vote_percentage}%</span>
                   </div>
-                  <ProgressBar now={stats.vote_percentage} variant="success" animated style={{ height: '12px' }} />
+                  <ProgressBar
+                    now={stats.vote_percentage}
+                    variant="success"
+                    animated
+                    style={{ height: "12px" }}
+                  />
                 </div>
 
                 <Button
                   variant="primary"
                   size="lg"
                   className="px-5 rounded-pill fw-bold"
-                  onClick={() => setActiveView('voting')}
+                  onClick={() => setActiveView("voting")}
                 >
                   {t.vote}
                 </Button>
@@ -183,23 +227,31 @@ const ElectionPage = () => {
             {/* PHASE 3: POST-VOTING */}
             {isPostVoting && (
               <div className="my-4">
-                <Alert variant="secondary" className="d-inline-block px-4 py-2 mb-4">
-                  {t.voteEndTitle}{stats.current_cycle}.
+                <Alert
+                  variant="secondary"
+                  className="d-inline-block px-4 py-2 mb-4"
+                >
+                  {t.voteEndTitle}
+                  {stats.current_cycle}.
                 </Alert>
 
-                <div className="mx-auto my-4" style={{ maxWidth: '400px' }}>
+                <div className="mx-auto my-4" style={{ maxWidth: "400px" }}>
                   <div className="d-flex justify-content-between small fw-bold mb-1">
                     <span>{t.percentagePostTitle}</span>
                     <span>{stats.vote_percentage}%</span>
                   </div>
-                  <ProgressBar now={stats.vote_percentage} variant="secondary" style={{ height: '12px' }} />
+                  <ProgressBar
+                    now={stats.vote_percentage}
+                    variant="secondary"
+                    style={{ height: "12px" }}
+                  />
                 </div>
 
                 <Button
                   variant="dark"
                   size="lg"
                   className="px-5 rounded-pill fw-bold"
-                  onClick={() => setActiveView('results')}
+                  onClick={() => setActiveView("results")}
                 >
                   {t.results}
                 </Button>

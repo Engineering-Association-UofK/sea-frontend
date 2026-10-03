@@ -19,8 +19,16 @@ export function ProfilePage() {
 
   const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: "info", label: t.tabs.info, icon: <User className="h-4 w-4" /> },
-    { id: "certificates", label: t.tabs.certificates, icon: <Award className="h-4 w-4" /> },
-    { id: "notifications", label: t.tabs.notifications, icon: <Bell className="h-4 w-4" /> },
+    {
+      id: "certificates",
+      label: t.tabs.certificates,
+      icon: <Award className="h-4 w-4" />,
+    },
+    {
+      id: "notifications",
+      label: t.tabs.notifications,
+      icon: <Bell className="h-4 w-4" />,
+    },
   ];
 
   const activeTabObj = tabs.find((tab) => tab.id === activeTab) || tabs[0];
@@ -51,11 +59,11 @@ export function ProfilePage() {
       <div className="sm:hidden">
         <div className="relative flex items-center justify-between rounded-xl border border-gray-200 bg-white p-2.5 shadow-sm transition-all focus-within:border-[var(--primary-color)] focus-within:ring-2 focus-within:ring-[var(--primary-color)]/20 active:bg-gray-50">
           <div className="flex items-center gap-3 min-w-0">
-            <div 
+            <div
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-              style={{ 
-                backgroundColor: 'rgba(var(--primary-color), 0.1)', 
-                color: 'var(--primary-color)' 
+              style={{
+                backgroundColor: "rgba(var(--primary-color), 0.1)",
+                color: "var(--primary-color)",
               }}
             >
               {activeTabObj.icon}

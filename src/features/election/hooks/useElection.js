@@ -1,14 +1,14 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { electionService } from '../api/election.service';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { electionService } from "../api/election.service";
 
 export const ELECTION_KEYS = {
-  all: ['election'],
-  live: () => [...ELECTION_KEYS.all, 'live'],
-  publicStatistics: () => [...ELECTION_KEYS.all, 'public-statistics'],
-  privateStatistics: () => [...ELECTION_KEYS.all, 'private-statistics'],
-  candidates: () => [...ELECTION_KEYS.all, 'candidates'],
-  ticket: () => [...ELECTION_KEYS.all, 'ticket'],
-  results: (cycle) => [...ELECTION_KEYS.all, 'results', cycle],
+  all: ["election"],
+  live: () => [...ELECTION_KEYS.all, "live"],
+  publicStatistics: () => [...ELECTION_KEYS.all, "public-statistics"],
+  privateStatistics: () => [...ELECTION_KEYS.all, "private-statistics"],
+  candidates: () => [...ELECTION_KEYS.all, "candidates"],
+  ticket: () => [...ELECTION_KEYS.all, "ticket"],
+  results: (cycle) => [...ELECTION_KEYS.all, "results", cycle],
 };
 
 // ==========================================
@@ -65,7 +65,8 @@ export const useCreateCandidate = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (candidateData) => electionService.createCandidate(candidateData),
+    mutationFn: (candidateData) =>
+      electionService.createCandidate(candidateData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ELECTION_KEYS.candidates() });
     },
@@ -77,7 +78,8 @@ export const useUpdateCandidate = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, belonging }) => electionService.updateCandidate({ id, belonging }),
+    mutationFn: ({ id, belonging }) =>
+      electionService.updateCandidate({ id, belonging }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ELECTION_KEYS.candidates() });
     },
@@ -112,8 +114,12 @@ export const useSubmitVote = () => {
     mutationFn: (voteData) => electionService.submitVote(voteData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ELECTION_KEYS.ticket() });
-      queryClient.invalidateQueries({ queryKey: ELECTION_KEYS.publicStatistics() });
-      queryClient.invalidateQueries({ queryKey: ELECTION_KEYS.privateStatistics() });
+      queryClient.invalidateQueries({
+        queryKey: ELECTION_KEYS.publicStatistics(),
+      });
+      queryClient.invalidateQueries({
+        queryKey: ELECTION_KEYS.privateStatistics(),
+      });
     },
   });
 };

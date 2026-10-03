@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Key, Loader2 } from "lucide-react";
-import { useUpdateProfile, useUpdatePassword } from "@/features/profile/hooks/useProfile";
-import { Department, Gender, UserProfileResponse } from "@/features/profile/api/models";
+import {
+  useUpdateProfile,
+  useUpdatePassword,
+} from "@/features/profile/hooks/useProfile";
+import {
+  Department,
+  Gender,
+  UserProfileResponse,
+} from "@/features/profile/api/models";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface PersonalInfoPanelProps {
@@ -40,7 +47,11 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
     e.preventDefault();
     updatePasswordMutation.mutate(passwordData, {
       onSuccess: () => {
-        setPasswordData({ old_password: "", new_password: "", confirm_password: "" });
+        setPasswordData({
+          old_password: "",
+          new_password: "",
+          confirm_password: "",
+        });
       },
     });
   };
@@ -52,21 +63,29 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
         <form onSubmit={handleProfileSubmit} className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-medium text-gray-700">{t.nameEn}</label>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.nameEn}
+              </label>
               <input
                 type="text"
                 value={formData.name_en}
-                onChange={(e) => setFormData({ ...formData, name_en: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name_en: e.target.value })
+                }
                 className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-700">{t.nameAr}</label>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.nameAr}
+              </label>
               <input
                 type="text"
                 dir="rtl"
                 value={formData.name_ar}
-                onChange={(e) => setFormData({ ...formData, name_ar: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name_ar: e.target.value })
+                }
                 className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               />
             </div>
@@ -74,19 +93,30 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-medium text-gray-700">{t.phone}</label>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.phone}
+              </label>
               <input
                 type="text"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-700">{t.department}</label>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.department}
+              </label>
               <select
                 value={formData.department}
-                onChange={(e) => setFormData({ ...formData, department: e.target.value as Department })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    department: e.target.value as Department,
+                  })
+                }
                 className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               >
                 {Object.values(Department).map((dept) => (
@@ -104,7 +134,9 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
             className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-white transition-colors"
             style={{ backgroundColor: "var(--primary-color)" }}
           >
-            {updateProfileMutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+            {updateProfileMutation.isPending && (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            )}
             {updateProfileMutation.isPending ? t.saving : t.saveBtn}
           </button>
         </form>
@@ -116,29 +148,50 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
         </h2>
         <form onSubmit={handlePasswordSubmit} className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-gray-700">{t.oldPassword}</label>
+            <label className="block text-xs font-medium text-gray-700">
+              {t.oldPassword}
+            </label>
             <input
               type="password"
               value={passwordData.old_password}
-              onChange={(e) => setPasswordData({ ...passwordData, old_password: e.target.value })}
+              onChange={(e) =>
+                setPasswordData({
+                  ...passwordData,
+                  old_password: e.target.value,
+                })
+              }
               className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-700">{t.newPassword}</label>
+            <label className="block text-xs font-medium text-gray-700">
+              {t.newPassword}
+            </label>
             <input
               type="password"
               value={passwordData.new_password}
-              onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
+              onChange={(e) =>
+                setPasswordData({
+                  ...passwordData,
+                  new_password: e.target.value,
+                })
+              }
               className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-700">{t.confirmPassword}</label>
+            <label className="block text-xs font-medium text-gray-700">
+              {t.confirmPassword}
+            </label>
             <input
               type="password"
               value={passwordData.confirm_password}
-              onChange={(e) => setPasswordData({ ...passwordData, confirm_password: e.target.value })}
+              onChange={(e) =>
+                setPasswordData({
+                  ...passwordData,
+                  confirm_password: e.target.value,
+                })
+              }
               className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
             />
           </div>
@@ -147,7 +200,11 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
             disabled={updatePasswordMutation.isPending}
             className="w-full rounded-md bg-gray-900 py-2 text-sm font-medium text-white hover:bg-black"
           >
-            {updatePasswordMutation.isPending ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : t.updatePasswordBtn}
+            {updatePasswordMutation.isPending ? (
+              <Loader2 className="mx-auto h-4 w-4 animate-spin" />
+            ) : (
+              t.updatePasswordBtn
+            )}
           </button>
         </form>
       </div>

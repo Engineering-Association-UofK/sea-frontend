@@ -1,5 +1,8 @@
 import { Download, Loader2 } from "lucide-react";
-import { useCertificates, useDownloadCertificate } from "@/features/profile/hooks/useProfile";
+import {
+  useCertificates,
+  useDownloadCertificate,
+} from "@/features/profile/hooks/useProfile";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function CertificatesPanel() {
@@ -9,7 +12,10 @@ export function CertificatesPanel() {
   const { data: certData, isLoading } = useCertificates();
   const downloadMutation = useDownloadCertificate();
 
-  if (isLoading) return <Loader2 className="mx-auto h-6 w-6 animate-spin [color:var(--primary-color)]" />;
+  if (isLoading)
+    return (
+      <Loader2 className="mx-auto h-6 w-6 animate-spin [color:var(--primary-color)]" />
+    );
 
   return (
     <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
@@ -19,9 +25,14 @@ export function CertificatesPanel() {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {certData.list.map((cert) => (
-            <div key={cert.id} className="flex items-center justify-between rounded-lg border border-gray-200 p-4">
+            <div
+              key={cert.id}
+              className="flex items-center justify-between rounded-lg border border-gray-200 p-4"
+            >
               <div>
-                <h3 className="font-medium text-gray-900">{cert.template_name}</h3>
+                <h3 className="font-medium text-gray-900">
+                  {cert.template_name}
+                </h3>
                 <p className="text-xs text-gray-500">
                   {t.issued}: {new Date(cert.issued_date).toLocaleDateString()}
                 </p>

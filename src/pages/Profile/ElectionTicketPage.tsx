@@ -1,20 +1,26 @@
-import React, { useState } from "react";import { Link } from "react-router-dom";import { 
-  Vote, 
-  Ticket, 
-  Calendar, 
-  Clock, 
-  ShieldCheck, 
-  Loader2, 
-  AlertTriangle, 
-  Copy, 
-  Check, 
-  AlertCircle, 
-  ArrowRight 
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Vote,
+  Ticket,
+  Calendar,
+  Clock,
+  ShieldCheck,
+  Loader2,
+  AlertTriangle,
+  Copy,
+  Check,
+  AlertCircle,
+  ArrowRight,
 } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext";import { useElectionPublicStatistics, useElectionTicket } from "@/features/election/hooks/useElection";
+import { useLanguage } from "@/context/LanguageContext";
+import {
+  useElectionPublicStatistics,
+  useElectionTicket,
+} from "@/features/election/hooks/useElection";
 function TicketFetcher({ ticketT }: { ticketT: any }) {
   const [copied, setCopied] = useState(false);
-  
+
   const { data, isLoading, isError } = useElectionTicket();
 
   const ticketCode = data?.data?.ticket || data?.ticket;
@@ -31,7 +37,9 @@ function TicketFetcher({ ticketT }: { ticketT: any }) {
     return (
       <div className="py-12 flex flex-col items-center justify-center space-y-3">
         <Loader2 className="h-10 w-10 animate-spin [color:var(--primary-color)]" />
-        <p className="text-base font-medium text-gray-600">{ticketT.generating}</p>
+        <p className="text-base font-medium text-gray-600">
+          {ticketT.generating}
+        </p>
       </div>
     );
   }
@@ -40,7 +48,9 @@ function TicketFetcher({ ticketT }: { ticketT: any }) {
     return (
       <div className="mb-6 rounded-xl bg-red-50 p-4 border border-red-200 text-center">
         <AlertTriangle className="mx-auto h-6 w-6 text-red-600 mb-2" />
-        <p className="text-sm font-medium text-red-800">{ticketT.alreadyGotError}</p>
+        <p className="text-sm font-medium text-red-800">
+          {ticketT.alreadyGotError}
+        </p>
       </div>
     );
   }
@@ -54,7 +64,7 @@ function TicketFetcher({ ticketT }: { ticketT: any }) {
         <div className="font-mono text-4xl sm:text-5xl font-black text-gray-900 tracking-[0.2em] break-all mb-6">
           {ticketCode}
         </div>
-        
+
         <button
           onClick={handleCopy}
           className="mx-auto flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors w-full sm:w-auto min-w-[200px]"
@@ -81,15 +91,19 @@ function TicketFetcher({ ticketT }: { ticketT: any }) {
 export default function ElectionTicketPage() {
   const { language, translations } = useLanguage();
   const isAr = language === "ar";
-  
+
   const pageT = translations.election.ticketPage;
   const ticketT = translations.profile.election;
 
   const [confirmed, setConfirmed] = useState(false);
   const [requested, setRequested] = useState(false);
 
-  const { data: statsResponse, isLoading: statsLoading, isError: statsError } = useElectionPublicStatistics();
-  
+  const {
+    data: statsResponse,
+    isLoading: statsLoading,
+    isError: statsError,
+  } = useElectionPublicStatistics();
+
   const stats = statsResponse?.data || statsResponse;
 
   const formatDate = (isoString: string) => {
@@ -122,32 +136,44 @@ export default function ElectionTicketPage() {
   const isLive = stats.engage_election;
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-8" dir={isAr ? "rtl" : "ltr"}>
-      
+    <div
+      className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-8"
+      dir={isAr ? "rtl" : "ltr"}
+    >
       {/* Header & Stats Banner */}
       <section className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-5 mb-6 gap-4">
           <div className="flex items-center gap-3">
-            <div 
+            <div
               className="p-3 rounded-lg"
               style={{ backgroundColor: "rgba(var(--primary-color), 0.1)" }}
             >
-              <Vote className="h-7 w-7" style={{ color: "var(--primary-color)" }} />
+              <Vote
+                className="h-7 w-7"
+                style={{ color: "var(--primary-color)" }}
+              />
             </div>
             <div>
               <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
                 {pageT.title}
               </h1>
               <p className="text-sm text-gray-500 mt-1">
-                {pageT.cycle}{stats.current_cycle}
+                {pageT.cycle}
+                {stats.current_cycle}
               </p>
             </div>
           </div>
-          
-          <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold ${
-            isLive ? "bg-green-100 text-green-800 border border-green-200" : "bg-gray-100 text-gray-600 border border-gray-200"
-          }`}>
-            <span className={`h-2.5 w-2.5 rounded-full ${isLive ? "bg-green-500 animate-pulse" : "bg-gray-400"}`} />
+
+          <span
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold ${
+              isLive
+                ? "bg-green-100 text-green-800 border border-green-200"
+                : "bg-gray-100 text-gray-600 border border-gray-200"
+            }`}
+          >
+            <span
+              className={`h-2.5 w-2.5 rounded-full ${isLive ? "bg-green-500 animate-pulse" : "bg-gray-400"}`}
+            />
             {isLive ? pageT.statusLive : pageT.statusInactive}
           </span>
         </div>
@@ -157,7 +183,12 @@ export default function ElectionTicketPage() {
             {isLive ? (
               <>
                 {pageT.guideLivePrefix}{" "}
-                <strong className="px-1 text-lg" style={{ color: "var(--primary-color)" }}>{stats.vote_limit}</strong>{" "}
+                <strong
+                  className="px-1 text-lg"
+                  style={{ color: "var(--primary-color)" }}
+                >
+                  {stats.vote_limit}
+                </strong>{" "}
                 {pageT.guideLiveSuffix}
               </>
             ) : (
@@ -167,14 +198,19 @@ export default function ElectionTicketPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             <div className="p-4 rounded-xl bg-gray-50 border border-gray-100 flex flex-col">
-              <div className="flex items-center gap-2 mb-2" style={{ color: "var(--primary-color)" }}>
+              <div
+                className="flex items-center gap-2 mb-2"
+                style={{ color: "var(--primary-color)" }}
+              >
                 <Ticket className="h-5 w-5" />
                 <span className="text-xs font-bold uppercase tracking-wider">
                   {pageT.ticketsStart}
                 </span>
               </div>
               <p className="text-sm font-semibold text-gray-900 mt-auto">
-                {isLive ? formatDate(stats.tickets_start_time) : pageT.perCycleNotice}
+                {isLive
+                  ? formatDate(stats.tickets_start_time)
+                  : pageT.perCycleNotice}
               </p>
             </div>
 
@@ -210,9 +246,16 @@ export default function ElectionTicketPage() {
         {isLive ? (
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <ShieldCheck className="mx-auto h-12 w-12" style={{ color: "var(--primary-color)" }} />
-              <h2 className="mt-3 text-xl font-bold text-gray-900">{ticketT.title}</h2>
-              <p className="mt-2 text-sm text-gray-500">{ticketT.description}</p>
+              <ShieldCheck
+                className="mx-auto h-12 w-12"
+                style={{ color: "var(--primary-color)" }}
+              />
+              <h2 className="mt-3 text-xl font-bold text-gray-900">
+                {ticketT.title}
+              </h2>
+              <p className="mt-2 text-sm text-gray-500">
+                {ticketT.description}
+              </p>
             </div>
 
             {!requested ? (
@@ -250,9 +293,10 @@ export default function ElectionTicketPage() {
                       ? "shadow-md hover:shadow-lg transform hover:-translate-y-0.5 filter hover:brightness-95"
                       : "bg-gray-300 cursor-not-allowed"
                   }`}
-                  style={confirmed ? { backgroundColor: "var(--primary-color)" } : {}}
+                  style={
+                    confirmed ? { backgroundColor: "var(--primary-color)" } : {}
+                  }
                 >
-
                   {ticketT.generateBtn}
                 </button>
               </div>
@@ -276,16 +320,18 @@ export default function ElectionTicketPage() {
       </section>
 
       {/* Navigation */}
-      {isLive && <div className="flex justify-center sm:justify-end">
-        <Link
-          to="/election"
-          className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-bold text-base transition-all shadow-md hover:shadow-lg w-full sm:w-auto"
-        >
-          <Vote className="h-5 w-5" />
-          <span>{pageT.goToElection}</span>
-          <ArrowRight className={`h-5 w-5 ${isAr ? "rotate-180" : ""}`} />
-        </Link>
-      </div>}
+      {isLive && (
+        <div className="flex justify-center sm:justify-end">
+          <Link
+            to="/election"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-bold text-base transition-all shadow-md hover:shadow-lg w-full sm:w-auto"
+          >
+            <Vote className="h-5 w-5" />
+            <span>{pageT.goToElection}</span>
+            <ArrowRight className={`h-5 w-5 ${isAr ? "rotate-180" : ""}`} />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

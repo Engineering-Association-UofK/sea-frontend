@@ -1,36 +1,49 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { useLanguage } from '@/context/LanguageContext';
-import { FaUsers, FaLaptop, FaCalendarAlt, FaGlobe } from 'react-icons/fa';
-import '@/styles/HomePage.css';
+import React, { useState, useEffect, useRef } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useLanguage } from "@/context/LanguageContext";
+import { FaUsers, FaLaptop, FaCalendarAlt, FaGlobe } from "react-icons/fa";
+import "@/styles/HomePage.css";
 
 const Statistics = () => {
   const { translations, language } = useLanguage();
-  const isRtl = language === 'ar';
+  const isRtl = language === "ar";
   const [counts, setCounts] = useState({
-    students: 0, workshops: 0, events: 0, partners: 0, projects: 0, volunteers: 0,
+    students: 0,
+    workshops: 0,
+    events: 0,
+    partners: 0,
+    projects: 0,
+    volunteers: 0,
   });
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
   const targets = {
-    students: 1900, workshops: 30, events: 10, partners: 15, projects: 24, volunteers: 260,
+    students: 1900,
+    workshops: 30,
+    events: 10,
+    partners: 15,
+    projects: 24,
+    volunteers: 260,
   };
 
   const statsConfig = [
-    { key: 'students', icon: FaUsers, suffix: '+' },
-    { key: 'workshops', icon: FaLaptop, suffix: '+' },
-    { key: 'events', icon: FaCalendarAlt, suffix: '+' },
-    { key: 'volunteers', icon: FaGlobe, suffix: '+' },
+    { key: "students", icon: FaUsers, suffix: "+" },
+    { key: "workshops", icon: FaLaptop, suffix: "+" },
+    { key: "events", icon: FaCalendarAlt, suffix: "+" },
+    { key: "volunteers", icon: FaGlobe, suffix: "+" },
   ];
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        observer.disconnect();
-      }
-    }, { threshold: 0.2 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
@@ -63,13 +76,19 @@ const Statistics = () => {
     return () => clearInterval(timer);
   }, [isVisible]);
 
-  const formatNumber = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const formatNumber = (num) =>
+    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return (
-    <section className={`statistics-section ${isRtl ? 'rtl' : 'ltr'}`} ref={sectionRef}>
+    <section
+      className={`statistics-section ${isRtl ? "rtl" : "ltr"}`}
+      ref={sectionRef}
+    >
       <Container>
         <div className="section-header">
-          <h2 className="section-title">{translations.home.statistics.title || 'Our Impact'}</h2>
+          <h2 className="section-title">
+            {translations.home.statistics.title || "Our Impact"}
+          </h2>
           <span className="title-underline" />
         </div>
 
@@ -83,7 +102,8 @@ const Statistics = () => {
                     <IconComponent className="stat-icon" />
                   </div>
                   <div className="stat-number">
-                    {formatNumber(counts[stat.key])}{stat.suffix}
+                    {formatNumber(counts[stat.key])}
+                    {stat.suffix}
                   </div>
                   <div className="stat-label">
                     {translations.home.statistics?.[stat.key] || stat.key}

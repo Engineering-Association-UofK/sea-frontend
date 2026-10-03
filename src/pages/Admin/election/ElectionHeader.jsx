@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React from "react";
+import { Button } from "react-bootstrap";
 
 export const ElectionHeader = ({ onSync, onOpenResolve, isFetchingStats }) => (
   <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
@@ -17,7 +17,9 @@ export const ElectionHeader = ({ onSync, onOpenResolve, isFetchingStats }) => (
         onClick={onSync}
         disabled={isFetchingStats}
       >
-        <i className={`bi bi-arrow-clockwise ${isFetchingStats ? 'spin' : ''}`}></i>
+        <i
+          className={`bi bi-arrow-clockwise ${isFetchingStats ? "spin" : ""}`}
+        ></i>
         Sync Data
       </Button>
       <Button

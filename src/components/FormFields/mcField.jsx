@@ -7,18 +7,18 @@
 //       <Form.Label className="fw-bold">
 //         {label || "Select an option"} {isRequired && <span className="text-danger">*</span>}
 //       </Form.Label>
-      
+
 //       {options && options.length > 0 ? (
 //         options.map((opt, index) => (
-//           <Form.Check 
+//           <Form.Check
 //             key={index}
 //             type="radio"
 //             label={opt}
-//             name={name} 
+//             name={name}
 //             id={`choice-${name}-${index}`}
 //             className="mb-1"
 //             required={isRequired}
-//             onChange={() => onChange(opt)} 
+//             onChange={() => onChange(opt)}
 //           />
 //         ))
 //       ) : (
@@ -30,16 +30,23 @@
 
 // export default MCField;
 
-import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 
-const MCField = ({ label, options, isRequired, name, onChange, type = 'RADIO' }) => {
+const MCField = ({
+  label,
+  options,
+  isRequired,
+  name,
+  onChange,
+  type = "RADIO",
+}) => {
   const [checkedValues, setCheckedValues] = useState([]);
 
   const handleCheckbox = (opt) => {
     const updated = checkedValues.includes(opt)
-      ? checkedValues.filter(v => v !== opt) // uncheck
-      : [...checkedValues, opt];             // check
+      ? checkedValues.filter((v) => v !== opt) // uncheck
+      : [...checkedValues, opt]; // check
 
     setCheckedValues(updated);
     // Send each checked value as separate answer
@@ -49,7 +56,8 @@ const MCField = ({ label, options, isRequired, name, onChange, type = 'RADIO' })
   return (
     <Form.Group className="mb-3 text-start">
       <Form.Label className="fw-bold">
-        {label || "Select an option"} {isRequired && <span className="text-danger">*</span>}
+        {label || "Select an option"}{" "}
+        {isRequired && <span className="text-danger">*</span>}
       </Form.Label>
 
       {!options || options.length === 0 ? (
@@ -57,42 +65,48 @@ const MCField = ({ label, options, isRequired, name, onChange, type = 'RADIO' })
       ) : (
         <>
           {/* RADIO — pick one */}
-          {type === 'RADIO' && options.map((opt, index) => (
-            <Form.Check
-              key={index}
-              type="radio"
-              label={opt}
-              name={name}
-              id={`radio-${name}-${index}`}
-              className="mb-1"
-              required={isRequired}
-              onChange={() => onChange(opt)}
-            />
-          ))}
+          {type === "RADIO" &&
+            options.map((opt, index) => (
+              <Form.Check
+                key={index}
+                type="radio"
+                label={opt}
+                name={name}
+                id={`radio-${name}-${index}`}
+                className="mb-1"
+                required={isRequired}
+                onChange={() => onChange(opt)}
+              />
+            ))}
 
           {/* CHECKBOX — pick many */}
-          {type === 'CHECKBOX' && options.map((opt, index) => (
-            <Form.Check
-              key={index}
-              type="checkbox"
-              label={opt}
-              id={`checkbox-${name}-${index}`}
-              className="mb-1"
-              checked={checkedValues.includes(opt)}
-              onChange={() => handleCheckbox(opt)}
-            />
-          ))}
+          {type === "CHECKBOX" &&
+            options.map((opt, index) => (
+              <Form.Check
+                key={index}
+                type="checkbox"
+                label={opt}
+                id={`checkbox-${name}-${index}`}
+                className="mb-1"
+                checked={checkedValues.includes(opt)}
+                onChange={() => handleCheckbox(opt)}
+              />
+            ))}
 
           {/* DROPDOWN — pick one from collapsed menu */}
-          {type === 'DROPDOWN' && (
+          {type === "DROPDOWN" && (
             <Form.Select
               required={isRequired}
               onChange={(e) => onChange(e.target.value)}
               defaultValue=""
             >
-              <option value="" disabled>Select an option...</option>
+              <option value="" disabled>
+                Select an option...
+              </option>
               {options.map((opt, index) => (
-                <option key={index} value={opt}>{opt}</option>
+                <option key={index} value={opt}>
+                  {opt}
+                </option>
               ))}
             </Form.Select>
           )}

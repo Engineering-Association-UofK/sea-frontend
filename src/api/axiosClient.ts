@@ -2,19 +2,19 @@
  * ============================================================================
  * AXIOS CLIENT (TYPESCRIPT VERSION)
  * ============================================================================
- * 
+ *
  * WHY THIS FILE EXISTS:
- * This TypeScript client replaces the legacy `axiosClient.js` as part of our 
- * migration to a strongly-typed codebase. 
+ * This TypeScript client replaces the legacy `axiosClient.js` as part of our
+ * migration to a strongly-typed codebase.
  *
  * KEY DIFFERENCES & BEHAVIOR:
- * 1. RESPONSE UNWRAPPING: 
- *    The response interceptor unwraps `response.data` directly. Module augmentation 
- *    is applied below so Axios generic methods like `apiClient.get<T>()` return 
+ * 1. RESPONSE UNWRAPPING:
+ *    The response interceptor unwraps `response.data` directly. Module augmentation
+ *    is applied below so Axios generic methods like `apiClient.get<T>()` return
  *    `Promise<T>` instead of `Promise<AxiosResponse<T>>`.
  *
  * 2. CUSTOM CONFIG FLAGS:
- *    Supports custom request config options like `skipAuth: true` to bypass 
+ *    Supports custom request config options like `skipAuth: true` to bypass
  *    attaching the Bearer token for public endpoints.
  *
  * MIGRATION GUIDELINES:
@@ -39,13 +39,37 @@ declare module "axios" {
   }
   export interface AxiosInstance {
     request<T = any, R = T, D = any>(config: AxiosRequestConfig<D>): Promise<R>;
-    get<T = any, R = T, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
-    delete<T = any, R = T, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
-    head<T = any, R = T, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
-    options<T = any, R = T, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
-    post<T = any, R = T, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>): Promise<R>;
-    put<T = any, R = T, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>): Promise<R>;
-    patch<T = any, R = T, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>): Promise<R>;
+    get<T = any, R = T, D = any>(
+      url: string,
+      config?: AxiosRequestConfig<D>,
+    ): Promise<R>;
+    delete<T = any, R = T, D = any>(
+      url: string,
+      config?: AxiosRequestConfig<D>,
+    ): Promise<R>;
+    head<T = any, R = T, D = any>(
+      url: string,
+      config?: AxiosRequestConfig<D>,
+    ): Promise<R>;
+    options<T = any, R = T, D = any>(
+      url: string,
+      config?: AxiosRequestConfig<D>,
+    ): Promise<R>;
+    post<T = any, R = T, D = any>(
+      url: string,
+      data?: D,
+      config?: AxiosRequestConfig<D>,
+    ): Promise<R>;
+    put<T = any, R = T, D = any>(
+      url: string,
+      data?: D,
+      config?: AxiosRequestConfig<D>,
+    ): Promise<R>;
+    patch<T = any, R = T, D = any>(
+      url: string,
+      data?: D,
+      config?: AxiosRequestConfig<D>,
+    ): Promise<R>;
   }
 }
 
@@ -61,7 +85,9 @@ const apiClient = axios.create({
 
 // Helper: Get Token from storage
 const getAuthToken = (): string | null => {
-  return localStorage.getItem("sea-token") || sessionStorage.getItem("sea-token");
+  return (
+    localStorage.getItem("sea-token") || sessionStorage.getItem("sea-token")
+  );
 };
 
 // Helper: Clear auth data
@@ -82,7 +108,7 @@ apiClient.interceptors.request.use(
     }
     return config;
   },
-  (error: AxiosError) => Promise.reject(error)
+  (error: AxiosError) => Promise.reject(error),
 );
 
 // Response Interceptor (Global Unwrapping & Error Handling)
@@ -110,14 +136,17 @@ apiClient.interceptors.response.use(
       localStorage.removeItem("token");
       console.error("Unauthorized! Redirecting to login...");
 
-      if (!currentPath.includes("/login") && !currentPath.includes("/register")) {
+      if (
+        !currentPath.includes("/login") &&
+        !currentPath.includes("/register")
+      ) {
         clearAuthData();
         window.location.href = "/login?session_expired=true";
       }
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default apiClient;

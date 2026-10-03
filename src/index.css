@@ -4,11 +4,12 @@
 
 /* Ultra Light (100) */
 @font-face {
-  font-family: 'DINNextLTArabic';
-  src: url('/fonts/ArbFONTS-DINNextLTArabic-UltraLight-1.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-UltraLight-2.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-UltraLight-3.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-UltraLight-4.ttf') format('truetype');
+  font-family: "DINNextLTArabic";
+  src:
+    url("/fonts/ArbFONTS-DINNextLTArabic-UltraLight-1.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-UltraLight-2.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-UltraLight-3.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-UltraLight-4.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -16,9 +17,10 @@
 
 /* Light (300) */
 @font-face {
-  font-family: 'DINNextLTArabic';
-  src: url('/fonts/ArbFONTS-DINNEXTLTARABIC-LIGHT-1.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNEXTLTARABIC-LIGHT-2-2.ttf') format('truetype');
+  font-family: "DINNextLTArabic";
+  src:
+    url("/fonts/ArbFONTS-DINNEXTLTARABIC-LIGHT-1.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNEXTLTARABIC-LIGHT-2-2.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -26,20 +28,22 @@
 
 /* Regular / Medium (400 - 500) */
 @font-face {
-  font-family: 'DINNextLTArabic';
-  src: url('/fonts/ArbFONTS-DINNextLTArabic-Regular-2.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Regular-3.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Regular-4.ttf') format('truetype');
+  font-family: "DINNextLTArabic";
+  src:
+    url("/fonts/ArbFONTS-DINNextLTArabic-Regular-2.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Regular-3.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Regular-4.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'DINNextLTArabic';
-  src: url('/fonts/ArbFONTS-DINNextLTArabic-Medium-2.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Medium-3.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Medium-4.ttf') format('truetype');
+  font-family: "DINNextLTArabic";
+  src:
+    url("/fonts/ArbFONTS-DINNextLTArabic-Medium-2.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Medium-3.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Medium-4.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -47,10 +51,11 @@
 
 /* Bold (700) */
 @font-face {
-  font-family: 'DINNextLTArabic';
-  src: url('/fonts/ArbFONTS-DINNextLTArabic-Bold-2.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Bold-3.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Bold-4.ttf') format('truetype');
+  font-family: "DINNextLTArabic";
+  src:
+    url("/fonts/ArbFONTS-DINNextLTArabic-Bold-2.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Bold-3.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Bold-4.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -58,10 +63,11 @@
 
 /* Heavy (800) */
 @font-face {
-  font-family: 'DINNextLTArabic';
-  src: url('/fonts/ArbFONTS-DINNextLTArabic-Heavy-1.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Heavy2-1.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf') format('truetype');
+  font-family: "DINNextLTArabic";
+  src:
+    url("/fonts/ArbFONTS-DINNextLTArabic-Heavy-1.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Heavy2-1.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -69,10 +75,11 @@
 
 /* Black (900) */
 @font-face {
-  font-family: 'DINNextLTArabic';
-  src: url('/fonts/ArbFONTS-DINNextLTArabic-Black-2.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Black-3.ttf') format('truetype'),
-       url('/fonts/ArbFONTS-DINNextLTArabic-Black-4.ttf') format('truetype');
+  font-family: "DINNextLTArabic";
+  src:
+    url("/fonts/ArbFONTS-DINNextLTArabic-Black-2.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Black-3.ttf") format("truetype"),
+    url("/fonts/ArbFONTS-DINNextLTArabic-Black-4.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -82,17 +89,17 @@
    1. Core Framework Imports & CSS Variables
    ========================================================================== */
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 :root {
-  --primary-color: #22B2E6;
+  --primary-color: #22b2e6;
   --secondary-color: #6c757d;
   --fg-color-light: #fff;
 }
 
 /* Configure body for auto-fallback in RTL layout */
 body {
-  font-family: 'Montserrat', 'DINNextLTArabic', sans-serif;
+  font-family: "Montserrat", "DINNextLTArabic", sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -104,13 +111,14 @@ body {
 
 [dir="rtl"] body,
 [dir="rtl"] {
-  font-family: 'DINNextLTArabic', 'Montserrat', sans-serif;
+  font-family: "DINNextLTArabic", "Montserrat", sans-serif;
 }
 
 /* ==========================================================================
    2. Robust Mobile Layout Containment
    ========================================================================== */
-html, body {
+html,
+body {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
@@ -118,12 +126,14 @@ html, body {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -148,7 +158,7 @@ body {
 }
 
 .app-navbar .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
@@ -201,7 +211,12 @@ body {
 /* ==========================================================================
    4. Typography & Utility Classes
    ========================================================================== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
 }
 
@@ -210,12 +225,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hover-card {
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
 }
 
 .hover-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .12) !important;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.12) !important;
 }
 
 .hover-scale {
@@ -229,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
 .scrollbar-hide {
   scrollbar-width: none; /* Firefox */
 }
-.scrollbar-hide::-webkit-scrollbar { 
+.scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 

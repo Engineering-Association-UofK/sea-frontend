@@ -1,6 +1,6 @@
-import apiClient from '../../../api/axiosClient';
+import apiClient from "../../../api/axiosClient";
 
-const ADMIN_ENDPOINT = '/v1/admin';
+const ADMIN_ENDPOINT = "/v1/admin";
 
 export const adminService = {
   getAnalysis: () => {

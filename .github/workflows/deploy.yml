@@ -2,8 +2,8 @@ name: Deploy to Oracle Cloud
 
 on:
   push:
-    branches: [ "main" ]
-    tags: [ "v*" ] # Triggers on tags like v1.0, v1.0.0, etc.
+    branches: ["main"]
+    tags: ["v*"] # Triggers on tags like v1.0, v1.0.0, etc.
 
 jobs:
   build-and-deploy:
@@ -34,8 +34,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'v25'
-          cache: 'npm'
+          node-version: "v25"
+          cache: "npm"
 
       - name: Create .env file
         run: |

@@ -1,20 +1,20 @@
 .pickerModalBody :global(.nav-link.active) {
-    color: #495057 !important; 
-    background-color: #fff !important;
-    border-color: #dee2e6 #dee2e6 #fff !important;
+  color: #495057 !important;
+  background-color: #fff !important;
+  border-color: #dee2e6 #dee2e6 #fff !important;
 }
 .pickerModalBody :global(.nav-link)::after {
-    display: none !important;
-    content: none !important;
+  display: none !important;
+  content: none !important;
 }
 .pickerModalBody :global(.nav-link) {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 .pickerModalBody :global(.nav-link:hover) {
-    border-color: #e9ecef #e9ecef #dee2e6;
+  border-color: #e9ecef #e9ecef #dee2e6;
 }
-.scrollableContainer{
-    height: calc(55dvh - 63px) !important;
+.scrollableContainer {
+  height: calc(55dvh - 63px) !important;
 }
 /* .gridWrapper {
     height: calc(100dvh - 55px - 48px - 42px - 64px);

@@ -1,16 +1,10 @@
-import React, { useState, useRef } from 'react';
-import {
-  Navbar,
-  Nav,
-  Container,
-  Dropdown,
-  Offcanvas,
-} from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
-import { useLanguage } from '../context/LanguageContext';
-import { useAuth } from '../context/AuthContext';
-import { ADMIN_ROLES } from '../utils/roles';
-import UserDropdownMenu from './Layout/UserDropdownMenu/UserDropdownMenu';
+import React, { useState, useRef } from "react";
+import { Navbar, Nav, Container, Dropdown, Offcanvas } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import { useAuth } from "../context/AuthContext";
+import { ADMIN_ROLES } from "../utils/roles";
+import UserDropdownMenu from "./Layout/UserDropdownMenu/UserDropdownMenu";
 
 const NavigationBar = () => {
   const { translations, switchLanguage, language } = useLanguage();
@@ -35,7 +29,7 @@ const NavigationBar = () => {
     timeoutRef.current = setTimeout(() => setOpenDropdown(null), 200);
   };
 
-  const currentLabel = language === 'en' ? 'English' : 'العربية';
+  const currentLabel = language === "en" ? "English" : "العربية";
 
   // Desktop dropdown renderer
   const renderDesktopDropdown = (title, items, dropdownKey) => (
@@ -48,15 +42,15 @@ const NavigationBar = () => {
       <Dropdown.Toggle
         variant="link"
         className="fw-medium text-dark text-decoration-none p-0 border-0"
-        style={{ boxShadow: 'none' }}
+        style={{ boxShadow: "none" }}
       >
         {title}
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        align={language === 'ar' ? 'start' : 'end'}
+        align={language === "ar" ? "start" : "end"}
         className="shadow-sm border-0 rounded-3 py-2"
-        style={{ minWidth: '200px' }}
+        style={{ minWidth: "200px" }}
       >
         {items.map((item, idx) => (
           <Dropdown.Item
@@ -65,7 +59,7 @@ const NavigationBar = () => {
             to={item.to}
             end={item.end}
             className="py-2 px-3 text-center"
-            style={{ color: '#333' }}
+            style={{ color: "#333" }}
             onClick={() => setOpenDropdown(null)}
           >
             {item.label}
@@ -82,11 +76,13 @@ const NavigationBar = () => {
       <div className="w-100">
         <div
           className="d-flex justify-content-between align-items-center px-2 py-2"
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
           onClick={() => setOpen(!open)}
         >
-          <span className="fw-bold text-muted text-uppercase small">{title}</span>
-          <i className={`bi bi-chevron-${open ? 'up' : 'down'}`}></i>
+          <span className="fw-bold text-muted text-uppercase small">
+            {title}
+          </span>
+          <i className={`bi bi-chevron-${open ? "up" : "down"}`}></i>
         </div>
         {open && (
           <div className="ps-3">
@@ -111,17 +107,27 @@ const NavigationBar = () => {
 
   // Define dropdown items
   const aboutItems = [
-    { to: '/about/association', end: true,  label: translations.navbar.about.association },
-    { to: '/about/organization-structure',  label: translations.navbar.about.organizationStructure },
-    { to: '/about/council-of-thirty',       label: translations.navbar.about.councilOfThirty },
-    { to: '/about/elections',               label: translations.navbar.about.elections },
+    {
+      to: "/about/association",
+      end: true,
+      label: translations.navbar.about.association,
+    },
+    {
+      to: "/about/organization-structure",
+      label: translations.navbar.about.organizationStructure,
+    },
+    {
+      to: "/about/council-of-thirty",
+      label: translations.navbar.about.councilOfThirty,
+    },
+    { to: "/about/elections", label: translations.navbar.about.elections },
   ];
 
   const postsItems = [
-    { to: '/posts/news',          label: translations.navbar.posts.news },
-    { to: '/posts/issues',        label: translations.navbar.posts.issues },
-    { to: '/posts/announcements', label: translations.navbar.posts.blogs },
-    { to: '/posts/donations',     label: translations.navbar.posts.donations },
+    { to: "/posts/news", label: translations.navbar.posts.news },
+    { to: "/posts/issues", label: translations.navbar.posts.issues },
+    { to: "/posts/announcements", label: translations.navbar.posts.blogs },
+    { to: "/posts/donations", label: translations.navbar.posts.donations },
   ];
 
   return (
@@ -174,14 +180,17 @@ const NavigationBar = () => {
         `}
       </style>
 
-      <Navbar expand={false} className="shadow-sm py-2 sticky-top bg-white border-bottom">
+      <Navbar
+        expand={false}
+        className="shadow-sm py-2 sticky-top bg-white border-bottom"
+      >
         <Container fluid className="px-3 px-lg-5 gap-lg-3">
           {/* Logo */}
           <Navbar.Brand as={Link} to="/" className="me-1 me-lg-4 py-0">
             <img
-              src={language === 'ar' ? '/Logo-ar.png' : '/Logo-en.png'}
+              src={language === "ar" ? "/Logo-ar.png" : "/Logo-en.png"}
               alt="Logo"
-              style={{ height: '45px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: "45px", width: "auto", objectFit: "contain" }}
             />
           </Navbar.Brand>
 
@@ -190,13 +199,30 @@ const NavigationBar = () => {
             <Nav.Link as={NavLink} to="/" end className="fw-medium text-dark">
               {translations.navbar.home}
             </Nav.Link>
-            {renderDesktopDropdown(translations.navbar.about.title, aboutItems, 'about')}
-            {renderDesktopDropdown(translations.navbar.posts.title, postsItems, 'posts')}
-            <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark">
+            {renderDesktopDropdown(
+              translations.navbar.about.title,
+              aboutItems,
+              "about",
+            )}
+            {renderDesktopDropdown(
+              translations.navbar.posts.title,
+              postsItems,
+              "posts",
+            )}
+            <Nav.Link
+              as={NavLink}
+              to="/events"
+              end
+              className="fw-medium text-dark"
+            >
               {translations.navbar.events}
             </Nav.Link>
             {isAdmin && (
-              <Nav.Link as={NavLink} to="/admin" className="fw-medium text-dark">
+              <Nav.Link
+                as={NavLink}
+                to="/admin"
+                className="fw-medium text-dark"
+              >
                 {translations.navbar.admin}
               </Nav.Link>
             )}
@@ -208,15 +234,21 @@ const NavigationBar = () => {
               <Dropdown.Toggle
                 variant="link"
                 className="language-toggle text-decoration-none fw-bold p-0 border-0 d-flex align-items-center"
-                style={{ color: '#22B2E6', fontSize: '0.95rem' }}
+                style={{ color: "#22B2E6", fontSize: "0.95rem" }}
               >
                 <i className="bi bi-translate me-1"></i> {currentLabel}
               </Dropdown.Toggle>
               <Dropdown.Menu align="end">
-                <Dropdown.Item onClick={() => switchLanguage('en')} active={language === 'en'}>
+                <Dropdown.Item
+                  onClick={() => switchLanguage("en")}
+                  active={language === "en"}
+                >
                   English (EN)
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => switchLanguage('ar')} active={language === 'ar'}>
+                <Dropdown.Item
+                  onClick={() => switchLanguage("ar")}
+                  active={language === "ar"}
+                >
                   Arabic (AR)
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -229,7 +261,7 @@ const NavigationBar = () => {
                 <Link
                   to="/login"
                   className="btn fw-bold px-4 py-2 rounded-1 shadow-sm border-0 text-white"
-                  style={{ backgroundColor: '#22B2E6' }}
+                  style={{ backgroundColor: "#22B2E6" }}
                 >
                   {translations.navbar.login}
                 </Link>
@@ -248,27 +280,50 @@ const NavigationBar = () => {
           <Navbar.Offcanvas
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
-            placement={language === 'ar' ? 'start' : 'end'}
+            placement={language === "ar" ? "start" : "end"}
             show={showOffcanvas}
             onHide={handleClose}
           >
             <Offcanvas.Header closeButton className="border-bottom">
-              <Offcanvas.Title className="fw-bold" style={{ color: '#22B2E6' }}>
+              <Offcanvas.Title className="fw-bold" style={{ color: "#22B2E6" }}>
                 {translations.navbar.brand}
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body className="d-flex flex-column">
               <Nav className="flex-column gap-1">
-                <Nav.Link as={NavLink} to="/" end className="fw-medium text-dark fs-5" onClick={handleClose}>
+                <Nav.Link
+                  as={NavLink}
+                  to="/"
+                  end
+                  className="fw-medium text-dark fs-5"
+                  onClick={handleClose}
+                >
                   {translations.navbar.home}
                 </Nav.Link>
-                <MobileCollapsibleSection title={translations.navbar.about.title} items={aboutItems} />
-                <MobileCollapsibleSection title={translations.navbar.posts.title} items={postsItems} />
-                <Nav.Link as={NavLink} to="/events" end className="fw-medium text-dark fs-5" onClick={handleClose}>
+                <MobileCollapsibleSection
+                  title={translations.navbar.about.title}
+                  items={aboutItems}
+                />
+                <MobileCollapsibleSection
+                  title={translations.navbar.posts.title}
+                  items={postsItems}
+                />
+                <Nav.Link
+                  as={NavLink}
+                  to="/events"
+                  end
+                  className="fw-medium text-dark fs-5"
+                  onClick={handleClose}
+                >
                   {translations.navbar.events}
                 </Nav.Link>
                 {isAdmin && (
-                  <Nav.Link as={NavLink} to="/admin" className="fw-medium text-dark fs-5" onClick={handleClose}>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/admin"
+                    className="fw-medium text-dark fs-5"
+                    onClick={handleClose}
+                  >
                     {translations.navbar.admin}
                   </Nav.Link>
                 )}
@@ -282,7 +337,7 @@ const NavigationBar = () => {
                     to="/login"
                     className="btn w-100 fw-bold py-3 rounded-2 shadow-sm border-0 text-white"
                     onClick={handleClose}
-                    style={{ backgroundColor: '#22B2E6' }}
+                    style={{ backgroundColor: "#22B2E6" }}
                   >
                     {translations.navbar.login}
                   </Link>

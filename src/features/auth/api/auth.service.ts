@@ -1,4 +1,4 @@
-import apiClient from '../../../api/axiosClient';
+import apiClient from "../../../api/axiosClient";
 import {
   LoginParams,
   LoginResponse,
@@ -8,9 +8,9 @@ import {
   PasswordRegistrationRequest,
   DetailsRegistrationRequest,
   UsernameRegistrationRequest,
-} from './models';
+} from "./models";
 
-const ENDPOINT = '/v1/auth';
+const ENDPOINT = "/v1/auth";
 
 export const authService = {
   login: async (credentials: LoginParams): Promise<LoginResponse> => {
@@ -20,7 +20,9 @@ export const authService = {
     return response;
   },
 
-  checkRegistration: async (regCode: string): Promise<CheckRegistrationResponse> => {
+  checkRegistration: async (
+    regCode: string,
+  ): Promise<CheckRegistrationResponse> => {
     return await apiClient.post(`${ENDPOINT}/register/check`, {
       reg_code: regCode,
     });
@@ -33,7 +35,7 @@ export const authService = {
       | PasswordRegistrationRequest
       | DetailsRegistrationRequest
       | UsernameRegistrationRequest
-      | Record<string, any>
+      | Record<string, any>,
   ) => {
     return await apiClient.post(`${ENDPOINT}/register/step`, {
       step: Number(step),

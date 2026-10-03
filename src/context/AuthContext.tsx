@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { authService } from '../features/auth/api/auth.service';
-import { AuthUser, LoginCredentials, LoginResult } from './models';
-import { LoginResponse } from '../features/auth/api/models';
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { authService } from "../features/auth/api/auth.service";
+import { AuthUser, LoginCredentials, LoginResult } from "./models";
+import { LoginResponse } from "../features/auth/api/models";
 
 export interface AuthContextType {
   user: AuthUser | null;
@@ -30,15 +30,15 @@ interface AuthProviderProps {
 
 const parseJwt = (token: string): JwtPayload | null => {
   try {
-    const base64Url = token.split('.')[1];
+    const base64Url = token.split(".")[1];
     if (!base64Url) return null;
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
       window
         .atob(base64)
-        .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(""),
     );
 
     return JSON.parse(jsonPayload);
@@ -57,7 +57,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(() => {
     const storedUser =
-      localStorage.getItem('sea-user') || sessionStorage.getItem('sea-user');
+      localStorage.getItem("sea-user") || sessionStorage.getItem("sea-user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
@@ -70,23 +70,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }: LoginCredentials): Promise<LoginResult> => {
     setLoading(true);
     try {
-      const data: LoginResponse = await authService.login({ username, password });
+      const data: LoginResponse = await authService.login({
+        username,
+        password,
+      });
 
       // Handle "Account not verified" special case
       if (data && (!data.is_verified || !data.token)) {
         return {
           success: false,
-          status: 'verification_needed',
+          status: "verification_needed",
           user_id: data.user_id ?? null,
         };
       }
 
-      const token = data?.token || '';
+      const token = data?.token || "";
       const decodedToken = parseJwt(token);
 
       // Handle Storage Choice
       const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem('sea-token', token);
+      storage.setItem("sea-token", token);
 
       // Map user details directly from LoginResponse with fallback to JWT
       const userToSet: AuthUser = {
@@ -95,27 +98,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
 
       setUser(userToSet);
-      storage.setItem('sea-user', JSON.stringify(userToSet));
+      storage.setItem("sea-user", JSON.stringify(userToSet));
       return { success: true };
     } catch (error: any) {
       const errorData = error.response?.data;
       const serverMessage =
         errorData?.message ||
         errorData?.error ||
-        (typeof errorData === 'string' ? errorData : '');
+        (typeof errorData === "string" ? errorData : "");
       const cleanMessage = String(serverMessage).toLowerCase().trim();
 
       // Check if the backend sent the verification message via error response
-      if (cleanMessage.includes('account not verified')) {
+      if (cleanMessage.includes("account not verified")) {
         return {
           success: false,
-          status: 'verification_needed',
+          status: "verification_needed",
           user_id: errorData?.user_id ?? null,
         };
       }
 
       const msg =
-        error.response?.data?.message || error.message || 'Login failed';
+        error.response?.data?.message || error.message || "Login failed";
       return {
         success: false,
         message: msg,
@@ -127,10 +130,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = (): void => {
-    localStorage.removeItem('sea-token');
-    localStorage.removeItem('sea-user');
-    sessionStorage.removeItem('sea-token');
-    sessionStorage.removeItem('sea-user');
+    localStorage.removeItem("sea-token");
+    localStorage.removeItem("sea-user");
+    sessionStorage.removeItem("sea-token");
+    sessionStorage.removeItem("sea-user");
     setUser(null);
   };
 
@@ -160,7 +163,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

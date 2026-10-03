@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Card, Table, Button, Badge, Spinner } from 'react-bootstrap';
-import { getDepartmentLabel } from './electionUtils';
+import React, { useState } from "react";
+import { Card, Table, Button, Badge, Spinner } from "react-bootstrap";
+import { getDepartmentLabel } from "./electionUtils";
 
 const CandidateAvatar = ({ url, name }) => {
   const [imgError, setImgError] = useState(false);
 
-  if (url && url.trim() !== '' && !imgError) {
+  if (url && url.trim() !== "" && !imgError) {
     return (
       <img
         src={url}
-        alt={name || 'Candidate'}
+        alt={name || "Candidate"}
         className="rounded-2 flex-shrink-0"
-        style={{ width: '42px', height: '42px', objectFit: 'cover' }}
+        style={{ width: "42px", height: "42px", objectFit: "cover" }}
         onError={() => setImgError(true)}
       />
     );
@@ -20,9 +20,9 @@ const CandidateAvatar = ({ url, name }) => {
   return (
     <div
       className="rounded-circle bg-primary-subtle text-primary fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
-      style={{ width: '42px', height: '42px', fontSize: '0.9rem' }}
+      style={{ width: "42px", height: "42px", fontSize: "0.9rem" }}
     >
-      {(name || 'C').charAt(0).toUpperCase()}
+      {(name || "C").charAt(0).toUpperCase()}
     </div>
   );
 };
@@ -54,7 +54,8 @@ export const CandidateTable = ({
       <Card className="w-100 border-0 shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="p-5 text-center text-muted">
-            <Spinner animation="border" size="sm" className="me-2" /> Loading candidates roster...
+            <Spinner animation="border" size="sm" className="me-2" /> Loading
+            candidates roster...
           </div>
         ) : isError ? (
           <div className="p-4 text-center text-danger">
@@ -64,14 +65,20 @@ export const CandidateTable = ({
         ) : !candidates || candidates.length === 0 ? (
           <div className="p-5 text-center text-muted">
             <i className="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
-            No candidates registered yet. Click <strong>Add Candidate</strong> to assign one.
+            No candidates registered yet. Click <strong>
+              Add Candidate
+            </strong>{" "}
+            to assign one.
           </div>
         ) : (
           <>
             {/* ---------------- MOBILE VIEW (< 768px) ---------------- */}
             <div className="d-md-none">
               {candidates.map((cand) => (
-                <div key={cand.id} className="p-3 border-bottom position-relative">
+                <div
+                  key={cand.id}
+                  className="p-3 border-bottom position-relative"
+                >
                   {/* Top Row */}
                   <div className="d-flex align-items-start justify-content-between gap-2 mb-2">
                     <div className="d-flex align-items-center gap-3 min-w-0">
@@ -81,7 +88,10 @@ export const CandidateTable = ({
                           {cand.name_en || `Candidate #${cand.id}`}
                         </div>
                         {cand.name_ar && (
-                          <div className="text-muted fs-7 text-truncate" dir="rtl">
+                          <div
+                            className="text-muted fs-7 text-truncate"
+                            dir="rtl"
+                          >
                             {cand.name_ar}
                           </div>
                         )}
@@ -90,10 +100,17 @@ export const CandidateTable = ({
 
                     {/* Placing & ID Identifiers */}
                     <div className="text-end flex-shrink-0">
-                      <Badge bg="primary-subtle" text="primary" className="font-monospace fw-bold fs-7 d-block mb-1">
+                      <Badge
+                        bg="primary-subtle"
+                        text="primary"
+                        className="font-monospace fw-bold fs-7 d-block mb-1"
+                      >
                         #{cand.placing}
                       </Badge>
-                      <span className="text-muted font-monospace fw-medium" style={{ fontSize: '0.72rem' }}>
+                      <span
+                        className="text-muted font-monospace fw-medium"
+                        style={{ fontSize: "0.72rem" }}
+                      >
                         ID: {cand.id}
                       </span>
                     </div>
@@ -105,7 +122,7 @@ export const CandidateTable = ({
                       bg="light"
                       text="dark"
                       className="border px-2 py-1 font-monospace fw-medium text-truncate"
-                      style={{ maxWidth: '55%' }}
+                      style={{ maxWidth: "55%" }}
                     >
                       <i className="bi bi-building me-1 text-primary"></i>
                       {getDepartmentLabel(cand.belonging)}
@@ -141,11 +158,21 @@ export const CandidateTable = ({
               <Table hover align="middle" className="mb-0">
                 <thead className="bg-light border-bottom">
                   <tr>
-                    <th className="ps-4 py-3 text-muted small text-uppercase">Candidate</th>
-                    <th className="py-3 text-muted small text-uppercase">Placing</th>
-                    <th className="py-3 text-muted small text-uppercase">User ID</th>
-                    <th className="py-3 text-muted small text-uppercase">Belonging (Department)</th>
-                    <th className="pe-4 py-3 text-end text-muted small text-uppercase">Actions</th>
+                    <th className="ps-4 py-3 text-muted small text-uppercase">
+                      Candidate
+                    </th>
+                    <th className="py-3 text-muted small text-uppercase">
+                      Placing
+                    </th>
+                    <th className="py-3 text-muted small text-uppercase">
+                      User ID
+                    </th>
+                    <th className="py-3 text-muted small text-uppercase">
+                      Belonging (Department)
+                    </th>
+                    <th className="pe-4 py-3 text-end text-muted small text-uppercase">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -159,7 +186,9 @@ export const CandidateTable = ({
                               {cand.name_en || `Candidate #${cand.id}`}
                             </div>
                             {cand.name_ar && (
-                              <div className="text-muted fs-7">{cand.name_ar}</div>
+                              <div className="text-muted fs-7">
+                                {cand.name_ar}
+                              </div>
                             )}
                           </div>
                         </div>

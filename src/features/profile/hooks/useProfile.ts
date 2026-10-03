@@ -1,4 +1,9 @@
-import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
 import { profileApi } from "../api/profile.api";
 import {
   UpdateProfileRequest,
@@ -13,7 +18,8 @@ export const PROFILE_KEYS = {
   details: () => [...PROFILE_KEYS.all, "details"] as const,
   summary: () => [...PROFILE_KEYS.all, "summary"] as const,
   ticket: () => [...PROFILE_KEYS.all, "ticket"] as const,
-  certificates: (params?: CertListParams) => [...PROFILE_KEYS.all, "certificates", params] as const,
+  certificates: (params?: CertListParams) =>
+    [...PROFILE_KEYS.all, "certificates", params] as const,
   notifications: (page?: number, limit?: number) =>
     [...PROFILE_KEYS.all, "notifications", page, limit] as const,
   infiniteNotifications: (limit: number) =>
@@ -39,7 +45,8 @@ export function useProfileSummary() {
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (payload: UpdateProfileRequest) => profileApi.updateProfile(payload),
+    mutationFn: (payload: UpdateProfileRequest) =>
+      profileApi.updateProfile(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: PROFILE_KEYS.details() });
     },
@@ -59,7 +66,8 @@ export function useUpdatePicture() {
 export function useUpdateUsername() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (payload: UpdateUsernameRequest) => profileApi.updateUsername(payload),
+    mutationFn: (payload: UpdateUsernameRequest) =>
+      profileApi.updateUsername(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: PROFILE_KEYS.all });
     },
@@ -68,14 +76,16 @@ export function useUpdateUsername() {
 
 export function useCheckUsername() {
   return useMutation({
-    mutationFn: (payload: UpdateUsernameRequest) => profileApi.checkUsernameAvailability(payload),
+    mutationFn: (payload: UpdateUsernameRequest) =>
+      profileApi.checkUsernameAvailability(payload),
   });
 }
 
 export function useUpdateEmail() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (payload: UpdateEmailRequest) => profileApi.updateEmail(payload),
+    mutationFn: (payload: UpdateEmailRequest) =>
+      profileApi.updateEmail(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: PROFILE_KEYS.all });
     },
@@ -84,7 +94,8 @@ export function useUpdateEmail() {
 
 export function useUpdatePassword() {
   return useMutation({
-    mutationFn: (payload: UpdatePasswordRequest) => profileApi.updatePassword(payload),
+    mutationFn: (payload: UpdatePasswordRequest) =>
+      profileApi.updatePassword(payload),
   });
 }
 
@@ -136,7 +147,8 @@ export function useNotifications(page = 1, limit = 10) {
 export function useInfiniteNotifications(limit = 10) {
   return useInfiniteQuery({
     queryKey: PROFILE_KEYS.infiniteNotifications(limit),
-    queryFn: ({ pageParam = 1 }) => profileApi.getNotifications(pageParam, limit),
+    queryFn: ({ pageParam = 1 }) =>
+      profileApi.getNotifications(pageParam, limit),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (lastPage.current_page < lastPage.total_pages) {

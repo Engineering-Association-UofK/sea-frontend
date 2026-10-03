@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '../../context/LanguageContext';
-import { authService } from '../../features/auth/api/auth.service';
+import React, { useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
+import { authService } from "../../features/auth/api/auth.service";
 
 const ForgotPassword = () => {
   const { language } = useLanguage();
-  const [method, setMethod] = useState('email');
-  const [inputValue, setInputValue] = useState('');
+  const [method, setMethod] = useState("email");
+  const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -17,14 +26,14 @@ const ForgotPassword = () => {
     setLoading(true);
     setError(null);
 
-    // Dynamically construct payload to ensure non-selected fields are entirely omitted 
-    const payload = { lang: language || 'en' };
-    
-    if (method === 'email') {
+    // Dynamically construct payload to ensure non-selected fields are entirely omitted
+    const payload = { lang: language || "en" };
+
+    if (method === "email") {
       payload.email = inputValue;
-    } else if (method === 'username') {
+    } else if (method === "username") {
       payload.username = inputValue;
-    } else if (method === 'user_id') {
+    } else if (method === "user_id") {
       payload.user_id = Number(inputValue);
     }
 
@@ -32,7 +41,10 @@ const ForgotPassword = () => {
       await authService.forgotPassword(payload);
       setSuccess(true);
     } catch (err) {
-      setError(err?.response?.data?.message || 'Failed to send password reset request.');
+      setError(
+        err?.response?.data?.message ||
+          "Failed to send password reset request.",
+      );
     } finally {
       setLoading(false);
     }
@@ -40,10 +52,14 @@ const ForgotPassword = () => {
 
   const getPlaceholder = () => {
     switch (method) {
-      case 'email': return 'e.g. student@example.com';
-      case 'username': return 'e.g. john_doe';
-      case 'user_id': return 'e.g. 123456';
-      default: return '';
+      case "email":
+        return "e.g. student@example.com";
+      case "username":
+        return "e.g. john_doe";
+      case "user_id":
+        return "e.g. 123456";
+      default:
+        return "";
     }
   };
 
@@ -75,22 +91,37 @@ const ForgotPassword = () => {
           <Col xs={12} sm={10} md={8} lg={5} xl={4}>
             <Card className="shadow-lg login-card">
               <Card.Body className="p-3 p-md-5">
-                <h2 className="text-center fw-bold mb-3 mb-md-4 login-title" style={{ color: '#22B2E6' }}>
+                <h2
+                  className="text-center fw-bold mb-3 mb-md-4 login-title"
+                  style={{ color: "#22B2E6" }}
+                >
                   Forgot Password
                 </h2>
 
-                {error && <Alert variant="danger" className="py-2 small">{error}</Alert>}
+                {error && (
+                  <Alert variant="danger" className="py-2 small">
+                    {error}
+                  </Alert>
+                )}
 
                 {success ? (
                   <div className="text-center">
                     <Alert variant="success" className="border-0 bg-light">
-                      <i className="bi bi-check2-circle fs-1 d-block mb-2" style={{ color: '#22B2E6' }}></i>
+                      <i
+                        className="bi bi-check2-circle fs-1 d-block mb-2"
+                        style={{ color: "#22B2E6" }}
+                      ></i>
                       <h6 className="fw-bold text-dark">Reset Link Sent</h6>
                       <p className="small mb-0 text-secondary">
-                        If an account matches those details, we have sent instructions to reset your password.
+                        If an account matches those details, we have sent
+                        instructions to reset your password.
                       </p>
                     </Alert>
-                    <Button variant="outline-secondary" className="w-100 rounded-pill mt-3 py-2 fw-semibold" onClick={() => setSuccess(false)}>
+                    <Button
+                      variant="outline-secondary"
+                      className="w-100 rounded-pill mt-3 py-2 fw-semibold"
+                      onClick={() => setSuccess(false)}
+                    >
                       Try another method
                     </Button>
                   </div>
@@ -101,10 +132,15 @@ const ForgotPassword = () => {
                     </p>
 
                     <Form.Group className="mb-3">
-                      <Form.Label className="small fw-medium text-secondary">Find account via</Form.Label>
-                      <Form.Select 
-                        value={method} 
-                        onChange={(e) => { setMethod(e.target.value); setInputValue(''); }}
+                      <Form.Label className="small fw-medium text-secondary">
+                        Find account via
+                      </Form.Label>
+                      <Form.Select
+                        value={method}
+                        onChange={(e) => {
+                          setMethod(e.target.value);
+                          setInputValue("");
+                        }}
                         className="border-light bg-light"
                       >
                         <option value="email">Email Address</option>
@@ -115,10 +151,20 @@ const ForgotPassword = () => {
 
                     <Form.Group className="mb-4">
                       <Form.Label className="small fw-medium text-secondary">
-                        {method === 'email' ? 'Enter Email' : method === 'username' ? 'Enter Username' : 'Enter Index Number'}
+                        {method === "email"
+                          ? "Enter Email"
+                          : method === "username"
+                            ? "Enter Username"
+                            : "Enter Index Number"}
                       </Form.Label>
                       <Form.Control
-                        type={method === 'user_id' ? 'number' : method === 'email' ? 'email' : 'text'}
+                        type={
+                          method === "user_id"
+                            ? "number"
+                            : method === "email"
+                              ? "email"
+                              : "text"
+                        }
                         placeholder={getPlaceholder()}
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
@@ -127,14 +173,26 @@ const ForgotPassword = () => {
                       />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" className="w-100 rounded-pill py-2 fw-semibold shadow-sm border-0" disabled={loading}>
-                      {loading ? <Spinner animation="border" size="sm" /> : 'Send Reset Link'}
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className="w-100 rounded-pill py-2 fw-semibold shadow-sm border-0"
+                      disabled={loading}
+                    >
+                      {loading ? (
+                        <Spinner animation="border" size="sm" />
+                      ) : (
+                        "Send Reset Link"
+                      )}
                     </Button>
                   </Form>
                 )}
 
                 <div className="text-center mt-4">
-                  <Link to="/login" className="text-decoration-none small text-secondary">
+                  <Link
+                    to="/login"
+                    className="text-decoration-none small text-secondary"
+                  >
                     ← Back to Login
                   </Link>
                 </div>

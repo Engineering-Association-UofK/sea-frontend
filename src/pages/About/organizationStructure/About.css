@@ -1,145 +1,163 @@
 :root {
-    --brand-blue: #22B2E6;
-    --brand-blue-hover: #1ca0cf;
-    --text-dark: #2c3e50;
-    --bg-light: #f8f9fa;
+  --brand-blue: #22b2e6;
+  --brand-blue-hover: #1ca0cf;
+  --text-dark: #2c3e50;
+  --bg-light: #f8f9fa;
 }
 
 .structure-page {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 /* Typography & Titles */
 .section-title {
-    color: var(--text-dark);
+  color: var(--text-dark);
 }
 
 .title-underline {
-    height: 4px;
-    width: 80px;
-    background-color: var(--brand-blue);
-    border-radius: 4px;
+  height: 4px;
+  width: 80px;
+  background-color: var(--brand-blue);
+  border-radius: 4px;
 }
 
 .max-w-700 {
-    max-width: 700px;
+  max-width: 700px;
 }
 
 /* Top Leadership Cards */
 .top-tier-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #ffffff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  background-color: #ffffff;
 }
 
 .top-tier-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Base wrapper styles */
 .nav-pills-wrapper {
-    position: relative;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    transition: mask-image 0.3s ease;
+  position: relative;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transition: mask-image 0.3s ease;
 }
 
 /* LTR Fade (Fade out on the right) */
 .ltr .nav-pills-wrapper {
-    mask-image: linear-gradient(to right, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
-    padding-right: 50px;
-    padding-left: 0;
+  mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  padding-right: 50px;
+  padding-left: 0;
 }
 
 /* RTL Fade (Fade out on the left) */
 .rtl .nav-pills-wrapper {
-    mask-image: linear-gradient(to left, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to left, black 80%, transparent 100%);
-    padding-left: 50px;
-    padding-right: 0;
+  mask-image: linear-gradient(to left, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, black 80%, transparent 100%);
+  padding-left: 50px;
+  padding-right: 0;
 }
 
 /* Disable fade on desktop so centering works perfectly */
 @media (min-width: 768px) {
-    .ltr .nav-pills-wrapper, 
-    .rtl .nav-pills-wrapper {
-        mask-image: none;
-        -webkit-mask-image: none;
-        padding-left: 0;
-        padding-right: 0;
-    }
+  .ltr .nav-pills-wrapper,
+  .rtl .nav-pills-wrapper {
+    mask-image: none;
+    -webkit-mask-image: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .nav-pills-wrapper::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+  display: none; /* Chrome/Safari */
 }
 
 .nav-pills .nav-link {
-    color: var(--text-dark);
-    background-color: #ffffff;
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    transition: all 0.3s ease;
+  color: var(--text-dark);
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
 }
 
 .nav-pills .nav-link:hover {
-    background-color: rgba(34, 178, 230, 0.1);
-    color: var(--brand-blue);
+  background-color: rgba(34, 178, 230, 0.1);
+  color: var(--brand-blue);
 }
 
 .nav-pills .nav-link.active {
-    background-color: var(--brand-blue) !important;
-    color: #ffffff !important;
-    box-shadow: 0 4px 10px rgba(34, 178, 230, 0.3);
+  background-color: var(--brand-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(34, 178, 230, 0.3);
 }
 
 /* Structure Cards */
 .structure-card {
-    background-color: #ffffff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .structure-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
 }
 
 .icon-wrapper {
-    width: 65px;
-    height: 65px;
-    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-hover));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(
+    135deg,
+    var(--brand-blue),
+    var(--brand-blue-hover)
+  );
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Fade animation for Tab switching */
 .fade-in-tab {
-    animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Join Section CTA Banner */
 .cta-card {
-    background-color: var(--brand-blue);
-    background-image: linear-gradient(135deg, var(--brand-blue) 0%, #178ab3 100%);
+  background-color: var(--brand-blue);
+  background-image: linear-gradient(135deg, var(--brand-blue) 0%, #178ab3 100%);
 }
 
 .cta-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url('data:image/svg+xml;utf8,<svg opacity="0.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%23fff"/></svg>') repeat;
-    background-size: 20px 20px;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml;utf8,<svg opacity="0.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%23fff"/></svg>')
+    repeat;
+  background-size: 20px 20px;
+  pointer-events: none;
 }
 
 .z-index-1 {
-    z-index: 1;
+  z-index: 1;
 }

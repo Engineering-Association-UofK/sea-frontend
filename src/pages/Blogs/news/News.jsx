@@ -1,18 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Spinner, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useBlogs } from '../../../features/blogs/hooks/useBlogs';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Card, Spinner, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useBlogs } from "../../../features/blogs/hooks/useBlogs";
 import "./News.css";
-import { useLanguage } from '../../../context/LanguageContext';
+import { useLanguage } from "../../../context/LanguageContext";
 
 // Card-Skeleton for main large card
 const CardSkeleton = () => (
   <Card className="h-100 shadow-sm border-0">
-    <div style={{ height: '250px', backgroundColor: '#e9ecef' }} className="skeleton-animation"></div>
+    <div
+      style={{ height: "250px", backgroundColor: "#e9ecef" }}
+      className="skeleton-animation"
+    ></div>
     <Card.Body>
-      <div style={{ height: '1.8rem', width: '80%', backgroundColor: '#e9ecef', marginBottom: '1rem' }} className="skeleton-animation"></div>
-      <div style={{ height: '1rem', width: '100%', backgroundColor: '#e9ecef', marginBottom: '0.5rem' }} className="skeleton-animation"></div>
-      <div style={{ height: '1rem', width: '90%', backgroundColor: '#e9ecef' }} className="skeleton-animation"></div>
+      <div
+        style={{
+          height: "1.8rem",
+          width: "80%",
+          backgroundColor: "#e9ecef",
+          marginBottom: "1rem",
+        }}
+        className="skeleton-animation"
+      ></div>
+      <div
+        style={{
+          height: "1rem",
+          width: "100%",
+          backgroundColor: "#e9ecef",
+          marginBottom: "0.5rem",
+        }}
+        className="skeleton-animation"
+      ></div>
+      <div
+        style={{ height: "1rem", width: "90%", backgroundColor: "#e9ecef" }}
+        className="skeleton-animation"
+      ></div>
     </Card.Body>
   </Card>
 );
@@ -22,10 +44,29 @@ const ThumbnailSkeleton = () => (
   <div className="d-flex flex-column gap-3 w-100">
     {[...Array(3)].map((_, i) => (
       <div key={i} className="d-flex gap-3">
-        <div style={{ width: '120px', height: '120px', backgroundColor: '#e9ecef', borderRadius: '0.5rem' }} className="skeleton-animation"></div>
+        <div
+          style={{
+            width: "120px",
+            height: "120px",
+            backgroundColor: "#e9ecef",
+            borderRadius: "0.5rem",
+          }}
+          className="skeleton-animation"
+        ></div>
         <div className="flex-grow-1">
-          <div style={{ height: '1.5rem', width: '80%', backgroundColor: '#e9ecef', marginBottom: '0.5rem' }} className="skeleton-animation"></div>
-          <div style={{ height: '1rem', width: '60%', backgroundColor: '#e9ecef' }} className="skeleton-animation"></div>
+          <div
+            style={{
+              height: "1.5rem",
+              width: "80%",
+              backgroundColor: "#e9ecef",
+              marginBottom: "0.5rem",
+            }}
+            className="skeleton-animation"
+          ></div>
+          <div
+            style={{ height: "1rem", width: "60%", backgroundColor: "#e9ecef" }}
+            className="skeleton-animation"
+          ></div>
         </div>
       </div>
     ))}
@@ -37,7 +78,7 @@ const News = () => {
   const [page, setPage] = useState(1);
   const [allPosts, setAllPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const { data, isLoading, error, isFetching } = useBlogs('NEWS', page, 10);
+  const { data, isLoading, error, isFetching } = useBlogs("NEWS", page, 10);
 
   // add new posts when fetched...
   useEffect(() => {
@@ -45,7 +86,7 @@ const News = () => {
       if (page === 1) {
         setAllPosts(data.posts);
       } else {
-        setAllPosts(prev => [...prev, ...data.posts]);
+        setAllPosts((prev) => [...prev, ...data.posts]);
       }
       setHasMore(page < data.pages);
     }
@@ -53,7 +94,7 @@ const News = () => {
 
   const loadMore = () => {
     if (hasMore && !isFetching) {
-      setPage(prev => prev + 1);
+      setPage((prev) => prev + 1);
     }
   };
 
@@ -89,11 +130,10 @@ const News = () => {
   const tSidePosts = allPosts.slice(1, 4); // thumbnail-Side-Post
   const thumbnailPosts = allPosts.slice(4);
 
-
   return (
     <Container className="py-5">
       <h1 className="text-center fw-bold mb-5 text-primary">
-        {language == 'en' ? 'Latest News' : 'اخر الاخبار'}
+        {language == "en" ? "Latest News" : "اخر الاخبار"}
       </h1>
 
       {/* The Card and the 3 thumbnails */}
@@ -102,24 +142,49 @@ const News = () => {
           {/* Big Card... */}
           <Col>
             {firstPost ? (
-              <Card className="h-100 shadow-sm border-0 hover-card" style={{ borderRadius: "1rem" }}>
+              <Card
+                className="h-100 shadow-sm border-0 hover-card"
+                style={{ borderRadius: "1rem" }}
+              >
                 <Card.Img
                   variant="top"
-                  src={firstPost.image_url || `https://placehold.co/600x400/e2e8f0/1e293b?text=${firstPost.title}`}
-                  style={{ height: '350px', maxHeight: '70vw', objectFit: 'cover', borderRadius: "1rem" }}
+                  src={
+                    firstPost.image_url ||
+                    `https://placehold.co/600x400/e2e8f0/1e293b?text=${firstPost.title}`
+                  }
+                  style={{
+                    height: "350px",
+                    maxHeight: "70vw",
+                    objectFit: "cover",
+                    borderRadius: "1rem",
+                  }}
                 />
                 <Card.Body>
-                  <Card.Title className="fw-bold text-primary fs-3">{firstPost.title}</Card.Title>
+                  <Card.Title className="fw-bold text-primary fs-3">
+                    {firstPost.title}
+                  </Card.Title>
                   <Card.Text className="text-muted">
                     {firstPost.summary || "No Summary Available"}
                   </Card.Text>
                   <div className="text-muted small mb-3">
-                    <i className="bi bi-person-circle me-1"></i> {firstPost.author_name}
+                    <i className="bi bi-person-circle me-1"></i>{" "}
+                    {firstPost.author_name}
                     <span className="mx-2">•</span>
-                    <i className="bi bi-calendar3 me-1"></i> {new Date(firstPost.updated_at).toLocaleDateString()}
+                    <i className="bi bi-calendar3 me-1"></i>{" "}
+                    {new Date(firstPost.updated_at).toLocaleDateString()}
                   </div>
-                  <Link to={`/posts/news/${firstPost.slug}`} className="btn btn-outline-primary rounded-pill">
-                    {language == 'en' ? 'Continue Reading' : 'مواصلة القراءة'} <i className={"bi bi-arrow-" + (language == 'en' ? 'right' : 'left') + " ms-1"}></i>
+                  <Link
+                    to={`/posts/news/${firstPost.slug}`}
+                    className="btn btn-outline-primary rounded-pill"
+                  >
+                    {language == "en" ? "Continue Reading" : "مواصلة القراءة"}{" "}
+                    <i
+                      className={
+                        "bi bi-arrow-" +
+                        (language == "en" ? "right" : "left") +
+                        " ms-1"
+                      }
+                    ></i>
                   </Link>
                 </Card.Body>
               </Card>
@@ -133,31 +198,60 @@ const News = () => {
             {tSidePosts.length === 3 ? (
               <div className="d-flex flex-column gap-3">
                 {tSidePosts.map((post) => (
-                  <Card key={post.slug} className="shadow-sm border-0 hover-card" style={{ borderRadius: "1rem" }}>
+                  <Card
+                    key={post.slug}
+                    className="shadow-sm border-0 hover-card"
+                    style={{ borderRadius: "1rem" }}
+                  >
                     <Row className="g-0">
                       <Col xs={3}>
                         <Card.Img
-                          src={post.image_url || `https://placehold.co/600x400/e2e8f0/1e293b?text=${post.title}`}
-                          style={{ maxHeight: "200px", objectFit: 'cover', borderRadius: '0.8rem' }}
+                          src={
+                            post.image_url ||
+                            `https://placehold.co/600x400/e2e8f0/1e293b?text=${post.title}`
+                          }
+                          style={{
+                            maxHeight: "200px",
+                            objectFit: "cover",
+                            borderRadius: "0.8rem",
+                          }}
                         />
                       </Col>
                       <Col xs={8}>
                         <Card.Body>
-                          <Card.Title className="fw-bold text-primary fs-6">{post.title}</Card.Title>
+                          <Card.Title className="fw-bold text-primary fs-6">
+                            {post.title}
+                          </Card.Title>
                           <Card.Text className="text-muted">
                             {post.summary
-                              ? (post.summary.length > 60
-                                ? post.summary.slice(0, 60) + '...'
-                                : post.summary)
+                              ? post.summary.length > 60
+                                ? post.summary.slice(0, 60) + "..."
+                                : post.summary
                               : "No Summary Available"}
                           </Card.Text>
                           <div className="text-muted small mb-3">
-                            <i className="bi bi-person-circle me-1"></i> {firstPost.author_name}
+                            <i className="bi bi-person-circle me-1"></i>{" "}
+                            {firstPost.author_name}
                             <span className="mx-2">•</span>
-                            <i className="bi bi-calendar3 me-1"></i> {new Date(firstPost.updated_at).toLocaleDateString()}
+                            <i className="bi bi-calendar3 me-1"></i>{" "}
+                            {new Date(
+                              firstPost.updated_at,
+                            ).toLocaleDateString()}
                           </div>
-                          <Link to={`/posts/news/${post.slug}`} className="btn btn-outline-primary rounded-pill">
-                            {language == 'en' ? 'Continue Reading' : 'مواصلة القراءة'} <i className={"bi bi-arrow-" + (language == 'en' ? 'right' : 'left') + " ms-1"}></i>
+                          <Link
+                            to={`/posts/news/${post.slug}`}
+                            className="btn btn-outline-primary rounded-pill"
+                          >
+                            {language == "en"
+                              ? "Continue Reading"
+                              : "مواصلة القراءة"}{" "}
+                            <i
+                              className={
+                                "bi bi-arrow-" +
+                                (language == "en" ? "right" : "left") +
+                                " ms-1"
+                              }
+                            ></i>
                           </Link>
                         </Card.Body>
                       </Col>
@@ -178,31 +272,57 @@ const News = () => {
           <Row className="g-4">
             {thumbnailPosts.map((post) => (
               <Col xs={12} lg={6} key={post.slug}>
-                <Card className="shadow-sm border-0 h-100 hover-card" style={{ borderRadius: "1rem" }}>
+                <Card
+                  className="shadow-sm border-0 h-100 hover-card"
+                  style={{ borderRadius: "1rem" }}
+                >
                   <Row className="g-0 h-100">
                     <Col xs={3}>
                       <Card.Img
-                        src={post.image_url || `https://placehold.co/600x400/e2e8f0/1e293b?text=${post.title}`}
-                        style={{ maxHeight: "200px", objectFit: 'cover', borderRadius: '0.8rem' }}
+                        src={
+                          post.image_url ||
+                          `https://placehold.co/600x400/e2e8f0/1e293b?text=${post.title}`
+                        }
+                        style={{
+                          maxHeight: "200px",
+                          objectFit: "cover",
+                          borderRadius: "0.8rem",
+                        }}
                       />
                     </Col>
                     <Col xs={8}>
                       <Card.Body>
-                        <Card.Title className="fw-bold text-primary fs-6">{post.title}</Card.Title>
+                        <Card.Title className="fw-bold text-primary fs-6">
+                          {post.title}
+                        </Card.Title>
                         <Card.Text className="text-muted">
                           {post.summary
-                            ? (post.summary.length > 60
-                              ? post.summary.slice(0, 60) + '...'
-                              : post.summary)
+                            ? post.summary.length > 60
+                              ? post.summary.slice(0, 60) + "..."
+                              : post.summary
                             : "No Summary Available"}
                         </Card.Text>
                         <div className="text-muted small mb-3">
-                          <i className="bi bi-person-circle me-1"></i> {firstPost.author_name}
+                          <i className="bi bi-person-circle me-1"></i>{" "}
+                          {firstPost.author_name}
                           <span className="mx-2">•</span>
-                          <i className="bi bi-calendar3 me-1"></i> {new Date(firstPost.updated_at).toLocaleDateString()}
+                          <i className="bi bi-calendar3 me-1"></i>{" "}
+                          {new Date(firstPost.updated_at).toLocaleDateString()}
                         </div>
-                        <Link to={`/posts/news/${post.slug}`} className="btn btn-outline-primary rounded-pill">
-                          {language == 'en' ? 'Continue Reading' : 'مواصلة القراءة'} <i className={"bi bi-arrow-" + (language == 'en' ? 'right' : 'left') + " ms-1"}></i>
+                        <Link
+                          to={`/posts/news/${post.slug}`}
+                          className="btn btn-outline-primary rounded-pill"
+                        >
+                          {language == "en"
+                            ? "Continue Reading"
+                            : "مواصلة القراءة"}{" "}
+                          <i
+                            className={
+                              "bi bi-arrow-" +
+                              (language == "en" ? "right" : "left") +
+                              " ms-1"
+                            }
+                          ></i>
                         </Link>
                       </Card.Body>
                     </Col>
@@ -213,7 +333,6 @@ const News = () => {
           </Row>
         </div>
       )}
-
 
       {/* skeleton when loading more data */}
       {isFetching && page > 1 && (
@@ -239,12 +358,18 @@ const News = () => {
           >
             {isFetching ? (
               <>
-                <Spinner as="span" animation="border" size="sm" className="me-2" />
-                {language == 'en' ? 'Loading...' : 'يتم التحميل...'}
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  className="me-2"
+                />
+                {language == "en" ? "Loading..." : "يتم التحميل..."}
               </>
             ) : (
               <>
-                {language == 'en' ? 'Load More News' : 'اظهار المزيد'} <i className="bi bi-chevron-down ms-2"></i>
+                {language == "en" ? "Load More News" : "اظهار المزيد"}{" "}
+                <i className="bi bi-chevron-down ms-2"></i>
               </>
             )}
           </Button>

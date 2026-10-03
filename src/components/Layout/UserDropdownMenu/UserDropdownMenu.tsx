@@ -1,10 +1,10 @@
-import React from 'react';
-import { Dropdown, Spinner, Badge } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
-import { useLanguage } from '@/context/LanguageContext';
-import { useProfileSummary } from '@/features/profile/hooks/useProfile';
-import CustomActionButton from '@/components/CustomActionButton'
+import React from "react";
+import { Dropdown, Spinner, Badge } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { useProfileSummary } from "@/features/profile/hooks/useProfile";
+import CustomActionButton from "@/components/CustomActionButton";
 
 interface UserDropdownMenuProps {
   isMobile?: boolean;
@@ -21,20 +21,17 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
   const { data: summary, isLoading, isError } = useProfileSummary();
 
   const displayName =
-    language === 'ar'
+    language === "ar"
       ? summary?.name_ar || summary?.name_en || summary?.username
       : summary?.name_en || summary?.name_ar || summary?.username;
 
   const handleLogout = () => {
     logout();
     if (onItemClick) onItemClick();
-    navigate('/login');
+    navigate("/login");
   };
 
-  
-
-  const avatarSrc = summary?.profile_pic || '/default-avatar.png';
-
+  const avatarSrc = summary?.profile_pic || "/default-avatar.png";
 
   const menuHeader = (
     <div className="user-profile-header p-3 mb-3 d-flex align-items-center gap-3">
@@ -42,27 +39,30 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
         {isLoading ? (
           <div
             className="rounded-circle d-flex align-items-center justify-content-center bg-light"
-            style={{ width: '48px', height: '48px' }}
+            style={{ width: "48px", height: "48px" }}
           >
             <Spinner animation="border" size="sm" variant="info" />
           </div>
         ) : (
           <img
             src={avatarSrc}
-            alt={displayName || 'User'}
+            alt={displayName || "User"}
             className="rounded-circle mx-1 object-fit-cover shadow-sm border border-2 border-info"
-            style={{ width: '48px', height: '48px' }}
+            style={{ width: "48px", height: "48px" }}
             onError={(e) => {
-              (e.target as HTMLImageElement).src = 'https://via.placeholder.com/150';
+              (e.target as HTMLImageElement).src =
+                "https://via.placeholder.com/150";
             }}
           />
         )}
         <span className="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle p-1"></span>
       </div>
       <div className="overflow-hidden">
-        <h6 className="fw-bold mb-0 text-truncate text-dark">{displayName || 'Student User'}</h6>
+        <h6 className="fw-bold mb-0 text-truncate text-dark">
+          {displayName || "Student User"}
+        </h6>
         <small className="text-muted text-truncate d-block">
-          {summary?.email || summary?.department || 'Member'}
+          {summary?.email || summary?.department || "Member"}
         </small>
       </div>
     </div>
@@ -73,16 +73,22 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
       <CustomActionButton
         to="/profile/"
         icon="bi-person-badge-fill"
-        title={language === 'ar' ? 'الملف الشخصي' : 'User Profile'}
-        subtitle={language === 'ar' ? 'إدارة بياناتك وحسابك' : 'Manage your account'}
+        title={language === "ar" ? "الملف الشخصي" : "User Profile"}
+        subtitle={
+          language === "ar" ? "إدارة بياناتك وحسابك" : "Manage your account"
+        }
         variant="cyan"
       />
 
       <CustomActionButton
         to="/profile/election"
         icon="bi-box-seam-fill"
-        title={language === 'ar' ? 'انتخابات الجمعية' : 'Elections'}
-        subtitle={language === 'ar' ? 'التصويت والبطاقات الانتخابية' : 'Vote & Election ticket'}
+        title={language === "ar" ? "انتخابات الجمعية" : "Elections"}
+        subtitle={
+          language === "ar"
+            ? "التصويت والبطاقات الانتخابية"
+            : "Vote & Election ticket"
+        }
         variant="cyan"
         // badgeText={language === 'ar' ? 'نشط' : 'Active'}
       />
@@ -92,8 +98,10 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
       <CustomActionButton
         onClick={handleLogout}
         icon="bi-box-arrow-right"
-        title={language === 'ar' ? 'تسجيل الخروج' : 'Logout'}
-        subtitle={language === 'ar' ? 'إنهاء الجلسة الحالية' : 'Sign out of account'}
+        title={language === "ar" ? "تسجيل الخروج" : "Logout"}
+        subtitle={
+          language === "ar" ? "إنهاء الجلسة الحالية" : "Sign out of account"
+        }
         variant="danger"
       />
     </div>
@@ -116,7 +124,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
       .specialized-btn-cyan:hover {
         background: linear-gradient(135deg, #22B2E6 0%, #1782A9 100%);
         color: #ffffff !important;
-        transform: translateX(${language === 'ar' ? '-4px' : '4px'});
+        transform: translateX(${language === "ar" ? "-4px" : "4px"});
         box-shadow: 0 4px 12px rgba(34, 178, 230, 0.3);
       }
 
@@ -138,7 +146,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
 
       .specialized-btn-danger:hover {
         background: linear-gradient(135deg, #DC3545 0%, #A71D2A 100%);
-        transform: translateX(${language === 'ar' ? '-4px' : '4px'});
+        transform: translateX(${language === "ar" ? "-4px" : "4px"});
         box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
       }
 
@@ -187,7 +195,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
 
   // Render for Desktop Navbar Dropdown
   return (
-    <Dropdown align={language === 'ar' ? 'start' : 'end'}>
+    <Dropdown align={language === "ar" ? "start" : "end"}>
       {styles}
       <Dropdown.Toggle
         variant="link"
@@ -200,11 +208,12 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
           ) : (
             <img
               src={avatarSrc}
-              alt={displayName || 'User'}
+              alt={displayName || "User"}
               className="rounded-circle object-fit-cover border border-2 border-info"
-              style={{ width: '38px', height: '38px' }}
+              style={{ width: "38px", height: "38px" }}
               onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://via.placeholder.com/150';
+                (e.target as HTMLImageElement).src =
+                  "https://via.placeholder.com/150";
               }}
             />
           )}
@@ -214,7 +223,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
 
       <Dropdown.Menu
         className="shadow-lg border-0 p-2 rounded-3 mt-2"
-        style={{ minWidth: '280px' }}
+        style={{ minWidth: "280px" }}
       >
         {menuHeader}
         {menuItemsList}

@@ -1,11 +1,11 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { galleryService } from '../api/gallery.service';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { galleryService } from "../api/gallery.service";
 
 // Key for caching
 export const GALLERY_KEYS = {
-  all: ['gallery items'],
-  lists: () => [...GALLERY_KEYS.all, 'list'],
-  detail: (id) => [...GALLERY_KEYS.all, 'detail', id],
+  all: ["gallery items"],
+  lists: () => [...GALLERY_KEYS.all, "list"],
+  detail: (id) => [...GALLERY_KEYS.all, "detail", id],
 };
 
 // Hook for fetching all gallery items
@@ -14,14 +14,14 @@ export const useGalleryItems = () => {
     queryKey: GALLERY_KEYS.lists(),
     queryFn: () => galleryService.getAll(),
 
-    staleTime: 0, 
+    staleTime: 0,
   });
 };
 
 // Hook for fetching a single gallery image by keyword
 export const useGalleryImage = (keyword) => {
   return useQuery({
-    queryKey: ['gallery', 'keyword', keyword],
+    queryKey: ["gallery", "keyword", keyword],
     queryFn: () => galleryService.getByKeyword(keyword),
     enabled: !!keyword,
     staleTime: 1000 * 60 * 60, // 1 hour cache
@@ -49,7 +49,7 @@ export const useUpdateGalleryImage = () => {
     mutationFn: galleryService.update,
     onSuccess: (data, variables) => {
       // Invalidate the specific keyword query
-      queryClient.invalidateQueries(['gallery', 'keyword', variables.keyword]);
+      queryClient.invalidateQueries(["gallery", "keyword", variables.keyword]);
       // Also invalidate list just in case
       queryClient.invalidateQueries(GALLERY_KEYS.lists());
     },
@@ -64,7 +64,7 @@ export const useDeleteGalleryItem = () => {
     mutationFn: (id) => galleryService.delete(id),
     onSuccess: () => {
       // Refresh the list automatically
-      queryClient.invalidateQueries(['gallery items', 'list']);
+      queryClient.invalidateQueries(["gallery items", "list"]);
     },
   });
 };

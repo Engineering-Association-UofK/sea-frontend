@@ -24,11 +24,11 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
           src={profile.profile_pic}
           alt="Profile Avatar"
           className="h-28 w-28 rounded-full object-cover sm:h-32 sm:w-32 ring-4"
-          style={{ 
-            boxShadow: '0 0 0 4px rgba(var(--primary-color), 0.1)'
+          style={{
+            boxShadow: "0 0 0 4px rgba(var(--primary-color), 0.1)",
           }}
         />
-        <label 
+        <label
           className="absolute bottom-1 right-1 flex h-6 w-6 p-1 cursor-pointer items-center justify-center rounded-lg text-white shadow-md ring-2 ring-white transition-all hover:scale-105 active:scale-95"
           style={{ backgroundColor: "var(--primary-color)" }}
         >
@@ -48,7 +48,10 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
           <h1 className="break-words text-xl font-bold leading-snug text-gray-900 sm:text-2xl">
             {profile.name_en}
           </h1>
-          <span dir="rtl" className="break-words text-base font-medium text-gray-500 sm:text-lg">
+          <span
+            dir="rtl"
+            className="break-words text-base font-medium text-gray-500 sm:text-lg"
+          >
             {profile.name_ar}
           </span>
           <p className="mt-2 text-sm text-gray-500 break-all">
@@ -57,11 +60,11 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
         </div>
 
         <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
-          <span 
+          <span
             className="rounded-full px-3 py-1 text-xs font-semibold capitalize"
-            style={{ 
-              backgroundColor: 'rgba(var(--primary-color), 0.1)', 
-              color: 'var(--primary-color)' 
+            style={{
+              backgroundColor: "rgba(var(--primary-color), 0.1)",
+              color: "var(--primary-color)",
             }}
           >
             {profile.department} Dept.
