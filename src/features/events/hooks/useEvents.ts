@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { eventsApi } from "../api/events.api";
-import { EventListRequest } from "../api/models";
+import { eventsApi } from "../../events/api/events.api";
+import { EventListRequest } from "../../events/api/models";
 
 export const EVENTS_KEYS = {
   all: ["public_events"] as const,
