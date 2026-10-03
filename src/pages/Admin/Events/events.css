@@ -1,0 +1,630 @@
+/* Events control center. Scoped with the `ev-` prefix. Uses CSS variables with
+   sensible fallbacks; override --ev-* on a parent to match the admin theme. */
+
+.ev-page {
+  --ev-bg: var(--background, #ffffff);
+  --ev-surface: var(--surface, #ffffff);
+  --ev-text: var(--text, #1b1f24);
+  --ev-muted: var(--text-muted, #6b7280);
+  --ev-border: var(--border, #e3e6ea);
+  --ev-accent: var(--primary, #2563eb);
+  --ev-danger: var(--danger, #dc2626);
+
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  color: var(--ev-text);
+}
+
+.ev-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ev-title {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+}
+
+.ev-muted {
+  color: var(--ev-muted);
+  font-size: 0.875rem;
+}
+
+.ev-error {
+  color: var(--ev-danger);
+  font-size: 0.85rem;
+  margin: 4px 0 0;
+}
+
+/* Buttons & inputs */
+
+.ev-btn {
+  border: 1px solid var(--ev-border);
+  background: var(--ev-surface);
+  color: var(--ev-text);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+.ev-btn:hover:not(:disabled) {
+  border-color: var(--ev-accent);
+}
+.ev-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.ev-btn--small {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+}
+.ev-btn--primary {
+  background: var(--ev-accent);
+  border-color: var(--ev-accent);
+  color: #fff;
+}
+.ev-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ev-muted);
+}
+.ev-btn--danger {
+  color: var(--ev-danger);
+}
+.ev-btn--danger-solid {
+  background: var(--ev-danger);
+  border-color: var(--ev-danger);
+  color: #fff;
+}
+
+.ev-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--ev-border);
+  background: var(--ev-surface);
+  color: var(--ev-text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+}
+.ev-input:focus-visible,
+.ev-btn:focus-visible {
+  outline: 2px solid var(--ev-accent);
+  outline-offset: 1px;
+}
+
+/* Filters */
+
+.ev-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.ev-filters .ev-input {
+  width: auto;
+}
+.ev-filters__search {
+  flex: 1 1 240px;
+}
+
+/* Notice */
+
+.ev-notice {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+.ev-notice--success {
+  background: #e8f7ee;
+  color: #146c3a;
+}
+.ev-notice--error {
+  background: #fdecec;
+  color: #a31d1d;
+}
+
+/* Table */
+
+.ev-table-wrap {
+  border: 1px solid var(--ev-border);
+  border-radius: 12px;
+  overflow-x: auto;
+  transition: opacity 0.15s;
+}
+.ev-table-wrap.is-fetching {
+  opacity: 0.65;
+}
+.ev-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+.ev-table th,
+.ev-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ev-border);
+  vertical-align: middle;
+}
+.ev-table th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ev-muted);
+}
+.ev-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.ev-table__actions-col {
+  text-align: right !important;
+  width: 1%;
+  white-space: nowrap;
+}
+.ev-row-actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.ev-event-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ev-event-name {
+  font-weight: 600;
+}
+.ev-thumb {
+  width: 56px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--ev-border);
+}
+
+.ev-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--ev-border);
+  font-size: 0.8rem;
+}
+.ev-badge--accent {
+  background: color-mix(in srgb, var(--ev-accent) 15%, transparent);
+  color: var(--ev-accent);
+}
+
+.ev-skeleton {
+  display: block;
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--ev-border),
+    transparent,
+    var(--ev-border)
+  );
+  background-size: 200% 100%;
+  animation: ev-shimmer 1.2s infinite;
+}
+@keyframes ev-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Pagination */
+
+.ev-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+.ev-pagination__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.ev-pagination__gap {
+  padding: 0 4px;
+  color: var(--ev-muted);
+}
+
+/* Empty / error states */
+
+.ev-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 16px;
+  border: 1px dashed var(--ev-border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Modal */
+
+.ev-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.45);
+}
+.ev-modal {
+  width: 100%;
+  max-width: 640px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--ev-surface);
+  color: var(--ev-text);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.ev-modal--narrow {
+  max-width: 440px;
+}
+.ev-modal__title {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+}
+.ev-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.ev-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ev-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.ev-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+.ev-field > span {
+  font-weight: 600;
+}
+.ev-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ev-thumb--empty {
+  display: inline-block;
+}
+
+/* ---------- Manage modal: coordinators / applications / participants ---------- */
+
+.ev-modal--wide {
+  max-width: 760px;
+}
+.ev-manage-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ev-manage-head .ev-modal__title {
+  margin-bottom: 2px;
+}
+.ev-manage-name {
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+}
+
+.ev-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--ev-border);
+  overflow-x: auto;
+}
+.ev-tab {
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--ev-muted);
+  padding: 10px 14px;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ev-tab:hover {
+  color: var(--ev-text);
+}
+.ev-tab.is-active {
+  color: var(--ev-accent);
+  border-bottom-color: var(--ev-accent);
+  font-weight: 600;
+}
+.ev-tab:focus-visible {
+  outline: 2px solid var(--ev-accent);
+  outline-offset: -2px;
+}
+.ev-tabpanel {
+  padding-top: 16px;
+  min-height: 260px;
+}
+
+.ev-inline-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ev-inline-form .ev-input {
+  flex: 1;
+  min-width: 0;
+}
+.ev-inline-form--flush {
+  flex: 1;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ev-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--ev-border);
+  border-radius: 10px;
+  transition: opacity 0.15s;
+}
+.ev-list.is-fetching {
+  opacity: 0.65;
+}
+.ev-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--ev-border);
+}
+.ev-list__item:last-child {
+  border-bottom: none;
+}
+.ev-list__main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  min-width: 0;
+}
+.ev-list__title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.ev-list__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.ev-confirm {
+  display: inline-flex;
+  gap: 6px;
+}
+.ev-tab-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+.ev-empty {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.ev-badge--success {
+  background: #e8f7ee;
+  color: #146c3a;
+}
+.ev-notice--info {
+  background: color-mix(in srgb, var(--ev-accent) 10%, transparent);
+  color: var(--ev-text);
+}
+
+/* ---------- Compact / mobile layout ---------- */
+
+/* Rows become stacked cards instead of a horizontally scrolling table */
+@media (max-width: 720px) {
+  .ev-page {
+    padding: 16px 12px 40px;
+  }
+
+  .ev-table-wrap {
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+  .ev-table,
+  .ev-table tbody {
+    display: block;
+    min-width: 0;
+  }
+  /* Header labels are redundant once each row is a card */
+  .ev-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .ev-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid var(--ev-border);
+    border-radius: 12px;
+    background: var(--ev-surface);
+  }
+  .ev-table th,
+  .ev-table td {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .ev-td--event {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .ev-event-cell {
+    gap: 10px;
+  }
+  .ev-event-cell > div {
+    min-width: 0;
+  }
+  .ev-event-name {
+    overflow-wrap: anywhere;
+  }
+  .ev-thumb {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ev-td--date {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--ev-muted);
+  }
+
+  .ev-table__actions-col {
+    width: auto;
+    text-align: left !important;
+  }
+  .ev-td--actions {
+    flex: 1 1 100%;
+    padding-top: 10px !important;
+    border-top: 1px solid var(--ev-border);
+  }
+  .ev-row-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .ev-row-actions .ev-btn {
+    flex: 1;
+    min-height: 40px; /* comfortable touch target */
+  }
+
+  /* Manage modal lists: stack the text above its actions */
+  .ev-list__item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .ev-list__actions {
+    justify-content: flex-end;
+  }
+  .ev-inline-form:not(.ev-inline-form--flush) {
+    flex-direction: column;
+  }
+
+  /* Skeleton: one block per card */
+  .ev-row--skeleton td:not(.ev-td--event) {
+    display: none;
+  }
+  .ev-row--skeleton .ev-skeleton {
+    height: 48px;
+  }
+
+  /* Filters: search on its own line, selects side by side */
+  .ev-filters {
+    gap: 8px;
+  }
+  .ev-filters__search {
+    flex: 1 1 100%;
+  }
+  .ev-filters .ev-input:not(.ev-filters__search) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .ev-filters .ev-btn--ghost {
+    flex: 1 1 100%;
+  }
+  /* 16px stops iOS Safari from zooming into focused inputs */
+  .ev-input {
+    font-size: 16px;
+  }
+
+  /* Pagination: summary on top, compact controls below */
+  .ev-pagination {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .ev-pagination__buttons {
+    justify-content: center;
+  }
+  /* Keep only prev / current / next to avoid wrapping */
+  .ev-pagination__buttons .ev-btn--small:not([aria-current="page"]):not(:first-child):not(:last-child) {
+    display: none;
+  }
+  .ev-pagination__gap {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .ev-header {
+    flex-direction: column;
+  }
+  .ev-header .ev-btn--primary {
+    width: 100%;
+  }
+  .ev-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Modals become bottom sheets on phones */
+  .ev-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .ev-modal {
+    max-width: none;
+    max-height: 92vh;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 16px;
+  }
+  .ev-modal--narrow {
+    max-width: none;
+  }
+  .ev-modal__footer {
+    position: sticky;
+    bottom: -18px;
+    padding: 12px 0 4px;
+    background: var(--ev-surface);
+  }
+  .ev-modal__footer .ev-btn {
+    flex: 1;
+    min-height: 42px;
+  }
+}
