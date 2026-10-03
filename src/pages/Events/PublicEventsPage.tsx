@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom"; // or 'next/navigation'
-import { useEventList } from "@/features/public_events/hooks/useEvents";
+import { useEventList } from "@/features/events/hooks/useEvents";
 import {
   EventListItemResponse,
   EventListRequest,
   Secretariat,
-} from "@/features/public_events/api/models";
+} from "@/features/events/api/models";
 import { useLanguage } from "@/context/LanguageContext";
 import TablePaginator from "@/components/TablePaginator";
 import EventCard from "./components/EventCard";

@@ -3,11 +3,11 @@ import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { EventListItemResponse } from "@/features/public_events/api/models";
+import { EventListItemResponse } from "@/features/events/api/models";
 import {
   useApplyEvent,
   useCheckStatus,
-} from "@/features/public_events/hooks/useEvents";
+} from "@/features/events/hooks/useEvents";
 
 interface EventApplicationOverlayProps {
   event: EventListItemResponse;

@@ -2,7 +2,7 @@ import React from "react";
 import {
   EventListItemResponse,
   Secretariat,
-} from "@/features/public_events/api/models";
+} from "@/features/events/api/models";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface EventCardProps {
