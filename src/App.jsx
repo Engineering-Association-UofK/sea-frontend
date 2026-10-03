@@ -43,8 +43,6 @@ import FormAnalysisView from "./pages/forms/FormAnalysisView";
 import AnalysisGallery from "./pages/forms/AnalysisGallery";
 import ApplicationView from "./pages/forms/ApplicationView";
 import CategoryView from "./pages/forms/CategoryView";
-import EventsDashboard from "./pages/Admin/Events/EventsDashboard.jsx";
-import EventsEntry from "./pages/Admin/Events/EventsEntry.jsx";
 import AdminRoleGuard from "./components/AdminRoleGuard.jsx";
 import VerifyCertificate from "./components/verification/VerifyCertificate.jsx";
 import VerifyDocument from "./components/verification/VerifyDocument.jsx";
@@ -63,6 +61,7 @@ import ElectionAdminPage from "./pages/Admin/election/ElectionAdminPage.jsx";
 import ElectionsAbout from "./pages/About/elections/ElectionsAbout.jsx";
 import ElectionTicketPage from "./pages/Profile/ElectionTicketPage.tsx";
 import PublicEventsPage from "./pages/Events/PublicEventsPage.tsx";
+import EventsControlCenter from "./pages/Admin/Events/EventsControlCenter.tsx";
 
 ReactGA.initialize("G-S8J4CN53DH");
 
@@ -128,7 +127,7 @@ function App() {
               <Route path="/doc/verify/:hash" element={<VerifyDocument />} />
             </Route>
 
-            {/* GUEST ONLY ROUTES (Login/Register) 
+            {/* GUEST ONLY ROUTES (Login/Register)
               - Logged in users get kicked out to /admin or / */}
             {/* Standalone Layout containing only Back to Home button */}
             <Route element={<StandaloneLayout />}>
@@ -189,18 +188,18 @@ function App() {
                   path="events"
                   element={
                     <AdminRoleGuard allowedRoles={["content:event_manager"]}>
-                      <EventsDashboard />
+                      <EventsControlCenter />
                     </AdminRoleGuard>
                   }
                 />
-                <Route
+                {/* <Route
                   path="events/:id"
                   element={
                     <AdminRoleGuard allowedRoles={["content:event_manager"]}>
                       <EventsEntry />
                     </AdminRoleGuard>
                   }
-                />
+                /> */}
 
                 {/* Operations: Forms */}
                 <Route
@@ -326,12 +325,12 @@ function App() {
 
             {/* </Route> */}
             {/* STUDENT ROUTES (Future) */}
-            {/* 
+            {/*
             <Route element={<MainLayout />}>
               <Route element={<ProtectedRoute allowedRoles={['student']} />}>
                  <Route path="/student/courses" element={<Courses />} />
               </Route>
-            </Route> 
+            </Route>
             */}
             <Route path="*" element={<Navigate to={"/"} />} />
           </Routes>
