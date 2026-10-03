@@ -25,9 +25,10 @@ export default function ApplicationsTab({ eventId }: ApplicationsTabProps) {
 
   const [actionError, setActionError] = useState<string | null>(null);
 
-  const applications = data?.list ?? [];
+  const applications = (data?.list ?? []).filter(
+    (app) => app && (app.id || app.user_id),
+  );
 
-  // Step back if the last row of a page was removed
   useEffect(() => {
     if (!data || isFetching) return;
     if (page > 1 && data.list.length === 0) {
@@ -70,7 +71,11 @@ export default function ApplicationsTab({ eventId }: ApplicationsTabProps) {
   }
 
   if (applications.length === 0) {
-    return <p className="ev-muted ev-empty">No applications yet.</p>;
+    return (
+      <div className="ev-empty-state">
+        <p className="ev-muted ev-empty">No applications found.</p>
+      </div>
+    );
   }
 
   return (
@@ -80,17 +85,53 @@ export default function ApplicationsTab({ eventId }: ApplicationsTabProps) {
       <ul className={`ev-list ${isFetching ? "is-fetching" : ""}`}>
         {applications.map((app) => (
           <li key={app.id} className="ev-list__item">
-            <div className="ev-list__main">
-              <span className="ev-list__title">User #{app.user_id}</span>
-              <span
-                className={`ev-badge ${app.accepted ? "ev-badge--success" : "ev-badge--accent"}`}
-              >
-                {app.accepted ? "Accepted" : "Pending"}
-              </span>
-              <span className="ev-muted">
-                {app.form_id ? `Form #${app.form_id} · ` : ""}
-                {formatDate(app.started_at)}
-              </span>
+            <div className="ev-list__main ev-user-info">
+              {app.photo_url && (
+                <div
+                  className="ev-avatar-container"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    minWidth: "40px",
+                    minHeight: "40px",
+                    maxWidth: "40px",
+                    maxHeight: "40px",
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    flexShrink: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={app.photo_url}
+                    alt={app.username || `User ${app.user_id}`}
+                    className="ev-avatar"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                </div>
+              )}
+              <div className="ev-user-details">
+                <span className="ev-list__title">
+                  {app.username || `User #${app.user_id}`}
+                </span>
+                <span
+                  className={`ev-badge ${app.accepted ? "ev-badge--success" : "ev-badge--accent"}`}
+                >
+                  {app.accepted ? "Accepted" : "Pending"}
+                </span>
+                <span className="ev-muted">
+                  {app.username ? `ID: #${app.user_id} · ` : ""}
+                  {app.form_id ? `Form #${app.form_id} · ` : ""}
+                  {formatDate(app.started_at)}
+                </span>
+              </div>
             </div>
             <div className="ev-list__actions">
               {!app.accepted && (

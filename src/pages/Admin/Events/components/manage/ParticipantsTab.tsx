@@ -21,9 +21,10 @@ export default function ParticipantsTab({ eventId }: ParticipantsTabProps) {
   const removeMutation = useRemoveParticipant(eventId);
   const [actionError, setActionError] = useState<string | null>(null);
 
-  const participants = data?.list ?? [];
+  const participants = (data?.list ?? []).filter(
+    (p) => p && (p.id || p.user_id),
+  );
 
-  // Step back if the last row of a page was removed
   useEffect(() => {
     if (!data || isFetching) return;
     if (page > 1 && data.list.length === 0) {
@@ -66,7 +67,11 @@ export default function ParticipantsTab({ eventId }: ParticipantsTabProps) {
   }
 
   if (participants.length === 0) {
-    return <p className="ev-muted ev-empty">No participants yet.</p>;
+    return (
+      <div className="ev-empty-state">
+        <p className="ev-muted ev-empty">No participants found.</p>
+      </div>
+    );
   }
 
   return (
@@ -76,9 +81,47 @@ export default function ParticipantsTab({ eventId }: ParticipantsTabProps) {
       <ul className={`ev-list ${isFetching ? "is-fetching" : ""}`}>
         {participants.map((p) => (
           <li key={p.id} className="ev-list__item">
-            <div className="ev-list__main">
-              <span className="ev-list__title">User #{p.user_id}</span>
-              <span className="ev-muted">Joined {formatDate(p.joined_at)}</span>
+            <div className="ev-list__main ev-user-info">
+              {p.photo_url && (
+                <div
+                  className="ev-avatar-container"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    minWidth: "40px",
+                    minHeight: "40px",
+                    maxWidth: "40px",
+                    maxHeight: "40px",
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    flexShrink: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={p.photo_url}
+                    alt={p.username || `User ${p.user_id}`}
+                    className="ev-avatar"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                </div>
+              )}
+              <div className="ev-user-details">
+                <span className="ev-list__title">
+                  {p.username || `User #${p.user_id}`}
+                </span>
+                <span className="ev-muted">
+                  {p.username ? `ID: #${p.user_id} · ` : ""}
+                  Joined {formatDate(p.joined_at)}
+                </span>
+              </div>
             </div>
             <div className="ev-list__actions">
               <ConfirmButton
