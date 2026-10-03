@@ -3,6 +3,9 @@ import { Container, Card, Spinner, Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useBlogs } from '../../../features/blogs/hooks/useBlogs';
 import { useLanguage } from '../../../context/LanguageContext';
+import PageBanner from '../../../components/PageBanner';
+import issuesImg from '../../../utils/images/student_issues.jpg';
+import issuesMobileImg from '../../../utils/images/student_issuesMobile.jpg';
 import './Issues.css';
 
 const formatDate = (dateString, language) => {
@@ -69,11 +72,19 @@ const Issues = () => {
     }
 
     return (
-        <Container className="py-5">
+        <>
+          <PageBanner
+            image={issuesImg}
+            mobileImage={issuesMobileImg}
+            titleEn="Student Issues"
+            titleAr="القضايا الطلابية"
+            subtitleEn="Your voice matters.. and your rights are a priority"
+            subtitleAr="صوتك يُهم .. وحقوقك أولوية"
+            descEn="Follow the student issues that matter to you and participate in decision-making for a better university environment."
+            descAr="تابع القضايا الطلابية التي تهمك وشارك في صناعة القرارات من أجل بيئة جامعية أفضل."
+          />
+          <Container className="py-5">
             <div className="issues-single-column-container">
-                <h1 className="text-center fw-bold mb-5 text-primary">
-                    {language === 'en' ? 'Issues & Topics' : 'القضايا والموضوعات'}
-                </h1>
 
                 <div className="timeline-posts-list">
                     <div className="timeline-rail-line"></div>
@@ -168,7 +179,8 @@ const Issues = () => {
                     </div>
                 )}
             </div>
-        </Container>
+          </Container>
+        </>
     );
 };
 

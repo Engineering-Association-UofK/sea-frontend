@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useBlogs } from '../../../features/blogs/hooks/useBlogs';
 import "./News.css";
 import { useLanguage } from '../../../context/LanguageContext';
+import PageBanner from '../../../components/PageBanner';
+import newsImg from '../../../utils/images/news.jpg';
+import newsMobileImg from '../../../utils/images/newsMobile.jpg';
 
 // Card-Skeleton for main large card
 const CardSkeleton = () => (
@@ -91,10 +94,18 @@ const News = () => {
 
 
   return (
-    <Container className="py-5">
-      <h1 className="text-center fw-bold mb-5 text-primary">
-        {language == 'en' ? 'Latest News' : 'اخر الاخبار'}
-      </h1>
+    <>
+      <PageBanner
+        image={newsImg}
+        mobileImage={newsMobileImg}
+        titleEn="News"
+        titleAr="الأخبار"
+        subtitleEn="Everything new in the engineering world"
+        subtitleAr="كل جديد في عالم الهندسة"
+        descEn="Follow the latest news and updates that matter to engineering students and the activities of the Engineering Steering Association."
+        descAr="تابع آخر الأخبار والمستجدات التي تهم طالب الهندسة وأنشطة الجمعية الهندسية التسييرية."
+      />
+      <Container className="py-5">
 
       {/* The Card and the 3 thumbnails */}
       {allPosts.length > 0 && (
@@ -257,7 +268,8 @@ const News = () => {
           You've seen all the latest news
         </div>
       )}
-    </Container>
+      </Container>
+    </>
   );
 };
 

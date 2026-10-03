@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useBlogs } from '../../../features/blogs/hooks/useBlogs';
 import "./Blogs.css";
 import { useLanguage } from '../../../context/LanguageContext';
+import PageBanner from '../../../components/PageBanner';
+import articlesImg from '../../../utils/images/articles.jpg';
+import articlesMobileImg from '../../../utils/images/articlesMobile.jpg';
 
 // Card Skeleton
 const SkeletonCard = () => (
@@ -54,10 +57,18 @@ const Blogs = () => {
   }
 
   return (
-    <Container className="py-5">
-      <h1 className="text-center fw-bold mb-5 text-primary">
-        {language === 'en' ? "Blogs" : "المقالات"}
-      </h1>
+    <>
+      <PageBanner
+        image={articlesImg}
+        mobileImage={articlesMobileImg}
+        titleEn="Articles"
+        titleAr="المقالات"
+        subtitleEn="Knowledge that inspires.. and ideas that build the future"
+        subtitleAr="معرفة تُلهم .. وأفكار تبني المستقبل"
+        descEn="Read specialized engineering articles and a collection of ideas and visions that contribute to developing your engineering knowledge."
+        descAr="اقرأ مقالات هندسية متخصصة ومجموعة من الأفكار والرؤى التي تساهم في تطوير معرفتك الهندسية."
+      />
+      <Container className="py-5">
 
       <Row className="g-4">
         {allPosts.map((blog) => (
@@ -131,7 +142,8 @@ const Blogs = () => {
           {language === 'en' ? "You've reached the end" : "لقد وصلت إلى النهاية"}
         </div>
       )}
-    </Container>
+      </Container>
+    </>
   );
 };
 

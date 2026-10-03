@@ -3,6 +3,9 @@ import { Container, Row, Col, Card, Spinner, Button, Alert } from 'react-bootstr
 import { Link } from 'react-router-dom';
 import { useBlogs } from '../../../features/blogs/hooks/useBlogs';
 import { useLanguage } from '../../../context/LanguageContext';
+import PageBanner from '../../../components/PageBanner';
+import donationsImg from '../../../utils/images/donations.jpg';
+import donationsMobileImg from '../../../utils/images/donationsMobile.jpeg';
 import './Donation.css';
 
 const SkeletonCard = () => (
@@ -59,11 +62,18 @@ const Donation = () => {
     }
 
     return (
-        <Container className="py-5 donation-container">
-            <h1 className="text-center fw-bold mb-5 text-primary">
-                {language === 'en' ? 'Donations' : 'التبرعات'}
-            </h1>
-
+        <>
+          <PageBanner
+            image={donationsImg}
+            mobileImage={donationsMobileImg}
+            titleEn="Donations"
+            titleAr="التبرعات"
+            subtitleEn="With your support.. we build the future of engineering"
+            subtitleAr="بدعمك .. نبني مستقبل الهندسة"
+            descEn="Contribute to supporting the activities and programs of the Engineering Steering Association, and be a partner in developing engineers' skills and building a distinguished engineering community."
+            descAr="ساهم في دعم أنشطة وبرامج الجمعية الهندسية التسييرية وكن شريكاً في تطوير مهارات المهندسين وبناء مجتمع هندسي متميز."
+          />
+          <Container className="py-5 donation-container">
             <div className="donation-grid">
                 {allPosts.map((post) => (
                     <div key={post.slug} className="donation-card hover-card">
@@ -138,7 +148,8 @@ const Donation = () => {
                     {language === 'en' ? "You've reached the end" : 'لقد وصلت إلى النهاية'}
                 </div>
             )}
-        </Container>
+          </Container>
+        </>
     );
 };
 
