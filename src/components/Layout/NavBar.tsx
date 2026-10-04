@@ -1,15 +1,62 @@
-import React, { useState, useRef } from "react";
-import { Navbar, Nav, Container, Dropdown, Offcanvas } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Container, Dropdown, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { useLanguage } from "../context/LanguageContext";
-import { useAuth } from "../context/AuthContext";
-import { ADMIN_ROLES } from "../utils/roles";
-import UserDropdownMenu from "./Layout/UserDropdownMenu/UserDropdownMenu";
+import { useAuth } from "../../context/AuthContext";
+import { useLanguage } from "../../context/LanguageContext";
+import { ADMIN_ROLES } from "../../utils/roles";
+import NotificationBell from "./NotificationBell/NotificationBell";
+import UserDropdownMenu from "./UserDropdownMenu/UserDropdownMenu";
 
-const NavigationBar = () => {
-  const { translations, switchLanguage, language } = useLanguage();
-  const { user, logout } = useAuth();
-  const isAdmin = user?.roles?.some((r) => ADMIN_ROLES.includes(r));
+// --- Local types -----------------------------------------------------------
+
+interface NavSubItem {
+  to: string;
+  end?: boolean;
+  label: string;
+}
+
+interface NavTranslations {
+  navbar: {
+    home: string;
+    events: string;
+    admin: string;
+    brand: string;
+    login: string;
+    about: {
+      title: string;
+      association: string;
+      organizationStructure: string;
+      councilOfThirty: string;
+      elections: string;
+    };
+    posts: {
+      title: string;
+      news: string;
+      issues: string;
+      blogs: string;
+      donations: string;
+    };
+  };
+  [key: string]: unknown;
+}
+
+interface AuthUser {
+  roles?: string[];
+  [key: string]: unknown;
+}
+
+type DropdownKey = "about" | "posts" | null;
+
+const NavigationBar: React.FC = () => {
+  const { translations, switchLanguage, language } = useLanguage() as {
+    translations: NavTranslations;
+    switchLanguage: (lang: "en" | "ar") => void;
+    language: "en" | "ar";
+  };
+  const { user } = useAuth() as { user: AuthUser | null; logout: () => void };
+  const isAdmin = Boolean(
+    user?.roles?.some((r) => ADMIN_ROLES.includes(r)),
+  );
 
   // Offcanvas state
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -17,11 +64,11 @@ const NavigationBar = () => {
   const handleShow = () => setShowOffcanvas(true);
 
   // Hover timeout for desktop dropdowns
-  const timeoutRef = useRef(null);
-  const [openDropdown, setOpenDropdown] = useState(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<DropdownKey>(null);
 
-  const handleDropdownMouseEnter = (key) => {
-    clearTimeout(timeoutRef.current);
+  const handleDropdownMouseEnter = (key: DropdownKey) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setOpenDropdown(key);
   };
 
@@ -32,7 +79,11 @@ const NavigationBar = () => {
   const currentLabel = language === "en" ? "English" : "العربية";
 
   // Desktop dropdown renderer
-  const renderDesktopDropdown = (title, items, dropdownKey) => (
+  const renderDesktopDropdown = (
+    title: string,
+    items: NavSubItem[],
+    dropdownKey: DropdownKey,
+  ) => (
     <Dropdown
       show={openDropdown === dropdownKey}
       onMouseEnter={() => handleDropdownMouseEnter(dropdownKey)}
@@ -70,7 +121,10 @@ const NavigationBar = () => {
   );
 
   // Mobile collapsible section
-  const MobileCollapsibleSection = ({ title, items }) => {
+  const MobileCollapsibleSection: React.FC<{
+    title: string;
+    items: NavSubItem[];
+  }> = ({ title, items }) => {
     const [open, setOpen] = useState(false);
     return (
       <div className="w-100">
@@ -106,7 +160,7 @@ const NavigationBar = () => {
   };
 
   // Define dropdown items
-  const aboutItems = [
+  const aboutItems: NavSubItem[] = [
     {
       to: "/about/association",
       end: true,
@@ -123,7 +177,7 @@ const NavigationBar = () => {
     { to: "/about/elections", label: translations.navbar.about.elections },
   ];
 
-  const postsItems = [
+  const postsItems: NavSubItem[] = [
     { to: "/posts/news", label: translations.navbar.posts.news },
     { to: "/posts/issues", label: translations.navbar.posts.issues },
     { to: "/posts/announcements", label: translations.navbar.posts.blogs },
@@ -142,7 +196,7 @@ const NavigationBar = () => {
             }
           }
 
-          .desktop-nav .nav-link, 
+          .desktop-nav .nav-link,
           .desktop-nav .dropdown-toggle {
             color: #333 !important;
             border-bottom: 2px solid transparent;
@@ -254,9 +308,12 @@ const NavigationBar = () => {
               </Dropdown.Menu>
             </Dropdown>
 
-            <div className="d-none d-lg-block">
+            <div className="d-none d-lg-flex align-items-center gap-3">
               {user ? (
-                <UserDropdownMenu />
+                <>
+                  <NotificationBell />
+                  <UserDropdownMenu />
+                </>
               ) : (
                 <Link
                   to="/login"
@@ -331,7 +388,10 @@ const NavigationBar = () => {
 
               <div className="mt-auto pt-4 border-top">
                 {user ? (
-                  <UserDropdownMenu isMobile onItemClick={handleClose} />
+                  <>
+                    <NotificationBell isMobile onItemClick={handleClose} />
+                    <UserDropdownMenu isMobile onItemClick={handleClose} />
+                  </>
                 ) : (
                   <Link
                     to="/login"
