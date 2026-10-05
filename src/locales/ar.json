@@ -154,6 +154,10 @@
       "agricultural": "الهندسة الزراعية",
       "mining": "هندسة التعدين",
       "surveying": "هندسة المساحة"
+    },
+    "gender": {
+      "male": "ذكر",
+      "female": "أنثى"
     }
   },
   "secretariats": {
@@ -337,6 +341,7 @@
       "department": "القسم",
       "saveBtn": "حفظ التغييرات",
       "saving": "جاري الحفظ...",
+      "gender": "جِنس",
       "securityTitle": "الأمان وكلمة المرور",
       "oldPassword": "كلمة المرور القديمة",
       "newPassword": "كلمة المرور الجديدة",
@@ -349,18 +354,22 @@
       "issued": "تاريخ الإصدار",
       "downloadZip": "تحميل (ZIP)"
     },
-    "notifications": {
-      "title": "الإشعارات",
-      "markAllRead": "تحديد الكل كقروء",
-      "empty": "لا توجد إشعارات.",
-      "markAsRead": "تحديد كقروء",
-      "delete": "حذف"
+    "login": {
+      "updateUsername": "تحديث اسم المستخدم",
+      "usernameDesc": "اختر اسم مستخدم فريد. سيتم التحقق من توفر اسم المستخدم.",
+      "username": "اسم المستخدم",
+      "checking": "جاري التحقق من التوفر...",
+      "available": "متاح!",
+      "taken": "مأخوذ بالفعل أو غير صالح.",
+      "updateUsernameBtn": "تحديث اسم المستخدم",
+      "updateEmail": "تحديث البريد الإلكتروني",
+      "email": "عنوان البريد الإلكتروني",
+      "updateEmailBtn": "تحديث البريد الإلكتروني"
     },
     "tabs": {
       "info": "البيانات الشخصية والأمان",
       "certificates": "الشهادات",
-      "notifications": "الإشعارات",
-      "election": "بطاقة الانتخاب"
+      "login": "بيانات تسجيل الدخول"
     },
     "failedToLoad": "فشل في تحميل الملف الشخصي"
   }
