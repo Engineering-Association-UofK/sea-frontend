@@ -111,7 +111,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-xs font-medium text-gray-700">
-                University ID
+                {t.uniId}
               </label>
               <input
                 type="text"
