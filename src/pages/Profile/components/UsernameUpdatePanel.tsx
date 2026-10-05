@@ -6,19 +6,23 @@ import {
   useUpdateEmail,
 } from "@/features/profile/hooks/useProfile";
 import { UserProfileResponse } from "@/features/profile/api/models";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface UsernameUpdatePanelProps {
   profile: UserProfileResponse;
 }
 
 export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
+  const { translations } = useLanguage();
+  const t = translations.profile.login;
+
   const [username, setUsername] = useState(profile.username);
   const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
   const [email, setEmail] = useState(profile.email);
 
   const updateUsernameMutation = useUpdateUsername();
   const checkUsernameMutation = useCheckUsername();
-    const updateEmailMutation = useUpdateEmail();
+  const updateEmailMutation = useUpdateEmail();
 
   const isChanged = username.trim() !== "" && username !== profile.username;
 
@@ -62,18 +66,17 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      {/* Username Update Card */}
       <div className="max-w-2xl rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
         <h2 className="mb-2 flex items-center gap-2 text-lg font-semibold text-gray-900">
-          <AtSign className="h-5 w-5 text-gray-500" /> Update Username
+          <AtSign className="h-5 w-5 text-gray-500" /> {t.updateUsername}
         </h2>
-        <p className="mb-6 text-xs text-gray-500">
-          Choose a unique username. Your username will be checked for availability.
-        </p>
+        <p className="mb-6 text-xs text-gray-500">{t.usernameDesc}</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-medium text-gray-700">
-              Username
+              {t.username}
             </label>
             <div className="relative mt-1">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-sm text-gray-400">
@@ -81,8 +84,11 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
               </span>
               <input
                 type="text"
+                dir="ltr"
                 value={username}
-                onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/\s+/g, ""))}
+                onChange={(e) =>
+                  setUsername(e.target.value.toLowerCase().replace(/\s+/g, ""))
+                }
                 className="w-full rounded-md border border-gray-300 pl-7 pr-10 py-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
                 placeholder="new_username"
               />
@@ -90,12 +96,16 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
                 {checkUsernameMutation.isPending && (
                   <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
                 )}
-                {!checkUsernameMutation.isPending && isChanged && isAvailable === true && (
-                  <CheckCircle2 className="h-4 w-4 text-green-500" />
-                )}
-                {!checkUsernameMutation.isPending && isChanged && isAvailable === false && (
-                  <XCircle className="h-4 w-4 text-red-500" />
-                )}
+                {!checkUsernameMutation.isPending &&
+                  isChanged &&
+                  isAvailable === true && (
+                    <CheckCircle2 className="h-4 w-4 text-green-500" />
+                  )}
+                {!checkUsernameMutation.isPending &&
+                  isChanged &&
+                  isAvailable === false && (
+                    <XCircle className="h-4 w-4 text-red-500" />
+                  )}
               </div>
             </div>
 
@@ -103,16 +113,16 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
             {isChanged && (
               <div className="mt-2 text-xs">
                 {checkUsernameMutation.isPending && (
-                  <span className="text-gray-500">Checking availability...</span>
+                  <span className="text-gray-500">{t.checking}</span>
                 )}
                 {!checkUsernameMutation.isPending && isAvailable === true && (
                   <span className="font-medium text-green-600">
-                    @{username} is available!
+                    @{username} {t.available}
                   </span>
                 )}
                 {!checkUsernameMutation.isPending && isAvailable === false && (
                   <span className="font-medium text-red-600">
-                    @{username} is already taken or invalid.
+                    @{username} {t.taken}
                   </span>
                 )}
               </div>
@@ -129,7 +139,9 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
             }
             className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-white transition-colors disabled:cursor-not-allowed disabled:bg-gray-300"
             style={
-              isChanged && isAvailable === true && !updateUsernameMutation.isPending
+              isChanged &&
+              isAvailable === true &&
+              !updateUsernameMutation.isPending
                 ? { backgroundColor: "var(--primary-color)" }
                 : {}
             }
@@ -137,7 +149,7 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
             {updateUsernameMutation.isPending && (
               <Loader2 className="h-4 w-4 animate-spin" />
             )}
-            Update Username
+            {t.updateUsernameBtn}
           </button>
         </form>
       </div>
@@ -145,15 +157,16 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
       {/* Email Update Card */}
       <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
-          <Mail className="h-5 w-5 text-gray-500" /> Update Email
+          <Mail className="h-5 w-5 text-gray-500" /> {t.updateEmail}
         </h2>
         <form onSubmit={handleEmailSubmit} className="space-y-3">
           <div>
             <label className="block text-xs font-medium text-gray-700">
-              Email Address
+              {t.email}
             </label>
             <input
               type="email"
+              dir="ltr"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
@@ -171,7 +184,7 @@ export function UsernameUpdatePanel({ profile }: UsernameUpdatePanelProps) {
             {updateEmailMutation.isPending ? (
               <Loader2 className="mx-auto h-4 w-4 animate-spin" />
             ) : (
-              "Update Email"
+              t.updateEmailBtn
             )}
           </button>
         </form>
