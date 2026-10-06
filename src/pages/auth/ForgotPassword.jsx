@@ -14,7 +14,9 @@ import { useLanguage } from "../../context/LanguageContext";
 import { authService } from "../../features/auth/api/auth.service";
 
 const ForgotPassword = () => {
-  const { language } = useLanguage();
+  const { language, translations } = useLanguage();
+  const isAr = language === "ar";
+
   const [method, setMethod] = useState("email");
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,6 @@ const ForgotPassword = () => {
     setLoading(true);
     setError(null);
 
-    // Dynamically construct payload to ensure non-selected fields are entirely omitted
     const payload = { lang: language || "en" };
 
     if (method === "email") {
@@ -43,7 +44,9 @@ const ForgotPassword = () => {
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-          "Failed to send password reset request.",
+          (isAr
+            ? "فشل إرسال طلب إعادة تعيين كلمة المرور."
+            : "Failed to send password reset request.")
       );
     } finally {
       setLoading(false);
@@ -53,11 +56,11 @@ const ForgotPassword = () => {
   const getPlaceholder = () => {
     switch (method) {
       case "email":
-        return "e.g. student@example.com";
+        return isAr ? "مثال: student@example.com" : "e.g. student@example.com";
       case "username":
-        return "e.g. john_doe";
+        return isAr ? "مثال: john_doe" : "e.g. john_doe";
       case "user_id":
-        return "e.g. 123456";
+        return isAr ? "مثال: 123456" : "e.g. 123456";
       default:
         return "";
     }
@@ -86,7 +89,11 @@ const ForgotPassword = () => {
         `}
       </style>
 
-      <Container fluid className="px-3 px-md-4 py-3 py-md-0">
+      <Container
+        fluid
+        className="px-3 px-md-4 py-3 py-md-0"
+        dir={isAr ? "rtl" : "ltr"}
+      >
         <Row className="justify-content-center align-items-center min-vh-100">
           <Col xs={12} sm={10} md={8} lg={5} xl={4}>
             <Card className="shadow-lg login-card">
@@ -95,7 +102,8 @@ const ForgotPassword = () => {
                   className="text-center fw-bold mb-3 mb-md-4 login-title"
                   style={{ color: "#22B2E6" }}
                 >
-                  Forgot Password
+                  {translations.login?.forgotPassword ||
+                    (isAr ? "هل نسيت كلمة المرور؟" : "Forgot Password")}
                 </h2>
 
                 {error && (
@@ -111,10 +119,15 @@ const ForgotPassword = () => {
                         className="bi bi-check2-circle fs-1 d-block mb-2"
                         style={{ color: "#22B2E6" }}
                       ></i>
-                      <h6 className="fw-bold text-dark">Reset Link Sent</h6>
+                      <h6 className="fw-bold text-dark">
+                        {isAr
+                          ? "تم إرسال رابط إعادة التعيين"
+                          : "Reset Link Sent"}
+                      </h6>
                       <p className="small mb-0 text-secondary">
-                        If an account matches those details, we have sent
-                        instructions to reset your password.
+                        {isAr
+                          ? "إذا كان هناك حساب يطابق هذه البيانات، فقد أرسلنا تعليمات لإعادة تعيين كلمة المرور الخاصة بك."
+                          : "If an account matches those details, we have sent instructions to reset your password."}
                       </p>
                     </Alert>
                     <Button
@@ -122,18 +135,20 @@ const ForgotPassword = () => {
                       className="w-100 rounded-pill mt-3 py-2 fw-semibold"
                       onClick={() => setSuccess(false)}
                     >
-                      Try another method
+                      {isAr ? "جرب طريقة أخرى" : "Try another method"}
                     </Button>
                   </div>
                 ) : (
                   <Form onSubmit={handleSubmit}>
                     <p className="text-muted small text-center mb-4">
-                      Choose what you remember to find your account.
+                      {isAr
+                        ? "اختر الوسيلة التي تتذكرها للبحث عن حسابك."
+                        : "Choose what you remember to find your account."}
                     </p>
 
                     <Form.Group className="mb-3">
                       <Form.Label className="small fw-medium text-secondary">
-                        Find account via
+                        {isAr ? "البحث عن الحساب عبر" : "Find account via"}
                       </Form.Label>
                       <Form.Select
                         value={method}
@@ -143,19 +158,33 @@ const ForgotPassword = () => {
                         }}
                         className="border-light bg-light"
                       >
-                        <option value="email">Email Address</option>
-                        <option value="user_id">Index</option>
-                        <option value="username">Username</option>
+                        <option value="email">
+                          {translations.register?.email ||
+                            (isAr ? "البريد الإلكتروني" : "Email Address")}
+                        </option>
+                        <option value="user_id">
+                          {isAr ? "رقم الجلوس" : "Index"}
+                        </option>
+                        <option value="username">
+                          {translations.register?.username ||
+                            (isAr ? "اسم المستخدم" : "Username")}
+                        </option>
                       </Form.Select>
                     </Form.Group>
 
                     <Form.Group className="mb-4">
                       <Form.Label className="small fw-medium text-secondary">
                         {method === "email"
-                          ? "Enter Email"
+                          ? isAr
+                            ? "أدخل البريد الإلكتروني"
+                            : "Enter Email"
                           : method === "username"
-                            ? "Enter Username"
-                            : "Enter Index Number"}
+                            ? isAr
+                              ? "أدخل اسم المستخدم"
+                              : "Enter Username"
+                            : isAr
+                              ? "أدخل رقم الجلوس"
+                              : "Enter Index"}
                       </Form.Label>
                       <Form.Control
                         type={
@@ -181,6 +210,8 @@ const ForgotPassword = () => {
                     >
                       {loading ? (
                         <Spinner animation="border" size="sm" />
+                      ) : isAr ? (
+                        "إرسال رابط إعادة التعيين"
                       ) : (
                         "Send Reset Link"
                       )}
@@ -193,7 +224,7 @@ const ForgotPassword = () => {
                     to="/login"
                     className="text-decoration-none small text-secondary"
                   >
-                    ← Back to Login
+                    {isAr ? "العودة إلى تسجيل الدخول ←" : "← Back to Login"}
                   </Link>
                 </div>
               </Card.Body>

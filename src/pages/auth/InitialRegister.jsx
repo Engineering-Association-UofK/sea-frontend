@@ -11,8 +11,12 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useRegistration } from "../../features/auth/hooks/useRegistration";
+import { useLanguage } from "../../context/LanguageContext";
 
 const InitialRegister = () => {
+  const { language, translations } = useLanguage();
+  const isAr = language === "ar";
+
   const { submitInitial, loading, error } = useRegistration();
   const [formData, setFormData] = useState({
     userId: "",
@@ -58,7 +62,11 @@ const InitialRegister = () => {
         `}
       </style>
 
-      <Container fluid className="px-3 px-md-4 py-3 py-md-0">
+      <Container
+        fluid
+        className="px-3 px-md-4 py-3 py-md-0"
+        dir={isAr ? "rtl" : "ltr"}
+      >
         <Row className="justify-content-center align-items-center min-vh-100">
           <Col xs={12} sm={10} md={8} lg={5} xl={4}>
             <Card className="shadow-lg login-card">
@@ -67,10 +75,12 @@ const InitialRegister = () => {
                   className="text-center fw-bold mb-3 mb-md-4 login-title"
                   style={{ color: "#22B2E6" }}
                 >
-                  Student Registration
+                  {isAr ? "تسجيل الطلاب" : "Student Registration"}
                 </h2>
                 <p className="text-muted small text-center mb-4">
-                  Enter your credentials to begin account activation
+                  {isAr
+                    ? "أدخل بياناتك للبدء في تفعيل الحساب"
+                    : "Enter your credentials to begin account activation"}
                 </p>
 
                 {error && (
@@ -89,24 +99,38 @@ const InitialRegister = () => {
                       style={{ color: "#22B2E6" }}
                     ></i>
                     <h6 className="fw-bold text-dark">
-                      Verification Email Sent!
+                      {isAr
+                        ? "تم إرسال بريد التحقق!"
+                        : "Verification Email Sent!"}
                     </h6>
                     <p className="small mb-0 text-secondary">
-                      We have sent a completion link to{" "}
-                      <strong>{formData.email}</strong>. Please check your inbox
-                      to proceed.
+                      {isAr ? (
+                        <>
+                          تم إرسال رابط الإكمال إلى{" "}
+                          <strong>{formData.email}</strong>. يرجى التحقق من
+                          صندوق الوارد للمتابعة.
+                        </>
+                      ) : (
+                        <>
+                          We have sent a completion link to{" "}
+                          <strong>{formData.email}</strong>. Please check your
+                          inbox to proceed.
+                        </>
+                      )}
                     </p>
                   </Alert>
                 ) : (
                   <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
                       <Form.Label className="small fw-medium text-secondary">
-                        User ID / Student Number
+                        {isAr ? "رقم الجلوس" : "Index"}
                       </Form.Label>
                       <Form.Control
                         type="number"
                         name="userId"
-                        placeholder="e.g. 123456"
+                        placeholder={
+                          isAr ? "مثال: 123456" : "e.g. 123456"
+                        }
                         value={formData.userId}
                         onChange={handleChange}
                         required
@@ -116,12 +140,16 @@ const InitialRegister = () => {
 
                     <Form.Group className="mb-3">
                       <Form.Label className="small fw-medium text-secondary">
-                        Passcode
+                        {isAr ? "باسكود" : "Passcode"}
                       </Form.Label>
                       <Form.Control
                         type="password"
                         name="passcode"
-                        placeholder="Enter passcode provided by admin"
+                        placeholder={
+                          isAr
+                            ? "أدخل الرمز المستلم من الجمعية"
+                            : "Enter passcode provided by admin"
+                        }
                         value={formData.passcode}
                         onChange={handleChange}
                         required
@@ -131,7 +159,8 @@ const InitialRegister = () => {
 
                     <Form.Group className="mb-4">
                       <Form.Label className="small fw-medium text-secondary">
-                        Email Address
+                        {translations.register?.email ||
+                          (isAr ? "عنوان البريد الإلكتروني" : "Email Address")}
                       </Form.Label>
                       <Form.Control
                         type="email"
@@ -152,6 +181,8 @@ const InitialRegister = () => {
                     >
                       {loading ? (
                         <Spinner animation="border" size="sm" />
+                      ) : isAr ? (
+                        "تقديم"
                       ) : (
                         "Apply"
                       )}
@@ -160,14 +191,16 @@ const InitialRegister = () => {
                 )}
                 <div className="text-center mt-2">
                   <span className="text-muted small">
-                    Already have an account?{" "}
+                    {translations.register?.haveAccount ||
+                      (isAr ? "هل لديك حساب بالفعل؟" : "Already have an account?")}{" "}
                   </span>
                   <Link
                     to="/login"
                     className="fw-semibold text-decoration-none small"
                     style={{ color: "#22B2E6" }}
                   >
-                    Login
+                    {translations.login?.login ||
+                      (isAr ? "تسجيل الدخول" : "Login")}
                   </Link>
                 </div>
               </Card.Body>
