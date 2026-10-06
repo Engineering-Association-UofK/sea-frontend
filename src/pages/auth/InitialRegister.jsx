@@ -143,7 +143,7 @@ const InitialRegister = () => {
                         {isAr ? "باسكود" : "Passcode"}
                       </Form.Label>
                       <Form.Control
-                        type="password"
+                        type="text"
                         name="passcode"
                         placeholder={
                           isAr
