@@ -149,7 +149,7 @@ const InitialRegister = () => {
 
                     <Form.Group className="mb-2">
                       <Form.Label className="small fw-medium text-secondary">
-                        {isAr ? "باسكود" : "Passcode"}
+                        {isAr ? "رمز المرور" : "Passcode"}
                       </Form.Label>
                       <Form.Control
                         type="text"
