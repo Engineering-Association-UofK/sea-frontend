@@ -32,6 +32,22 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
     gender: profile.gender as Gender,
   });
 
+  const DEPARTMENT_KEYS = {
+    mechanical: translations.constants.departments.mechanical,
+    civil: translations.constants.departments.civil,
+    electrical: translations.constants.departments.electrical,
+    chemical: translations.constants.departments.chemical,
+    petroleum: translations.constants.departments.petroleum,
+    agricultural: translations.constants.departments.agricultural,
+    mining: translations.constants.departments.mining,
+    surveying: translations.constants.departments.surveying,
+  };
+
+  const GENDER_KEYS = {
+    male: translations.constants.gender.male,
+    female: translations.constants.gender.female,
+  };
+
   const [passwordData, setPasswordData] = useState({
     old_password: "",
     new_password: "",
@@ -58,6 +74,7 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      {/* Main Profile Info Form */}
       <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm lg:col-span-2">
         <h2 className="mb-4 text-lg font-semibold text-gray-900">{t.title}</h2>
         <form onSubmit={handleProfileSubmit} className="space-y-4">
@@ -94,6 +111,19 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-xs font-medium text-gray-700">
+                {t.uniId}
+              </label>
+              <input
+                type="text"
+                value={formData.uni_id}
+                onChange={(e) =>
+                  setFormData({ ...formData, uni_id: e.target.value })
+                }
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700">
                 {t.phone}
               </label>
               <input
@@ -105,6 +135,9 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
                 className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
               />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-xs font-medium text-gray-700">
                 {t.department}
@@ -121,9 +154,28 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
               >
                 {Object.values(Department).map((dept) => (
                   <option key={dept} value={dept}>
-                    {dept.charAt(0).toUpperCase() + dept.slice(1)}
+                      {DEPARTMENT_KEYS[dept]}
                   </option>
+
                 ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.gender}
+              </label>
+              <select
+                value={formData.gender}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    gender: e.target.value as Gender,
+                  })
+                }
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
+              >
+                <option value={Gender.Male}>{GENDER_KEYS.male}</option>
+                <option value={Gender.Female}>{GENDER_KEYS.female}</option>
               </select>
             </div>
           </div>
@@ -142,71 +194,75 @@ export function PersonalInfoPanel({ profile }: PersonalInfoPanelProps) {
         </form>
       </div>
 
-      <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
-          <Key className="h-5 w-5 text-gray-500" /> {t.securityTitle}
-        </h2>
-        <form onSubmit={handlePasswordSubmit} className="space-y-3">
-          <div>
-            <label className="block text-xs font-medium text-gray-700">
-              {t.oldPassword}
-            </label>
-            <input
-              type="password"
-              value={passwordData.old_password}
-              onChange={(e) =>
-                setPasswordData({
-                  ...passwordData,
-                  old_password: e.target.value,
-                })
-              }
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700">
-              {t.newPassword}
-            </label>
-            <input
-              type="password"
-              value={passwordData.new_password}
-              onChange={(e) =>
-                setPasswordData({
-                  ...passwordData,
-                  new_password: e.target.value,
-                })
-              }
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700">
-              {t.confirmPassword}
-            </label>
-            <input
-              type="password"
-              value={passwordData.confirm_password}
-              onChange={(e) =>
-                setPasswordData({
-                  ...passwordData,
-                  confirm_password: e.target.value,
-                })
-              }
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={updatePasswordMutation.isPending}
-            className="w-full rounded-md bg-gray-900 py-2 text-sm font-medium text-white hover:bg-black"
-          >
-            {updatePasswordMutation.isPending ? (
-              <Loader2 className="mx-auto h-4 w-4 animate-spin" />
-            ) : (
-              t.updatePasswordBtn
-            )}
-          </button>
-        </form>
+      {/* Side Column: Security */}
+      <div className="space-y-6">
+        {/* Security / Password Update Card */}
+        <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
+            <Key className="h-5 w-5 text-gray-500" /> {t.securityTitle}
+          </h2>
+          <form onSubmit={handlePasswordSubmit} className="space-y-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.oldPassword}
+              </label>
+              <input
+                type="password"
+                value={passwordData.old_password}
+                onChange={(e) =>
+                  setPasswordData({
+                    ...passwordData,
+                    old_password: e.target.value,
+                  })
+                }
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.newPassword}
+              </label>
+              <input
+                type="password"
+                value={passwordData.new_password}
+                onChange={(e) =>
+                  setPasswordData({
+                    ...passwordData,
+                    new_password: e.target.value,
+                  })
+                }
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700">
+                {t.confirmPassword}
+              </label>
+              <input
+                type="password"
+                value={passwordData.confirm_password}
+                onChange={(e) =>
+                  setPasswordData({
+                    ...passwordData,
+                    confirm_password: e.target.value,
+                  })
+                }
+                className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-[var(--primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/20"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={updatePasswordMutation.isPending}
+              className="w-full rounded-md bg-gray-900 py-2 text-sm font-medium text-white hover:bg-black"
+            >
+              {updatePasswordMutation.isPending ? (
+                <Loader2 className="mx-auto h-4 w-4 animate-spin" />
+              ) : (
+                t.updatePasswordBtn
+              )}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

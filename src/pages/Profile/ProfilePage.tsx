@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, Award, Bell, Ticket, Loader2, ChevronDown } from "lucide-react";
+import { User, Award, AtSign, Loader2, ChevronDown } from "lucide-react";
 import { Alert } from "react-bootstrap";
 import { useProfile } from "@/features/profile/hooks/useProfile";
 import { useLanguage } from "@/context/LanguageContext";
@@ -7,8 +7,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ProfileHeader } from "./components/ProfileHeader";
 import { TabButton, TabType } from "./components/TabButton";
 import { PersonalInfoPanel } from "./components/PersonalInfoPanel";
+import { UsernameUpdatePanel } from "./components/UsernameUpdatePanel";
 import { CertificatesPanel } from "./components/CertificatesPanel";
-import { NotificationsPanel } from "./components/NotificationsPanel";
 
 export function ProfilePage() {
   const { translations } = useLanguage();
@@ -20,14 +20,14 @@ export function ProfilePage() {
   const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: "info", label: t.tabs.info, icon: <User className="h-4 w-4" /> },
     {
+      id: "username",
+      label: t.tabs.login,
+      icon: <AtSign className="h-4 w-4" />,
+    },
+    {
       id: "certificates",
       label: t.tabs.certificates,
       icon: <Award className="h-4 w-4" />,
-    },
-    {
-      id: "notifications",
-      label: t.tabs.notifications,
-      icon: <Bell className="h-4 w-4" />,
     },
   ];
 
@@ -50,12 +50,11 @@ export function ProfilePage() {
   }
 
   return (
-    /* Full Viewport Minimum Height Wrapper */
     <div className="mx-auto flex min-h-screen max-w-6xl flex-col space-y-6 p-6">
       {/* Profile Header Summary */}
       <ProfileHeader profile={profile} />
 
-      {/* Styled Mobile Selector Box (Screens < sm) */}
+      {/* Styled Mobile Selector Box */}
       <div className="sm:hidden">
         <div className="relative flex items-center justify-between rounded-xl border border-gray-200 bg-white p-2.5 shadow-sm transition-all focus-within:border-[var(--primary-color)] focus-within:ring-2 focus-within:ring-[var(--primary-color)]/20 active:bg-gray-50">
           <div className="flex items-center gap-3 min-w-0">
@@ -91,7 +90,7 @@ export function ProfilePage() {
         </div>
       </div>
 
-      {/* Desktop Horizontal Tabs (Screens >= sm) */}
+      {/* Desktop Horizontal Tabs */}
       <div className="hidden border-b border-gray-200 sm:flex">
         {tabs.map((tab) => (
           <TabButton
@@ -105,11 +104,11 @@ export function ProfilePage() {
         ))}
       </div>
 
-      {/* Tab Panels with Smooth Height Relaxation & Full-Height Flex Fill */}
+      {/* Tab Content Panels */}
       <div className="min-h-[700px] flex-1 pt-2 transition-all duration-500 ease-in-out">
         {activeTab === "info" && <PersonalInfoPanel profile={profile} />}
+        {activeTab === "username" && <UsernameUpdatePanel profile={profile} />}
         {activeTab === "certificates" && <CertificatesPanel />}
-        {activeTab === "notifications" && <NotificationsPanel />}
       </div>
     </div>
   );

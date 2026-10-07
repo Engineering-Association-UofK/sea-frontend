@@ -11,8 +11,12 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useRegistration } from "../../features/auth/hooks/useRegistration";
+import { useLanguage } from "../../context/LanguageContext";
 
 const InitialRegister = () => {
+  const { language, translations } = useLanguage();
+  const isAr = language === "ar";
+
   const { submitInitial, loading, error } = useRegistration();
   const [formData, setFormData] = useState({
     userId: "",
@@ -20,6 +24,7 @@ const InitialRegister = () => {
     email: "",
   });
   const [successSent, setSuccessSent] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,6 +39,16 @@ const InitialRegister = () => {
       // Error handled by hook
     }
   };
+
+  const whatsappMessage = `طلب كود لإنشاء حساب بالموقع الرسمي للجمعية.
+
+الإسم:
+رقم الجلوس:
+القسم:`;
+
+  const whatsappLink = `https://wa.me/+249963167780?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
 
   return (
     <>
@@ -58,7 +73,11 @@ const InitialRegister = () => {
         `}
       </style>
 
-      <Container fluid className="px-3 px-md-4 py-3 py-md-0">
+      <Container
+        fluid
+        className="px-3 px-md-4 py-3 py-md-0"
+        dir={isAr ? "rtl" : "ltr"}
+      >
         <Row className="justify-content-center align-items-center min-vh-100">
           <Col xs={12} sm={10} md={8} lg={5} xl={4}>
             <Card className="shadow-lg login-card">
@@ -67,10 +86,12 @@ const InitialRegister = () => {
                   className="text-center fw-bold mb-3 mb-md-4 login-title"
                   style={{ color: "#22B2E6" }}
                 >
-                  Student Registration
+                  {isAr ? "تسجيل الطلاب" : "Student Registration"}
                 </h2>
                 <p className="text-muted small text-center mb-4">
-                  Enter your credentials to begin account activation
+                  {isAr
+                    ? "أدخل بياناتك للبدء في تفعيل الحساب"
+                    : "Enter your credentials to begin account activation"}
                 </p>
 
                 {error && (
@@ -89,24 +110,36 @@ const InitialRegister = () => {
                       style={{ color: "#22B2E6" }}
                     ></i>
                     <h6 className="fw-bold text-dark">
-                      Verification Email Sent!
+                      {isAr
+                        ? "تم إرسال بريد التحقق!"
+                        : "Verification Email Sent!"}
                     </h6>
                     <p className="small mb-0 text-secondary">
-                      We have sent a completion link to{" "}
-                      <strong>{formData.email}</strong>. Please check your inbox
-                      to proceed.
+                      {isAr ? (
+                        <>
+                          تم إرسال رابط الإكمال إلى{" "}
+                          <strong>{formData.email}</strong>. يرجى التحقق من
+                          صندوق الوارد للمتابعة.
+                        </>
+                      ) : (
+                        <>
+                          We have sent a completion link to{" "}
+                          <strong>{formData.email}</strong>. Please check your
+                          inbox to proceed.
+                        </>
+                      )}
                     </p>
                   </Alert>
                 ) : (
                   <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
                       <Form.Label className="small fw-medium text-secondary">
-                        User ID / Student Number
+                        {isAr ? "رقم الجلوس" : "Index"}
                       </Form.Label>
                       <Form.Control
                         type="number"
                         name="userId"
-                        placeholder="e.g. 123456"
+                        placeholder={isAr ? "مثال: 123456" : "e.g. 123456"}
                         value={formData.userId}
                         onChange={handleChange}
                         required
@@ -114,14 +147,18 @@ const InitialRegister = () => {
                       />
                     </Form.Group>
 
-                    <Form.Group className="mb-3">
+                    <Form.Group className="mb-2">
                       <Form.Label className="small fw-medium text-secondary">
-                        Passcode
+                        {isAr ? "رمز المرور" : "Passcode"}
                       </Form.Label>
                       <Form.Control
-                        type="password"
+                        type="text"
                         name="passcode"
-                        placeholder="Enter passcode provided by admin"
+                        placeholder={
+                          isAr
+                            ? "أدخل الرمز المستلم من الجمعية"
+                            : "Enter passcode provided by admin"
+                        }
                         value={formData.passcode}
                         onChange={handleChange}
                         required
@@ -129,9 +166,62 @@ const InitialRegister = () => {
                       />
                     </Form.Group>
 
+                    {/* Notice Toggle Button & Collapsible Alert */}
+                    <div className="mb-4">
+                      <Button
+                        variant="link"
+                        className="p-0 text-decoration-none small"
+                        onClick={() => setShowNotice(!showNotice)}
+                        style={{ color: "#22B2E6", fontSize: "0.85rem" }}
+                      >
+                        <i className="bi bi-info-circle me-1"></i>
+                        {translations.register.initial.howToGetPasscode}
+                      </Button>
+
+                      {showNotice && (
+                        <Alert
+                          variant="info"
+                          className="mt-2 mb-0 p-3 small border-0 shadow-sm"
+                          dir={isAr ? "rtl" : "ltr"}
+                          style={{ textAlign: isAr ? "right" : "left" }}
+                        >
+                          <h6 className="fw-bold mb-2">
+                            {translations.register.initial.noticeTitle}
+                          </h6>
+                          <ol
+                            className="mb-3"
+                            style={{
+                              paddingInlineStart: "1.25rem",
+                              paddingInlineEnd: 0,
+                            }}
+                          >
+                            <li className="mb-1">1. {translations.register.initial.step1}</li>
+                            <li className="mb-1">2. {translations.register.initial.step2}</li>
+                            <li className="mb-1">3. {translations.register.initial.step3}</li>
+                            <li className="mb-1">4. {translations.register.initial.step4}</li>
+                          </ol>
+                          <Button
+                            variant="success"
+                            href={whatsappLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-100 fw-bold d-flex align-items-center justify-content-center gap-2"
+                            style={{
+                              backgroundColor: "#25D366",
+                              borderColor: "#25D366",
+                            }}
+                          >
+                            <i className="bi bi-whatsapp fs-5"></i>
+                            <span>طلب الكود عبر واتساب</span>
+                          </Button>
+                        </Alert>
+                      )}
+                    </div>
+
                     <Form.Group className="mb-4">
                       <Form.Label className="small fw-medium text-secondary">
-                        Email Address
+                        {translations.register?.email ||
+                          (isAr ? "عنوان البريد الإلكتروني" : "Email Address")}
                       </Form.Label>
                       <Form.Control
                         type="email"
@@ -152,22 +242,28 @@ const InitialRegister = () => {
                     >
                       {loading ? (
                         <Spinner animation="border" size="sm" />
+                      ) : isAr ? (
+                        "تقديم"
                       ) : (
                         "Apply"
                       )}
                     </Button>
                   </Form>
                 )}
-                <div className="text-center mt-2">
+                <div className="text-center mt-3">
                   <span className="text-muted small">
-                    Already have an account?{" "}
+                    {translations.register?.haveAccount ||
+                      (isAr
+                        ? "هل لديك حساب بالفعل؟"
+                        : "Already have an account?")}{" "}
                   </span>
                   <Link
                     to="/login"
                     className="fw-semibold text-decoration-none small"
                     style={{ color: "#22B2E6" }}
                   >
-                    Login
+                    {translations.login?.login ||
+                      (isAr ? "تسجيل الدخول" : "Login")}
                   </Link>
                 </div>
               </Card.Body>

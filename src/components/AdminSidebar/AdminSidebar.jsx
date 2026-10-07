@@ -16,7 +16,7 @@ const AdminSidebar = ({ onNavigate }) => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/admin/dashboard"
+              to="/admin/"
               className="nav-link text-dark rounded-3"
               onClick={handleLinkClick}
             >
