@@ -24,6 +24,7 @@ const InitialRegister = () => {
     email: "",
   });
   const [successSent, setSuccessSent] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,6 +39,16 @@ const InitialRegister = () => {
       // Error handled by hook
     }
   };
+
+  const whatsappMessage = `طلب كود لإنشاء حساب بالموقع الرسمي للجمعية.
+
+الإسم:
+رقم الجلوس:
+القسم:`;
+
+  const whatsappLink = `https://wa.me/+249963167780?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
 
   return (
     <>
@@ -128,9 +139,7 @@ const InitialRegister = () => {
                       <Form.Control
                         type="number"
                         name="userId"
-                        placeholder={
-                          isAr ? "مثال: 123456" : "e.g. 123456"
-                        }
+                        placeholder={isAr ? "مثال: 123456" : "e.g. 123456"}
                         value={formData.userId}
                         onChange={handleChange}
                         required
@@ -138,7 +147,7 @@ const InitialRegister = () => {
                       />
                     </Form.Group>
 
-                    <Form.Group className="mb-3">
+                    <Form.Group className="mb-2">
                       <Form.Label className="small fw-medium text-secondary">
                         {isAr ? "باسكود" : "Passcode"}
                       </Form.Label>
@@ -156,6 +165,58 @@ const InitialRegister = () => {
                         className="border-light bg-light"
                       />
                     </Form.Group>
+
+                    {/* Notice Toggle Button & Collapsible Alert */}
+                    <div className="mb-4">
+                      <Button
+                        variant="link"
+                        className="p-0 text-decoration-none small"
+                        onClick={() => setShowNotice(!showNotice)}
+                        style={{ color: "#22B2E6", fontSize: "0.85rem" }}
+                      >
+                        <i className="bi bi-info-circle me-1"></i>
+                        {translations.register.initial.howToGetPasscode}
+                      </Button>
+
+                      {showNotice && (
+                        <Alert
+                          variant="info"
+                          className="mt-2 mb-0 p-3 small border-0 shadow-sm"
+                          dir={isAr ? "rtl" : "ltr"}
+                          style={{ textAlign: isAr ? "right" : "left" }}
+                        >
+                          <h6 className="fw-bold mb-2">
+                            {translations.register.initial.noticeTitle}
+                          </h6>
+                          <ol
+                            className="mb-3"
+                            style={{
+                              paddingInlineStart: "1.25rem",
+                              paddingInlineEnd: 0,
+                            }}
+                          >
+                            <li className="mb-1">1. {translations.register.initial.step1}</li>
+                            <li className="mb-1">2. {translations.register.initial.step2}</li>
+                            <li className="mb-1">3. {translations.register.initial.step3}</li>
+                            <li className="mb-1">4. {translations.register.initial.step4}</li>
+                          </ol>
+                          <Button
+                            variant="success"
+                            href={whatsappLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-100 fw-bold d-flex align-items-center justify-content-center gap-2"
+                            style={{
+                              backgroundColor: "#25D366",
+                              borderColor: "#25D366",
+                            }}
+                          >
+                            <i className="bi bi-whatsapp fs-5"></i>
+                            <span>طلب الكود عبر واتساب</span>
+                          </Button>
+                        </Alert>
+                      )}
+                    </div>
 
                     <Form.Group className="mb-4">
                       <Form.Label className="small fw-medium text-secondary">
@@ -189,10 +250,12 @@ const InitialRegister = () => {
                     </Button>
                   </Form>
                 )}
-                <div className="text-center mt-2">
+                <div className="text-center mt-3">
                   <span className="text-muted small">
                     {translations.register?.haveAccount ||
-                      (isAr ? "هل لديك حساب بالفعل؟" : "Already have an account?")}{" "}
+                      (isAr
+                        ? "هل لديك حساب بالفعل؟"
+                        : "Already have an account?")}{" "}
                   </span>
                   <Link
                     to="/login"

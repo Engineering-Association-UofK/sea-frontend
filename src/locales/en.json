@@ -96,8 +96,17 @@
     "error": "Login failed. Please check your username and password."
   },
   "register": {
+    "initial": {
+      "howToGetPasscode": "How to get a passcode?",
+      "noticeTitle": "Steps to get your passcode:\n",
+      "step1": "You must be an engineering student at the University of Khartoum (UofK).",
+      "step2": "Prepare identifying documents (University card is preferred, or another ID if unavailable).",
+      "step3": "Click the WhatsApp button below to send a pre-prepared message to the association's number. Fill in your details before sending, then attach your documents.",
+      "step4": "Managers will reply with your passcode if there are no complications."
+    },
     "title": "Create a New Account",
     "username": "Username",
+
     "email": "Email Address",
     "emailExample": "name@example.com",
     "password": "Password",
