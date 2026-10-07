@@ -62,6 +62,8 @@ import ElectionsAbout from "./pages/About/elections/ElectionsAbout.jsx";
 import ElectionTicketPage from "./pages/Profile/ElectionTicketPage.tsx";
 import PublicEventsPage from "./pages/Events/PublicEventsPage.tsx";
 import EventsControlCenter from "./pages/Admin/Events/EventsControlCenter.tsx";
+import NotificationsAdminPage from "./pages/Admin/notifications/NotificationsAdminPage.tsx";
+import { Role } from "./features/auth/api/models.ts";
 
 ReactGA.initialize("G-S8J4CN53DH");
 
@@ -159,7 +161,7 @@ function App() {
                 <Route
                   path="posts"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:blog_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentBlogMgr]}>
                       <PostsDashboard />
                     </AdminRoleGuard>
                   }
@@ -167,7 +169,7 @@ function App() {
                 <Route
                   path="posts/:id"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:blog_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentBlogMgr]}>
                       <PostsEntry />
                     </AdminRoleGuard>
                   }
@@ -177,7 +179,7 @@ function App() {
                 <Route
                   path="image-storage"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:editor"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentEditor]}>
                       <ImageStorageDashboard />
                     </AdminRoleGuard>
                   }
@@ -187,7 +189,7 @@ function App() {
                 <Route
                   path="events"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:event_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentEventMgr]}>
                       <EventsControlCenter />
                     </AdminRoleGuard>
                   }
@@ -205,7 +207,7 @@ function App() {
                 <Route
                   path="forms"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:form_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
                       <FormsDashboard />
                     </AdminRoleGuard>
                   }
@@ -213,7 +215,7 @@ function App() {
                 <Route
                   path="forms/create"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:form_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
                       <FormEntry />
                     </AdminRoleGuard>
                   }
@@ -221,7 +223,7 @@ function App() {
                 <Route
                   path="forms/edit/:id"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:form_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
                       <FormEntry />
                     </AdminRoleGuard>
                   }
@@ -229,7 +231,7 @@ function App() {
                 <Route
                   path="forms/analysis"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:form_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
                       <AnalysisGallery />
                     </AdminRoleGuard>
                   }
@@ -237,7 +239,7 @@ function App() {
                 <Route
                   path="forms/analysis/:id"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:form_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
                       <FormAnalysisView />
                     </AdminRoleGuard>
                   }
@@ -247,7 +249,7 @@ function App() {
                 <Route
                   path="bot"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:editor"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentEditor]}>
                       <AdminBotEditor />
                     </AdminRoleGuard>
                   }
@@ -257,7 +259,7 @@ function App() {
                 <Route
                   path="admin-users"
                   element={
-                    <AdminRoleGuard allowedRoles={["sys:admin_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.SystemAdminManager]}>
                       <AdminUsersDashboard />
                     </AdminRoleGuard>
                   }
@@ -265,7 +267,7 @@ function App() {
                 <Route
                   path="admin-users/:id"
                   element={
-                    <AdminRoleGuard allowedRoles={["sys:admin_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.SystemAdminManager]}>
                       <AdminUsersEntry />
                     </AdminRoleGuard>
                   }
@@ -275,7 +277,7 @@ function App() {
                 <Route
                   path="users"
                   element={
-                    <AdminRoleGuard allowedRoles={["sys:user_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
                       <UsersDashboard />
                     </AdminRoleGuard>
                   }
@@ -283,7 +285,7 @@ function App() {
                 <Route
                   path="users/:id"
                   element={
-                    <AdminRoleGuard allowedRoles={["sys:user_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
                       <UsersEntry />
                     </AdminRoleGuard>
                   }
@@ -293,7 +295,7 @@ function App() {
                 <Route
                   path="teams"
                   element={
-                    <AdminRoleGuard allowedRoles={["content:editor"]}>
+                    <AdminRoleGuard allowedRoles={[Role.ContentEditor]}>
                       <TeamsDashboard />
                     </AdminRoleGuard>
                   }
@@ -303,7 +305,7 @@ function App() {
                 <Route
                   path="passcode"
                   element={
-                    <AdminRoleGuard allowedRoles={["sys:user_manager"]}>
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
                       <PasscodeLookup />
                     </AdminRoleGuard>
                   }
@@ -315,6 +317,16 @@ function App() {
                   element={
                     <AdminRoleGuard allowedRoles={[]}>
                       <ElectionAdminPage />
+                    </AdminRoleGuard>
+                  }
+                />
+
+                {/* Election */}
+                <Route
+                  path="notifications"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
+                      <NotificationsAdminPage />
                     </AdminRoleGuard>
                   }
                 />
