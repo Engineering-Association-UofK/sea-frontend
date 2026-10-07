@@ -28,7 +28,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
   const handleLogout = () => {
     logout();
     if (onItemClick) onItemClick();
-    navigate("/login");
+    navigate("/");
   };
 
   const avatarSrc = summary?.profile_pic || "/default-avatar.png";
