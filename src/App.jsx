@@ -55,6 +55,10 @@ import RegistrationFlow from "./pages/auth/RegistrationFlow.jsx";
 import LoginForm from "./pages/auth/LoginForm.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 
+import CertificatesDashboard from "./pages/Admin/Certificates/CertificatesDashboard.jsx";
+import CertificatesEntry from "./pages/Admin/Certificates/CertificatesEntry.jsx";
+import TemplatesDashboard from "./pages/Admin/Certificate Templates/TemplatesDashboard.jsx";
+import TemplatesEntry from "./pages/Admin/Certificate Templates/TemplatesEntry.jsx";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga4";
 import ElectionAdminPage from "./pages/Admin/election/ElectionAdminPage.jsx";
@@ -302,6 +306,15 @@ function App() {
                 />
 
                 {/* USERS: Passcode lookup */}
+                
+                {/* Certificates Management: Certificates */}
+                <Route path="certificates" element={<AdminRoleGuard allowedRoles={["cert:certifier", "cert:manager", "cert:viewer"]}><CertificatesDashboard /></AdminRoleGuard>} />
+                <Route path="certificates/:id" element={<AdminRoleGuard allowedRoles={["cert:certifier", "cert:manager", "cert:viewer"]}><CertificatesEntry /></AdminRoleGuard>} />
+                
+                {/* Certificates Management: Certificate Templates */}
+                <Route path="certificate-templates" element={<AdminRoleGuard allowedRoles={["cert:certifier", "cert:manager", "cert:viewer"]}><TemplatesDashboard /></AdminRoleGuard>} />
+                <Route path="certificate-templates/:id" element={<AdminRoleGuard allowedRoles={["cert:certifier", "cert:manager", "cert:viewer"]}><TemplatesEntry /></AdminRoleGuard>} />
+                
                 <Route
                   path="passcode"
                   element={
