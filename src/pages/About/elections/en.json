@@ -1,0 +1,77 @@
+{
+  "hero": {
+    "title": "Elections Process",
+    "subtitle": "Legitimacy of Representation and Student Will",
+    "description": "The electoral process within the Engineering Association serves as the fundamental pillar of democratic representation and student legitimacy. Through direct and free voting, students across all departments and batches elect their representatives for the Thirty Council and Executive Committee to lead union, academic, and service initiatives."
+  },
+  "whyItMattersTitle": "Why Elections Matter",
+  "whyItMatters": [
+    {
+      "title": "Protecting Student Rights",
+      "icon": "bi bi-shield-check",
+      "text": "Elections ensure the selection of dedicated representatives capable of negotiating with administration to safeguard students' academic and service rights."
+    },
+    {
+      "title": "Expressing Free Will",
+      "icon": "bi bi-check2-square",
+      "text": "Provides every male and female student an equal opportunity to shape the association's vision and select competent candidates."
+    },
+    {
+      "title": "Accountability & Transparency",
+      "icon": "bi bi-eye",
+      "text": "Fosters a culture of transparency where each council presents clear financial and operational reports to the General Assembly."
+    },
+    {
+      "title": "Institutional Continuity",
+      "icon": "bi bi-diagram-3",
+      "text": "Guarantees smooth and democratic transitions of leadership, maintaining stable and continuous development across successive batches."
+    }
+  ],
+  "processTitle": "How Does the Process Work?",
+  "processSteps": [
+    {
+      "step": "01",
+      "title": "Electoral Committee Setup",
+      "icon": "bi bi-person-gear",
+      "description": "The General Assembly appoints an independent, neutral elections committee to oversee regulations, procedures, and integrity."
+    },
+    {
+      "step": "02",
+      "title": "Nominations & Appeals",
+      "icon": "bi bi-file-earmark-person",
+      "description": "Nominations for the 30 Council seats open under established guidelines, followed by a review and appeal window."
+    },
+    {
+      "step": "03",
+      "title": "Campaigns & Debates",
+      "icon": "bi bi-megaphone",
+      "description": "Candidates and lists present their action plans, reform visions, and electoral programs through open student forums and debates."
+    },
+    {
+      "step": "04",
+      "title": "Direct Voting & Counting",
+      "icon": "bi bi-box-seam",
+      "description": "Students cast their votes through direct ballot boxes or secure online voting. Votes are counted transparently in the presence of candidate agents."
+    },
+    {
+      "step": "05",
+      "title": "Results & Council Formation",
+      "icon": "bi bi-trophy",
+      "description": "The independent committee announces official results. The newly elected council convenes to form the Executive Committee and begin the new term."
+    }
+  ],
+  "resultsSection": {
+    "title": "Past Election Results Archive",
+    "subtitle": "Select or enter a cycle number below to look up official historical election results and statistics.",
+    "inputPlaceholder": "Enter cycle number (e.g. 1)...",
+    "searchButton": "View Results",
+    "quickSelectLabel": "Quick Select:",
+    "votesCount": "votes",
+    "rankLabel": "Rank",
+    "noResultsTitle": "No Results Found for This Cycle",
+    "noResultsText": "Please make sure to enter a valid cycle number to view archive records.",
+    "loading": "Fetching election results...",
+    "stayTunedTitle": "Stay Tuned",
+    "stayTunedText": "Results data is currently being collected and processed. This feature will be active soon."
+  }
+}

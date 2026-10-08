@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Spinner } from 'react-bootstrap';
-import ApplicationForm from './ApplicationForm';
-import { endpoints, authFetch } from '../../config/api';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Spinner } from "react-bootstrap";
+import ApplicationForm from "./ApplicationForm";
+import { endpoints, authFetch } from "../../config/api";
 
 const ApplicationView = () => {
   const { formId } = useParams();
@@ -45,40 +45,37 @@ const ApplicationView = () => {
         //   }))
         // };
         const reshapedSchema = {
-  id: form.id,
-  title: form.title,
-  description: form.description,
-  pages: pages.map((page) => ({
-    id: page.id,
-    title: `Step ${page.page_num}`,
-    fields: questions
-      .filter(q => q.form_page_id === page.id)
-      .sort((a, b) => a.display_order - b.display_order)
-      .map(q => ({
-        id: q.id,
-        label: q.question_text,
-        type: mapBackendType(q.type),
-        subType: mapSubType(q.type),
-        isRequired: q.is_required,
-        options: (() => {
-          if (!q.options) return [];
-          if (q.type === 'NUMBER') return q.options; // { min, max }
-          if (Array.isArray(q.options)) return q.options; // ["opt1", "opt2"]
-          return [];
-        })()
-      }))
-  }))
-};
+          id: form.id,
+          title: form.title,
+          description: form.description,
+          pages: pages.map((page) => ({
+            id: page.id,
+            title: `Step ${page.page_num}`,
+            fields: questions
+              .filter((q) => q.form_page_id === page.id)
+              .sort((a, b) => a.display_order - b.display_order)
+              .map((q) => ({
+                id: q.id,
+                label: q.question_text,
+                type: mapBackendType(q.type),
+                subType: mapSubType(q.type),
+                isRequired: q.is_required,
+                options: (() => {
+                  if (!q.options) return [];
+                  if (q.type === "NUMBER") return q.options; // { min, max }
+                  if (Array.isArray(q.options)) return q.options; // ["opt1", "opt2"]
+                  return [];
+                })(),
+              })),
+          })),
+        };
 
-console.log("Reshaped schema:", JSON.stringify(reshapedSchema));
-setSchema(reshapedSchema);
-
-        
-
+        console.log("Reshaped schema:", JSON.stringify(reshapedSchema));
+        setSchema(reshapedSchema);
       } catch (err) {
         console.error("Fetch error:", err);
         alert("Could not load the form.");
-        navigate('/forms');
+        navigate("/forms");
       } finally {
         setLoading(false);
       }
@@ -105,37 +102,39 @@ setSchema(reshapedSchema);
   //   if (backendType === 'NUMBER') return 'number';
   //   return 'short';
   // };
-const mapBackendType = (backendType) => {
-  const map = {
-    'TEXT': 'text',
-    'PARAGRAPH': 'text',
-    'NUMBER': 'number',
-    'RADIO': 'choice',
-    'CHECKBOX': 'choice',
-    'DROPDOWN': 'choice',
+  const mapBackendType = (backendType) => {
+    const map = {
+      TEXT: "text",
+      PARAGRAPH: "text",
+      NUMBER: "number",
+      RADIO: "choice",
+      CHECKBOX: "choice",
+      DROPDOWN: "choice",
+    };
+    return map[backendType] || "text";
   };
-  return map[backendType] || 'text';
-};
 
-const mapSubType = (backendType) => {
-  if (backendType === 'PARAGRAPH') return 'long';
-  if (backendType === 'NUMBER') return 'number';
-  if (backendType === 'RADIO') return 'RADIO';
-  if (backendType === 'CHECKBOX') return 'CHECKBOX';
-  if (backendType === 'DROPDOWN') return 'DROPDOWN';
-  return 'short';
-};
-  if (loading) return (
-    <Container className="text-center py-5">
-      <Spinner animation="border" variant="primary" />
-    </Container>
-  );
+  const mapSubType = (backendType) => {
+    if (backendType === "PARAGRAPH") return "long";
+    if (backendType === "NUMBER") return "number";
+    if (backendType === "RADIO") return "RADIO";
+    if (backendType === "CHECKBOX") return "CHECKBOX";
+    if (backendType === "DROPDOWN") return "DROPDOWN";
+    return "short";
+  };
+  if (loading)
+    return (
+      <Container className="text-center py-5">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
 
-  if (!schema) return (
-    <Container className="text-center py-5">
-      <p className="text-muted">Form not found.</p>
-    </Container>
-  );
+  if (!schema)
+    return (
+      <Container className="text-center py-5">
+        <p className="text-muted">Form not found.</p>
+      </Container>
+    );
 
   return (
     <div className="bg-light min-vh-100">

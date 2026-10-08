@@ -1,5 +1,7 @@
 .hover-card {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .hover-card:hover {
@@ -39,7 +41,7 @@ div.col-8 {
 
 .card-body .btn,
 .card-body div.text-muted.small.mb-3 {
-  margin-bottom: 0.0rem !important;
+  margin-bottom: 0rem !important;
 }
 
 @media (max-width: 1000px) {
@@ -51,7 +53,6 @@ div.col-8 {
 }
 
 @media (max-width: 750px) {
-
   .row:not(:first-child) .hover-card.card,
   .mt-5 .hover-card.card,
   .d-flex.flex-column.gap-3 .hover-card.card {
@@ -121,11 +122,11 @@ div.col-8 {
 
 @media (max-width: 400px) {
   .card-body {
-    padding: 0.0rem 0;
+    padding: 0rem 0;
   }
 
   .card-title {
-    font-size: 1.0rem !important;
+    font-size: 1rem !important;
     margin-bottom: 0.3rem;
   }
 

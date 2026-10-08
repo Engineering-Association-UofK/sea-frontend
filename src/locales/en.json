@@ -1,263 +1,382 @@
 {
-    "navbar": {
-        "brand": "Steering Engineering Association",
-        "home": "Home",
-        "about": "About Us",
-        "forms": "Forms",
-        "association": "The Association",
-        "organizationStructure": "Organizational Structure",
-        "councilOfThirty": "Council of Thirty",
-        "initiatives": "Initiatives",
-        "blogs": "Topics",
-        "events": "Events",
-        "posts": {
-            "news": "News",
-            "issues": "Issues",
-            "blogs": "Blog",
-            "donations": "Donations"
-        },
-        "admin": "Admin",
-        "login": "Login",
-        "logout": "Logout",
-        "language": "العربية",
-        "userMenu": {
-            "profile": "Profile"
-        }
+  "navbar": {
+    "brand": "Steering Engineering Association",
+    "home": "Home",
+    "about": {
+      "title": "About Us",
+      "association": "The Association",
+      "organizationStructure": "Organizational Structure",
+      "councilOfThirty": "Council of Thirty",
+      "elections": "Elections"
     },
-    "home": {
-        "hero": {
-            "title": "Steering Engineering Association",
-            "subtitle": "The voice of the student, the spirit of engineering, and the future of innovation.",
-            "cta": "Learn More"
-        },
-        "about": {
-            "title": "About Us",
-            "subtitle": "The Steering Engineering Association is a student organization dedicated to representing engineering students and enhancing their university experience through events, initiatives, and academic and social support. We work to build a strong, collaborative student community that contributes to developing students' skills and achieving their academic and professional goals."
-        },
-        "initiatives": {
-            "title": "Initiatives",
-            "subtitle": "Discover the initiatives and events organized by the association to enhance the student experience at the Faculty of Engineering.",
-            "initiative1": {
-                "title": "Sports & Cultural Events",
-                "desc": "Creating an incubator environment for students' talents and interests, while fostering friendly competition among them."
-            },
-            "initiative2": {
-                "title": "Professional Workshop Series",
-                "desc": "The association organizes a series of workshops focused on professional skill development, such as resume writing, interview preparation, and effective communication."
-            },
-            "initiative3": {
-                "title": "Social Initiatives",
-                "desc": "Hosting activities and events aimed at strengthening social bonds and promoting collaboration."
-            }
-        },
-        "news": {
-            "title": "Latest News",
-            "readMore": "Read More"
-        },
-        "contact": {
-            "title": "Contact Us",
-            "subtitle": "Have questions? We would love to hear from you."
-        },
-        "blogsPage": {
-            "title": "The Blog",
-            "subtitle": "News, updates, and stories from the student community.",
-            "searchPlaceholder": "Search articles...",
-            "readMore": "Read More",
-            "noResults": "No articles found.",
-            "latest": "Latest Posts",
-            "backToBlogs": "Back to Blog",
-            "lastUpdated": "Last Updated"
-        }
+    "events": "Events",
+    "posts": {
+      "title": "Topics",
+      "news": "News",
+      "issues": "Issues",
+      "blogs": "Blog",
+      "donations": "Donations"
     },
-    "gallery": {
-        "title": "Photo Gallery",
-        "loading": "Loading photos...",
-        "noPhotos": "No photos currently available."
+    "admin": "Admin",
+    "login": "Login",
+    "logout": "Logout",
+    "language": "العربية",
+    "userMenu": {
+      "profile": "Profile"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Steering Engineering Association",
+      "subtitle": "The voice of the student, the spirit of engineering, and the future of innovation.",
+      "cta": "Learn More",
+      "electionLiveBadge": "Elections Live",
+      "cycleLabel": "Cycle",
+      "voteNow": "Vote Now"
     },
-    "login": {
-        "title": "Login",
-        "username": "Username",
-        "password": "Password",
-        "remember": "Remember me",
-        "forgotPassword": "Forgot Password?",
-        "login": "Login",
-        "loading": "Logging in...",
-        "dontHaveAccount": "Don't have an account?",
-        "register": "Register",
-        "error": "Login failed. Please check your username and password."
-    },
-    "register": {
-        "title": "Create a New Account",
-        "username": "Username",
-        "email": "Email Address",
-        "emailExample": "name@example.com",
-        "password": "Password",
-        "confirmPassword": "Confirm Password",
-        "remember": "Remember me",
-        "forgotPassword": "Forgot Password?",
-        "register": "Register",
-        "loading": "Registering...",
-        "haveAccount": "Already have an account?",
-        "login": "Login",
-        "studentIndex": "Registration Number (Index)",
-        "uniId": "University ID",
-        "passcode": "Passcode",
-        "passcodeHelp": "The code received from the Steering Engineering Association.",
-        "nameEn": "Full Name (English)",
-        "nameAr": "Full Name (Arabic)",
-        "gender": "Gender",
-        "male": "Male",
-        "female": "Female",
-        "department": "Department",
-        "phone": "Phone Number",
-        "next": "Next",
-        "back": "Back"
-    },
-    "footer": {
-        "brand": "Steering Engineering Association",
-        "description": "The Steering Engineering Association is a student organization dedicated to representing engineering students and enhancing their university experience through events, initiatives, and academic and social support.",
-        "contact": "Contact Us",
-        "follow": "Follow Us",
-        "rights": "All rights reserved.",
-        "quickLinks": "Quick Links",
-        "privacy": "Privacy Policy",
-        "terms": "Terms and Conditions",
-        "email": "Email",
-        "phone": "Phone",
-        "locationName": "Location",
-        "location": "321 - Khartoum - Sudan",
-        "postalCodeName": "Postal Code"
-    },
-    "bot": {
-        "needHelp": "Need help?"
-    },
-    "feedback": {
-        "button": "Feedback",
-        "title": "Technical Support",
-        "messageLabel": "Message",
-        "messagePlaceholder": "Describe the issue or suggestion...",
-        "contactLabel": "Contact Information (Optional)",
-        "contactPlaceholder": "Email or Phone",
-        "send": "Send",
-        "sending": "Sending...",
-        "success": "Thank you! Your feedback has been received.",
-        "error": "Something went wrong. Please try again."
-    },
-    "secretariats": {
-        "title": "Association Secretariats",
-        "media": {
-            "name": "Media Secretariat",
-            "desc": "The secretariat dedicated to highlighting the association's identity and communicating its activities and initiatives creatively. It reflects the true image of the student environment and contributes to building effective communication with the university community and the outside world. It strives to create professional media content that expresses the spirit of the college, enhances its institutional presence, and acts as an incubator to develop its members' skills using the latest media technologies."
-        },
-        "academic": {
-            "name": "Academic Secretariat",
-            "desc": "The fundamental pillar concerned with supporting and enriching the educational journey of engineering students and overcoming academic obstacles. It also creates an integrated environment that goes beyond the classroom to develop research and practical skills, aiming for university and professional academic excellence."
-        },
-        "sports": {
-            "name": "Sports Secretariat",
-            "desc": "Responsible for activating and consolidating physical and mental culture within the college community. It manages all sports activities, directly supervises the teams representing the college in university tournaments, and spreads awareness about the importance of physical activity as an integral part of the quality of university life."
-        },
-        "external": {
-            "name": "External Relations",
-            "desc": "The interface that connects engineering students to the academic and professional world beyond the university's borders. It seeks to create real opportunities for students through partnerships with universities, international organizations, and professional institutions, as well as providing scholarships, internships, and developmental events to build a strong career path early on."
-        },
-        "cultural": {
-            "name": "Cultural Secretariat",
-            "desc": "The creative incubator that aims to enrich the university life experience by creating interactive spaces that bring students together around the values of art, literature, and knowledge. It serves as an umbrella organizing the work of specialized clubs, seeking to foster a sense of belonging and solidify free expression skills, acting as a bridge connecting the engineering community with its cultural surroundings."
-        },
-        "social": {
-            "name": "Social Secretariat",
-            "desc": "The human and service pillar of the association, promoting values of solidarity and cooperation within the college community. It works to improve the university environment both materially and morally through its various offices, contributing to the support of students in need and providing a conducive study environment governed by responsibility and synergy."
-        },
-        "financial": {
-            "name": "Financial Secretariat",
-            "desc": "Responsible for the complete supervision of financial resources and controlling incoming and outgoing cash flows. It aims to ensure the highest levels of transparency through budget preparation and accounting schedules, in addition to developing strategies to grow the association's financial resources to ensure the continuity of its activities."
-        },
-        "general": {
-            "name": "General Secretariat",
-            "desc": "Considered the beating heart of the Steering Engineering Association. It is responsible for coordinating between the various secretariats and the executive committee presidency, organizing relationships between departments, and approving their plans and programs. It is the most dynamic body, working to turn organizational visions into a cohesive institutional reality."
-        }
+    "about": {
+      "title": "About Us",
+      "subtitle": "The Steering Engineering Association is a student organization dedicated to representing engineering students and enhancing their university experience through events, initiatives, and academic and social support. We work to build a strong, collaborative student community that contributes to developing students' skills and achieving their academic and professional goals."
     },
     "statistics": {
-        "title": "Association Statistics",
-        "subtitle": "Numbers reflecting our impact and the growth of our engineering community",
-        "students": "Registered Student",
-        "workshops": "Workshops and Seminars",
-        "events": "Event",
-        "partners": "Partner",
-        "projects": "Student Project",
-        "volunteers": "Association's Members"
+      "title": "Association Statistics",
+      "subtitle": "Numbers reflecting our impact and the growth of our engineering community",
+      "students": "Registered Student",
+      "workshops": "Workshops and Seminars",
+      "events": "Event",
+      "partners": "Partner",
+      "projects": "Student Project",
+      "volunteers": "Association's Members"
     },
-    "profile": {
-        "title": "PROFILE",
-        "settings": "SETTINGS",
-        "detailsTab": "Details",
-        "certificatesTab": "Certificates",
-        "personalInfo": "Personal Info",
-        "nameAr": "Name (Arabic)",
-        "email": "Email",
-        "phone": "Phone",
-        "department": "Department",
-        "loadingProfile": "Loading Profile...",
-        "loadingCerts": "Loading Certificates...",
-        "noCerts": "No Certificates Yet",
-        "exploreCourses": "Explore Courses",
-        "certId": "Certificate ID",
-        "grade": "Grade",
-        "issueDate": "Issue Date",
-        "securityTab": "Security",
-        "UniversityID":"University ID",
-        "editProfile":"Edit Profile",
-        "cancel":"Cancel",
-        "Gender":"Gender",
-        "accountTab":"account",
-        "crunt":"Current",
-        "ussernameedit":"enter new username",
-        "emailnew":"enter new email",
-        "enternewname":"Update Email Address",
-        "UpdateName":"Update Username",
-        "Updateuse": "Update Username",
-        "Updateemail": "Update Email",
-        "saving":"saving",
-        "save":"save",
-        "Notifications":"Notifications",
-        "Nonotifications":"No notifications",
-        "Prev":"Prev",
-        "Next":"Next",
-        "Marking":"Marking...",
-
-        "MarkAllAsRead":"Mark all as read",
-        "Delete":"Delete",
-        "MarkAsRead":"MarkAsRead",
-        
-        "password":{
-            "securityTab": "Security",
-            "UniversityID":"University ID",
-            "editProfile":"Edit Profile",
-            "cancel":"Cancel",
-            "Gender":"Gender",
-            "accountTab":"account",
-            "crunt":"Current",
-            "ussernameedit":"enter new username",
-            "emailnew":"enter new email",
-            "enternewname":"Update Email Address",
-            "UpdateName":"Update Username",
-            "Updateuse": "Update Username",
-            "Updateemail": "Update Email",
-            "saving":"saving",
-            "save":"save",
-            "password":{
-                "securityTab": "Security",
-                "securityTitle": "Security Settings",
-                "oldPassword": "Old Password",
-                "newPassword": "New Password",
-                "confirmPassword": "Confirm Password",
-                "updateBtn": "Update Password",
-                "updatingBtn": "Updating...",
-                "passwordMismatch": "New passwords do not match",
-                "updateSuccess": "Password updated successfully!",
-                "networkError": "Network error, please try again later"
-            }
-        }
+    "initiatives": {
+      "title": "Initiatives",
+      "subtitle": "Discover the initiatives and events organized by the association to enhance the student experience at the Faculty of Engineering.",
+      "initiative1": {
+        "title": "Sports & Cultural Events",
+        "desc": "Creating an incubator environment for students' talents and interests, while fostering friendly competition among them."
+      },
+      "initiative2": {
+        "title": "Professional Workshop Series",
+        "desc": "The association organizes a series of workshops focused on professional skill development, such as resume writing, interview preparation, and effective communication."
+      },
+      "initiative3": {
+        "title": "Social Initiatives",
+        "desc": "Hosting activities and events aimed at strengthening social bonds and promoting collaboration."
+      }
+    },
+    "news": {
+      "title": "Latest News",
+      "readMore": "Read More"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "Have questions? We would love to hear from you."
+    },
+    "blogsPage": {
+      "title": "The Blog",
+      "subtitle": "News, updates, and stories from the student community.",
+      "searchPlaceholder": "Search articles...",
+      "readMore": "Read More",
+      "noResults": "No articles found.",
+      "latest": "Latest Posts",
+      "backToBlogs": "Back to Blog",
+      "lastUpdated": "Last Updated"
     }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "remember": "Remember me",
+    "forgotPassword": "Forgot Password?",
+    "login": "Login",
+    "loading": "Logging in...",
+    "dontHaveAccount": "Don't have an account?",
+    "register": "Register",
+    "error": "Login failed. Please check your username and password."
+  },
+  "register": {
+    "initial": {
+      "howToGetPasscode": "How to get a passcode?",
+      "noticeTitle": "Steps to get your passcode:\n",
+      "step1": "You must be an engineering student at the University of Khartoum (UofK).",
+      "step2": "Prepare identifying documents (University card is preferred, or another ID if unavailable).",
+      "step3": "Click the WhatsApp button below to send a pre-prepared message to the association's number. Fill in your details before sending, then attach your documents.",
+      "step4": "Managers will reply with your passcode if there are no complications."
+    },
+    "title": "Create a New Account",
+    "username": "Username",
+
+    "email": "Email Address",
+    "emailExample": "name@example.com",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "remember": "Remember me",
+    "forgotPassword": "Forgot Password?",
+    "register": "Register",
+    "loading": "Registering...",
+    "haveAccount": "Already have an account?",
+    "login": "Login",
+    "studentIndex": "Registration Number (Index)",
+    "uniId": "University ID",
+    "passcode": "Passcode",
+    "passcodeHelp": "The code received from the Steering Engineering Association.",
+    "nameEn": "Full Name (English)",
+    "nameAr": "Full Name (Arabic)",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "department": "Department",
+    "phone": "Phone Number",
+    "next": "Next",
+    "back": "Back"
+  },
+  "footer": {
+    "brand": "Steering Engineering Association",
+    "description": "The Steering Engineering Association is a student organization dedicated to representing engineering students and enhancing their university experience through events, initiatives, and academic and social support.",
+    "contact": "Contact Us",
+    "follow": "Follow Us",
+    "rights": "All rights reserved.",
+    "quickLinks": "Quick Links",
+    "privacy": "Privacy Policy",
+    "terms": "Terms and Conditions",
+    "email": "Email",
+    "phone": "Phone",
+    "locationName": "Location",
+    "location": "321 - Khartoum - Sudan",
+    "postalCodeName": "Postal Code"
+  },
+  "bot": {
+    "needHelp": "Need help?"
+  },
+  "constants": {
+    "departments": {
+      "mechanical": "Mechanical Engineering",
+      "civil": "Civil Engineering",
+      "electrical": "Electrical Engineering",
+      "chemical": "Chemical Engineering",
+      "petroleum": "Petroleum Engineering",
+      "agricultural": "Agricultural Engineering",
+      "mining": "Mining Engineering",
+      "surveying": "Surveying Engineering"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female"
+    }
+  },
+  "secretariats": {
+    "title": "Association Secretariats",
+    "media": {
+      "name": "Media Secretariat",
+      "desc": "The secretariat dedicated to highlighting the association's identity and communicating its activities and initiatives creatively. It reflects the true image of the student environment and contributes to building effective communication with the university community and the outside world. It strives to create professional media content that expresses the spirit of the college, enhances its institutional presence, and acts as an incubator to develop its members' skills using the latest media technologies."
+    },
+    "academic": {
+      "name": "Academic Secretariat",
+      "desc": "The fundamental pillar concerned with supporting and enriching the educational journey of engineering students and overcoming academic obstacles. It also creates an integrated environment that goes beyond the classroom to develop research and practical skills, aiming for university and professional academic excellence."
+    },
+    "sports": {
+      "name": "Sports Secretariat",
+      "desc": "Responsible for activating and consolidating physical and mental culture within the college community. It manages all sports activities, directly supervises the teams representing the college in university tournaments, and spreads awareness about the importance of physical activity as an integral part of the quality of university life."
+    },
+    "external": {
+      "name": "External Relations",
+      "desc": "The interface that connects engineering students to the academic and professional world beyond the university's borders. It seeks to create real opportunities for students through partnerships with universities, international organizations, and professional institutions, as well as providing scholarships, internships, and developmental events to build a strong career path early on."
+    },
+    "cultural": {
+      "name": "Cultural Secretariat",
+      "desc": "The creative incubator that aims to enrich the university life experience by creating interactive spaces that bring students together around the values of art, literature, and knowledge. It serves as an umbrella organizing the work of specialized clubs, seeking to foster a sense of belonging and solidify free expression skills, acting as a bridge connecting the engineering community with its cultural surroundings."
+    },
+    "social": {
+      "name": "Social Secretariat",
+      "desc": "The human and service pillar of the association, promoting values of solidarity and cooperation within the college community. It works to improve the university environment both materially and morally through its various offices, contributing to the support of students in need and providing a conducive study environment governed by responsibility and synergy."
+    },
+    "financial": {
+      "name": "Financial Secretariat",
+      "desc": "Responsible for the complete supervision of financial resources and controlling incoming and outgoing cash flows. It aims to ensure the highest levels of transparency through budget preparation and accounting schedules, in addition to developing strategies to grow the association's financial resources to ensure the continuity of its activities."
+    },
+    "general": {
+      "name": "General Secretariat",
+      "desc": "Considered the beating heart of the Steering Engineering Association. It is responsible for coordinating between the various secretariats and the executive committee presidency, organizing relationships between departments, and approving their plans and programs. It is the most dynamic body, working to turn organizational visions into a cohesive institutional reality."
+    }
+  },
+  "events": {
+    "title": "Public Events",
+    "secretariats": {
+      "media": "Media Secretariat",
+      "academic": "Academic Secretariat",
+      "sports": "Sports Secretariat",
+      "external_relations": "External Relations Secretariat",
+      "cultural": "Cultural Secretariat",
+      "financial": "Financial Secretariat",
+      "general": "General Secretariat",
+      "social": "Social Secretariat"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "close": "Close",
+      "signInToApply": "Sign in to apply",
+      "signInReason": "You must be signed in to submit an application for this event.",
+      "apply": "Apply Now",
+      "applyReason": "This event requires an application. Click to join.",
+      "goToForm": "Complete Application Form",
+      "goToFormReason": "You have applied but still need to complete the form to be accepted.",
+      "accepted": "Application Accepted",
+      "acceptedReason": "You are fully registered for this event.",
+      "loadingStatus": "Loading application status...",
+      "statusError": "Application status could not be loaded.",
+      "applyError": "Your application could not be submitted. Please try again.",
+      "applicationSubmitted": "Your application has been submitted.",
+      "noApplicationNeeded": "No Application Required",
+      "noApplicationReason": "This event is open for public participation without applying."
+    },
+    "labels": {
+      "starts": "Starts:",
+      "ends": "Ends:",
+      "coordinators": "Coordinators"
+    },
+    "noEvents": "No events available for this secretariat at the moment.",
+    "secretariatViews": "Event secretariats",
+    "searchPlaceholder": "Search events by name...",
+    "loadingEvents": "Loading events...",
+    "loadError": "Events could not be loaded.",
+    "retry": "Try again",
+    "noSearchResults": "No events match your search."
+  },
+  "election": {
+    "main": {
+      "error": "Failed to fetch election statistics.",
+      "badge": "Election Cycle #",
+      "title": "Engineering Association Election",
+      "timeStart": "Voting Begins In",
+      "timeEnd": "Voting Ends In",
+      "timeTicket": "Ticket Release Countdown",
+      "ticketNotice1": "Voting tickets are not open yet. Release Date",
+      "ticketNotice2": "Voting tickets are now available! Please Sign In to claim your ticket code",
+      "voteLive": "Voting Live",
+      "percentageCurrentTitle": "Student Voter Turnout",
+      "percentagePostTitle": "Final Voter Turnout",
+      "vote": "Vote Now",
+      "voteEndTitle": "Voting has ended: Cycle #",
+      "results": "View Election Results",
+
+      "statusInactive": "Elections Inactive",
+      "inactiveTitle": "No Active Election",
+      "inactiveDesc": "There are no active elections at this moment. Please check back during the next election cycle.",
+      "checkingStatus": "Checking election status..."
+    },
+    "vote": {
+      "back": "Back to Overview",
+      "loading": "Loading candidate list...",
+      "error": "Failed to load candidates. Please try again.",
+      "search": "Search candidates",
+      "selected": "Selected",
+      "ticketTitle": "Voting Ticket Code",
+      "ticketNotice": "Enter or paste your 8-character voting ticket code (e.g. ",
+      "candidateSelected": "candidates selected",
+      "submit": "Submit Vote",
+      "confirmTitle": "Confirm Your Vote",
+      "confirmQ": "Are you sure you want to submit your votes for the following selected candidate(s)?",
+      "confirmTicket": "Ticket",
+      "confirmNote": "Note",
+      "confirmNotice": "Once submitted, votes cannot be changed or reverted.",
+      "confirm": "Confirm & Cast Votes",
+      "confirmCancel": "Cancel",
+      "confirmError": "Failed to submit vote. Check your ticket code.",
+      "alertLimit": "You can only vote for up to ",
+      "alertSuccess": "Vote submitted successfully!",
+      "alertForbidden": "Vote ticket is not correct or already used!"
+    },
+    "results": {
+      "back": "Back to Overview",
+      "loading": "Loading election results...",
+      "error": "Failed to load election results.",
+      "title": "Election Results: Cycle #",
+      "columns": {
+        "rank": "Rank",
+        "name": "Candidate Name",
+        "department": "Department",
+        "voteCount": "Votes Received",
+        "userId": "Index",
+        "date": "Resolved Date"
+      }
+    },
+    "ticketPage": {
+      "title": "Election Ticket & Info",
+      "cycle": "Election Cycle #",
+      "statusLive": "Elections Live",
+      "statusInactive": "Elections Inactive",
+      "howItWorksTitle": "How Election Works",
+      "guideLivePrefix": "The Engineering Association conducts electronic voting via secure voting tickets. Your voting ticket allows you to select up to",
+      "guideLiveSuffix": "candidate(s) at once on a single ticket. You must generate your ticket below to vote.",
+      "guideInactive": "Elections take place periodically during the academic year. Each student receives a secure single-use voting ticket to cast votes up to a candidate limit established when a new election cycle begins.",
+      "ticketsStart": "Ticket Claim Window",
+      "voteStart": "Voting Begins",
+      "voteEnd": "Voting Ends",
+      "perCycleNotice": "Announced per cycle",
+      "goToElection": "Go to Election Hall",
+      "ticketUnavailableTitle": "Ticket Generation Currently Unavailable",
+      "ticketUnavailableDesc": "Elections are not active at this time. Ticket generation will open automatically once the next election cycle goes live.",
+      "loadingStats": "Loading election details...",
+      "errorStats": "Unable to load election information. Please try again later."
+    }
+  },
+  "profile": {
+    "election": {
+      "title": "Voting Credentials",
+      "description": "Generate your secure election voting ticket to participate in the ongoing campus elections.",
+      "warningTitle": "CRITICAL INFORMATION - READ CAREFULLY",
+      "warning1": "This ticket can only be generated ONCE per year.",
+      "warning2": "DO NOT SHARE this code with anyone, not even association staff.",
+      "warning3": "If you lose this ticket, you WILL NOT be able to vote. It cannot be recovered.",
+      "confirmCheckbox": "I understand that I must save this ticket immediately and keep it strictly confidential.",
+      "generateBtn": "Generate Election Ticket",
+      "generating": "Generating...",
+      "ticketLabel": "Your Official Voting Ticket",
+      "copyBtn": "Copy Ticket Code",
+      "copied": "Copied to clipboard!",
+      "alreadyGotError": "You have already generated your ticket for this election.",
+      "saveWarning": "Please copy and save this code somewhere secure right now. It will not be shown again once the page reloads."
+    },
+    "info": {
+      "title": "Personal Details",
+      "nameEn": "English Name",
+      "nameAr": "Arabic Name",
+      "phone": "Phone",
+      "department": "Department",
+      "gender": "Gender",
+      "uniId": "University ID",
+      "saveBtn": "Save Changes",
+      "saving": "Saving...",
+      "securityTitle": "Security",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "updatePasswordBtn": "Update Password"
+    },
+    "certificates": {
+      "title": "Your Certificates",
+      "empty": "No certificates found.",
+      "issued": "Issued",
+      "downloadZip": "ZIP"
+    },
+    "login": {
+      "updateUsername": "Update Username",
+      "usernameDesc": "Choose a unique username. Your username will be checked for availability.",
+      "username": "Username",
+      "checking": "Checking availability...",
+      "available": "is available!",
+      "taken": "is already taken or invalid.",
+      "updateUsernameBtn": "Update Username",
+      "updateEmail": "Update Email",
+      "email": "Email Address",
+      "updateEmailBtn": "Update Email"
+    },
+    "tabs": {
+      "info": "Personal Info & Security",
+      "certificates": "Certificates",
+      "login": "Login Keys"
+    },
+    "failedToLoad": "Failed to load profile"
+  }
 }

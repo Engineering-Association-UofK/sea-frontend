@@ -3,7 +3,7 @@ import {
   Routes,
   Route,
   Navigate,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
 import Home from "./pages/Home/Home";
@@ -26,30 +26,28 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicOnlyRoute from "./components/PublicOnlyRoute.jsx";
 import AdminUsersDashboard from "./pages/Admin/Admin Users/AdminUsersDashboard.jsx";
 import AdminUsersEntry from "./pages/Admin/Admin Users/AdminUsersEntry.jsx";
-import Dashboard from "./pages/Admin/Dashboard/Dashboard.jsx";
 import ImageStorageDashboard from "./pages/Admin/Image Storage/ImageStorageDashboard.jsx";
 import { CONFIG } from "./config";
-import ProfilePage from "./pages/Profile/ProfilePage.jsx";
-import UsersDashboard from './pages/Admin/Users/UsersDashboard.jsx';
+import { ProfilePage } from "./pages/Profile/ProfilePage.tsx";
+import UsersDashboard from "./pages/Admin/Users/UsersDashboard.jsx";
 import UsersEntry from "./pages/Admin/Users/UsersEntry.jsx";
-import FormEntry from './pages/forms/FormEntry.jsx';
-import FormsDashboard from './pages/forms/FormsDashboard.jsx';
-import FormsGallery from './pages/forms/FormsGallery';
+import FormEntry from "./pages/forms/FormEntry.jsx";
+import FormsDashboard from "./pages/forms/FormsDashboard.jsx";
+import FormsGallery from "./pages/forms/FormsGallery";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopButton from "./components/ScrollToTopButton.jsx";
 import AdminBotEditor from "./pages/Admin/bot/AdminBotEditor.jsx";
 import PostsEntry from "./pages/Admin/Posts/PostsEntry.jsx";
 import PostsDashboard from "./pages/Admin/Posts/PostsDashboard.jsx";
-import FormAnalysisView from './pages/forms/FormAnalysisView';
-import AnalysisGallery from './pages/forms/AnalysisGallery';
-import ApplicationView from './pages/forms/ApplicationView';
-import CategoryView from './pages/forms/CategoryView'; // Make sure this is here!
-import Events from "./pages/Events/Events.jsx";
-import EventsDashboard from "./pages/Admin/Events/EventsDashboard.jsx";
-import EventsEntry from "./pages/Admin/Events/EventsEntry.jsx";
+import FormAnalysisView from "./pages/forms/FormAnalysisView";
+import AnalysisGallery from "./pages/forms/AnalysisGallery";
+import ApplicationView from "./pages/forms/ApplicationView";
+import CategoryView from "./pages/forms/CategoryView";
 import AdminRoleGuard from "./components/AdminRoleGuard.jsx";
 import VerifyCertificate from "./components/verification/VerifyCertificate.jsx";
 import VerifyDocument from "./components/verification/VerifyDocument.jsx";
+import ElectionPage from "./pages/election/ElectionPage.jsx";
+import DashboardPage from "./pages/Admin/dashboard/DashboardPage.jsx";
 import TeamsDashboard from "./pages/Admin/Teams/TeamsDashboard.jsx";
 import PasscodeLookup from "./pages/Admin/passcode/PasscodeLookup.jsx";
 import InitialRegister from "./pages/auth/InitialRegister.jsx";
@@ -57,23 +55,33 @@ import RegistrationFlow from "./pages/auth/RegistrationFlow.jsx";
 import LoginForm from "./pages/auth/LoginForm.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 
-import React, { useEffect } from 'react';
-import ReactGA from 'react-ga4';
 import CertificatesDashboard from "./pages/Admin/Certificates/CertificatesDashboard.jsx";
 import CertificatesEntry from "./pages/Admin/Certificates/CertificatesEntry.jsx";
 import TemplatesDashboard from "./pages/Admin/Certificate Templates/TemplatesDashboard.jsx";
 import TemplatesEntry from "./pages/Admin/Certificate Templates/TemplatesEntry.jsx";
+import React, { useEffect } from "react";
+import ReactGA from "react-ga4";
+import ElectionAdminPage from "./pages/Admin/election/ElectionAdminPage.jsx";
+import ElectionsAbout from "./pages/About/elections/ElectionsAbout.jsx";
+import ElectionTicketPage from "./pages/Profile/ElectionTicketPage.tsx";
+import PublicEventsPage from "./pages/Events/PublicEventsPage.tsx";
+import EventsControlCenter from "./pages/Admin/Events/EventsControlCenter.tsx";
+import NotificationsAdminPage from "./pages/Admin/notifications/NotificationsAdminPage.tsx";
+import { Role } from "./features/auth/api/models.ts";
 
-ReactGA.initialize('G-S8J4CN53DH');
+ReactGA.initialize("G-S8J4CN53DH");
 
 const AnalyticsTracker = () => {
   const location = useLocation();
 
   useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname + location.search,
+    });
   }, [location]);
 
-  return null; 
+  return null;
 };
 
 function App() {
@@ -86,28 +94,46 @@ function App() {
           <Routes>
             {/* PUBLIC ROUTES (Accessible by everyone) */}
             {/* Main Layout containing NavBar and Footer */}
-            <Route element={<MainLayout />}  >
+            <Route element={<MainLayout />}>
               <Route path="/profile" element={<ProfilePage />} />
+              <Route
+                path="/profile/election"
+                element={<ElectionTicketPage />}
+              />
               <Route path="/" element={<Home />} />
               {/* Add other public routes here */}
               <Route path="/forms" element={<FormsGallery />} />
               <Route path="/apply/:formId" element={<ApplicationView />} />
-              <Route path="/forms/category/:categoryId" element={<CategoryView />} />
+              <Route
+                path="/forms/category/:categoryId"
+                element={<CategoryView />}
+              />
               <Route path="/about/association" element={<AssociationAbout />} />
-              <Route path="/about/organization-structure" element={<OrganizationStructureAbout />} />
-              <Route path="/about/council-of-thirty" element={<ThirtiethCouncilAbout />} />
-              <Route path="/events" element={<Events />} />
+              <Route
+                path="/about/organization-structure"
+                element={<OrganizationStructureAbout />}
+              />
+              <Route
+                path="/about/council-of-thirty"
+                element={<ThirtiethCouncilAbout />}
+              />
+              <Route path="/about/elections" element={<ElectionsAbout />} />
+              <Route path="/events" element={<PublicEventsPage />} />
               <Route path="/posts/announcements" element={<Blogs />} />
               <Route path="/posts/donations" element={<Donation />} />
               <Route path="/posts/announcements" element={<Blogs />} />
               <Route path="/posts/issues" element={<Issues />} />
               <Route path="/posts/news" element={<News />} />
-              <Route path="/posts/:type/:slug" element={<Post />} /> { /* view posts */}
-              <Route path="/cert/verify/:hash" element={<VerifyCertificate />} />
+              <Route path="/posts/:type/:slug" element={<Post />} />{" "}
+              {/* view posts */}
+              <Route
+                path="/cert/verify/:hash"
+                element={<VerifyCertificate />}
+              />
               <Route path="/doc/verify/:hash" element={<VerifyDocument />} />
             </Route>
 
-            {/* GUEST ONLY ROUTES (Login/Register) 
+            {/* GUEST ONLY ROUTES (Login/Register)
               - Logged in users get kicked out to /admin or / */}
             {/* Standalone Layout containing only Back to Home button */}
             <Route element={<StandaloneLayout />}>
@@ -119,50 +145,167 @@ function App() {
               </Route>
             </Route>
 
+            <Route element={<StandaloneLayout />}>
+              <Route path="/election" element={<ElectionPage />} />
+            </Route>
+
             {/* ADMIN ROUTES (Protected)
                 - Only users with role 'admin' can enter */}
             {/* Admin Routes wrapped in StandaloneLayout so they have the Back button */}
-            <Route element={<ProtectedRoute allowedRoles={CONFIG.ADMIN_ROLES} />}>
+            <Route
+              element={<ProtectedRoute allowedRoles={CONFIG.ADMIN_ROLES} />}
+            >
               <Route path="/admin" element={<AdminLayout />}>
                 {/* <Route index element={<Navigate to="dashboard" replace />} /> */}
-                
+
                 {/* Dashboard: Open to all admins */}
-                {/* <Route path="dashboard" element={<Dashboard />} /> */}
-                
+                <Route path="" element={<DashboardPage />} />
+
                 {/* Content: Posts */}
-                <Route path="posts" element={<AdminRoleGuard allowedRoles={["content:blog_manager"]}><PostsDashboard /></AdminRoleGuard>} />
-                <Route path="posts/:id" element={<AdminRoleGuard allowedRoles={["content:blog_manager"]}><PostsEntry /></AdminRoleGuard>} />
-                
+                <Route
+                  path="posts"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentBlogMgr]}>
+                      <PostsDashboard />
+                    </AdminRoleGuard>
+                  }
+                />
+                <Route
+                  path="posts/:id"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentBlogMgr]}>
+                      <PostsEntry />
+                    </AdminRoleGuard>
+                  }
+                />
+
                 {/* Content: Media Storage */}
-                <Route path="image-storage" element={<AdminRoleGuard allowedRoles={["content:editor"]}><ImageStorageDashboard /></AdminRoleGuard>} />
-                
+                <Route
+                  path="image-storage"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentEditor]}>
+                      <ImageStorageDashboard />
+                    </AdminRoleGuard>
+                  }
+                />
+
                 {/* Operations: Events */}
-                <Route path="events" element={<AdminRoleGuard allowedRoles={["content:event_manager"]}><EventsDashboard /></AdminRoleGuard>} />
-                <Route path="events/:id" element={<AdminRoleGuard allowedRoles={["content:event_manager"]}><EventsEntry /></AdminRoleGuard>} />
-                
+                <Route
+                  path="events"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentEventMgr]}>
+                      <EventsControlCenter />
+                    </AdminRoleGuard>
+                  }
+                />
+                {/* <Route
+                  path="events/:id"
+                  element={
+                    <AdminRoleGuard allowedRoles={["content:event_manager"]}>
+                      <EventsEntry />
+                    </AdminRoleGuard>
+                  }
+                /> */}
+
                 {/* Operations: Forms */}
-                <Route path="forms" element={<AdminRoleGuard allowedRoles={["content:form_manager"]}><FormsDashboard /></AdminRoleGuard>} />
-                <Route path="forms/create" element={<AdminRoleGuard allowedRoles={["content:form_manager"]}><FormEntry /></AdminRoleGuard>} />
-                <Route path="forms/edit/:id" element={<AdminRoleGuard allowedRoles={["content:form_manager"]}><FormEntry /></AdminRoleGuard>} />
-                <Route path="forms/analysis" element={<AdminRoleGuard allowedRoles={["content:form_manager"]}><AnalysisGallery /></AdminRoleGuard>} />
-                <Route path="forms/analysis/:id" element={<AdminRoleGuard allowedRoles={["content:form_manager"]}><FormAnalysisView /></AdminRoleGuard>} />
-                
+                <Route
+                  path="forms"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
+                      <FormsDashboard />
+                    </AdminRoleGuard>
+                  }
+                />
+                <Route
+                  path="forms/create"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
+                      <FormEntry />
+                    </AdminRoleGuard>
+                  }
+                />
+                <Route
+                  path="forms/edit/:id"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
+                      <FormEntry />
+                    </AdminRoleGuard>
+                  }
+                />
+                <Route
+                  path="forms/analysis"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
+                      <AnalysisGallery />
+                    </AdminRoleGuard>
+                  }
+                />
+                <Route
+                  path="forms/analysis/:id"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentFormMgr]}>
+                      <FormAnalysisView />
+                    </AdminRoleGuard>
+                  }
+                />
+
                 {/* Operations: Bot */}
-                <Route path="bot" element={<AdminRoleGuard allowedRoles={["content:editor"]}><AdminBotEditor /></AdminRoleGuard>} />
-                
+                <Route
+                  path="bot"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentEditor]}>
+                      <AdminBotEditor />
+                    </AdminRoleGuard>
+                  }
+                />
+
                 {/* Accounts: Admin Users */}
-                <Route path="admin-users" element={<AdminRoleGuard allowedRoles={["sys:admin_manager"]}><AdminUsersDashboard /></AdminRoleGuard>} />
-                <Route path="admin-users/:id" element={<AdminRoleGuard allowedRoles={["sys:admin_manager"]}><AdminUsersEntry /></AdminRoleGuard>} />
-                
+                <Route
+                  path="admin-users"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.SystemAdminManager]}>
+                      <AdminUsersDashboard />
+                    </AdminRoleGuard>
+                  }
+                />
+                <Route
+                  path="admin-users/:id"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.SystemAdminManager]}>
+                      <AdminUsersEntry />
+                    </AdminRoleGuard>
+                  }
+                />
+
                 {/* Accounts: Platform Users */}
-                <Route path="users" element={<AdminRoleGuard allowedRoles={["sys:user_manager"]}><UsersDashboard /></AdminRoleGuard>} />
-                <Route path="users/:id" element={<AdminRoleGuard allowedRoles={["sys:user_manager"]}><UsersEntry /></AdminRoleGuard>} />
+                <Route
+                  path="users"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
+                      <UsersDashboard />
+                    </AdminRoleGuard>
+                  }
+                />
+                <Route
+                  path="users/:id"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
+                      <UsersEntry />
+                    </AdminRoleGuard>
+                  }
+                />
 
                 {/* TEAMS: Council members */}
-                <Route path="teams" element={<AdminRoleGuard allowedRoles={["content:editor"]}><TeamsDashboard /></AdminRoleGuard>} />
+                <Route
+                  path="teams"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.ContentEditor]}>
+                      <TeamsDashboard />
+                    </AdminRoleGuard>
+                  }
+                />
 
                 {/* USERS: Passcode lookup */}
-                <Route path="passcode" element={<AdminRoleGuard allowedRoles={["sys:user_manager"]}><PasscodeLookup /></AdminRoleGuard>} />
                 
                 {/* Certificates Management: Certificates */}
                 <Route path="certificates" element={<AdminRoleGuard allowedRoles={["cert:certifier", "cert:manager", "cert:viewer"]}><CertificatesDashboard /></AdminRoleGuard>} />
@@ -172,18 +315,47 @@ function App() {
                 <Route path="certificate-templates" element={<AdminRoleGuard allowedRoles={["cert:certifier", "cert:manager", "cert:viewer"]}><TemplatesDashboard /></AdminRoleGuard>} />
                 <Route path="certificate-templates/:id" element={<AdminRoleGuard allowedRoles={["cert:certifier", "cert:manager", "cert:viewer"]}><TemplatesEntry /></AdminRoleGuard>} />
                 
+                <Route
+                  path="passcode"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
+                      <PasscodeLookup />
+                    </AdminRoleGuard>
+                  }
+                />
+
+                {/* Election */}
+                <Route
+                  path="election"
+                  element={
+                    <AdminRoleGuard allowedRoles={[]}>
+                      <ElectionAdminPage />
+                    </AdminRoleGuard>
+                  }
+                />
+
+                {/* Election */}
+                <Route
+                  path="notifications"
+                  element={
+                    <AdminRoleGuard allowedRoles={[Role.SystemUserMgr]}>
+                      <NotificationsAdminPage />
+                    </AdminRoleGuard>
+                  }
+                />
+
                 <Route path="*" element={<Navigate to="/admin/dashboard" />} />
               </Route>
             </Route>
 
             {/* </Route> */}
             {/* STUDENT ROUTES (Future) */}
-            {/* 
+            {/*
             <Route element={<MainLayout />}>
               <Route element={<ProtectedRoute allowedRoles={['student']} />}>
                  <Route path="/student/courses" element={<Courses />} />
               </Route>
-            </Route> 
+            </Route>
             */}
             <Route path="*" element={<Navigate to={"/"} />} />
           </Routes>

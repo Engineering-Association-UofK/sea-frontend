@@ -16,17 +16,17 @@ The application uses **JWT authentication** with role-based access control (RBAC
 
 ## Tech Stack
 
-| Category | Technologies |
-|----------|--------------|
-| Core | React 19, React Router DOM 7 |
-| Build Tool | Vite 7 |
-| UI Library | React Bootstrap 5, Bootstrap Icons |
-| State & Data Fetching | TanStack React Query 5 |
-| HTTP Client | Axios |
-| Markdown | React Markdown + custom editor |
-| Authentication | JWT (stored in localStorage/sessionStorage) |
-| Icons | FontAwesome, Bootstrap Icons |
-| Styling | CSS Modules, Bootstrap, custom CSS |
+| Category              | Technologies                                |
+| --------------------- | ------------------------------------------- |
+| Core                  | React 19, React Router DOM 7                |
+| Build Tool            | Vite 7                                      |
+| UI Library            | React Bootstrap 5, Bootstrap Icons          |
+| State & Data Fetching | TanStack React Query 5                      |
+| HTTP Client           | Axios                                       |
+| Markdown              | React Markdown + custom editor              |
+| Authentication        | JWT (stored in localStorage/sessionStorage) |
+| Icons                 | FontAwesome, Bootstrap Icons                |
+| Styling               | CSS Modules, Bootstrap, custom CSS          |
 
 ---
 
@@ -113,6 +113,7 @@ src/
 ## Core Features
 
 ### 1. Authentication & Authorization
+
 - Login as admin or regular user
 - JWT stored in `localStorage` (remember me) or `sessionStorage`
 - Role-based access: `ROLE_CONTENT_EDITOR`, `ROLE_SUPER_ADMIN`, etc.
@@ -120,6 +121,7 @@ src/
 - Two-step verification for admin login (code sent to email)
 
 ### 2. Blog Management
+
 - Full CRUD operations for blog posts
 - Markdown editor with live preview
 - Image upload with alt text
@@ -127,35 +129,41 @@ src/
 - Public blog listing with search and featured post
 
 ### 3. Admin User Management
+
 - Create/update/delete admin users
 - Assign roles (Content Editor, User Manager, Super Admin, etc.)
 - Email update capability
 - Verification status tracking
 
 ### 4. Bot Commands Management
+
 - Configure conversational flow for the chat bot
 - Each command has: keyword, trigger text, response text, next possible keywords
 - Multi-language support (English, Arabic, French)
 - Visual tree structure via checkbox selection
 
 ### 5. Image Storage & Gallery
+
 - Upload images & metadata to Backend
 - Publish/unpublish images to news section
 - Clear unused images
 - Image picker modal to reuse stored images
 
 ### 6. System Monitoring Dashboard
+
 - Real-time system health (CPU, memory, disk)
 - Application uptime
 - Auto-refresh every 30 seconds
 - Visual indicators (success/warning/danger)
 
 ### 7. Chat Bot (Floating Widget)
+
 - Contextual conversation with predefined commands
 - Supports RTL for Arabic
 - Options-based navigation
 
 ### 8. Multi-language Support
+
 - English / Arabic (RTL support)
 - Language persisted in localStorage
 - All UI text from JSON files
@@ -171,48 +179,52 @@ All API calls are wrapped in custom hooks following this pattern:
 ```javascript
 // service file
 export const blogService = {
-  getAll: () => apiClient.get('/api/blogs'),
-  create: (data) => apiClient.post('/api/blogs', data),
-}
+  getAll: () => apiClient.get("/api/blogs"),
+  create: (data) => apiClient.post("/api/blogs", data),
+};
 
 // hook file
 export const useBlogs = () => {
   return useQuery({
-    queryKey: ['blogs', 'list'],
+    queryKey: ["blogs", "list"],
     queryFn: () => blogService.getAll(),
-  })
-}
+  });
+};
 
 export const useCreateBlog = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: blogService.create,
-    onSuccess: () => queryClient.invalidateQueries(['blogs', 'list']),
-  })
-}
+    onSuccess: () => queryClient.invalidateQueries(["blogs", "list"]),
+  });
+};
 ```
 
 **Usage in components:**
+
 ```javascript
-const { data: blogs, isLoading } = useBlogs()
-const { mutate: createBlog } = useCreateBlog()
+const { data: blogs, isLoading } = useBlogs();
+const { mutate: createBlog } = useCreateBlog();
 ```
 
 ### Axios Client with Interceptors
 
 `axiosClient.js` is the central HTTP client:
+
 - Automatically attaches JWT token to requests
 - Handles 401 responses by clearing auth and redirecting to login
 - Returns `response.data` directly (no need for `.data.data`)
 
 **Skip auth when needed:**
+
 ```javascript
-apiClient.get('/public-endpoint', { skipAuth: true })
+apiClient.get("/public-endpoint", { skipAuth: true });
 ```
 
 ### Authentication Context
 
 `AuthContext` provides:
+
 - `user` (with roles, type, name, email)
 - `login()`, `logout()`, `register()`, `changePassword()`
 - `sendCode()`, `verifyCode()` for two-step verification
@@ -223,6 +235,7 @@ apiClient.get('/public-endpoint', { skipAuth: true })
 ### Markdown Editor
 
 Custom `MDEdit` component features:
+
 - Toolbar with formatting buttons (bold, italic, headings, lists, links, images)
 - Live preview toggle
 - Image insertion with width/alignment options
@@ -238,9 +251,6 @@ Create a `.env` file in the project root:
 # Backend API (without /api suffix)
 VITE_API_NEW_BASE_URL_RAW=http://localhost:8000
 
-# Monitoring service (separate backend)
-VITE_API_MONITOR_URL=http://localhost:8888
-
 ```
 
 ---
@@ -248,6 +258,7 @@ VITE_API_MONITOR_URL=http://localhost:8888
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 20+ and pnpm (recommended) or npm
 - Docker installed and running
 - Backend Compose container running
@@ -271,12 +282,12 @@ pnpm run dev
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start Vite dev server |
-| `pnpm build` | Production build |
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `pnpm dev`     | Start Vite dev server    |
+| `pnpm build`   | Production build         |
 | `pnpm preview` | Preview production build |
-| `pnpm lint` | Run ESLint |
+| `pnpm lint`    | Run ESLint               |
 
 ---
 
@@ -313,16 +324,20 @@ pnpm run dev
 ```javascript
 // Form submission with upload
 const handleSubmit = async (e) => {
-  e.preventDefault()
-  const finalImage = await upload(formData.image)
-  createMutation.mutate({ ...formData, image: finalImage })
-}
+  e.preventDefault();
+  const finalImage = await upload(formData.image);
+  createMutation.mutate({ ...formData, image: finalImage });
+};
 
 // Error handling with Alert
-{error && <Alert variant="danger">{error.message}</Alert>}
+{
+  error && <Alert variant="danger">{error.message}</Alert>;
+}
 
 // Loading state
-{isLoading && <Spinner animation="border" />}
+{
+  isLoading && <Spinner animation="border" />;
+}
 ```
 
 ---
@@ -336,16 +351,19 @@ Check our [OpenAPI documentation](https://api-sea-uofk.duckdns.org/swagger/index
 ## Troubleshooting
 
 ### "Unauthorized! Redirecting to login..."
+
 - Your JWT token expired or is invalid
 - Check `localStorage` / `sessionStorage` for `sea-token`
 - Backend might be returning 401
 
 ### React Query data not refreshing
+
 - Ensure `queryKey` matches between query and invalidation
 - Check `staleTime` configuration
 - Call `refetch()` manually if needed
 
 ### RTL layout issues
+
 - Language context sets `document.dir = 'rtl'` for Arabic
 - Use Bootstrap's built-in RTL support
 - Custom CSS should use `[dir="rtl"]` selectors

@@ -1,5 +1,5 @@
-import React from 'react';
-import Pagination from 'react-bootstrap/Pagination';
+import React from "react";
+import Pagination from "react-bootstrap/Pagination";
 
 /**
  * Reusable paginator for all admin dashboards.
@@ -10,16 +10,27 @@ import Pagination from 'react-bootstrap/Pagination';
  * - onPageChange {function} - Called with the new page number when user clicks
  * - disabled     {boolean}  - Disables all controls while fetching (optional)
  */
-const TablePaginator = ({ currentPage, totalPages, onPageChange, disabled = false }) => {
+const TablePaginator = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+  disabled = false,
+}) => {
   if (!totalPages || totalPages <= 1) return null;
 
   const handleClick = (newPage) => {
-    if (disabled || newPage < 1 || newPage > totalPages || newPage === currentPage) return;
+    if (
+      disabled ||
+      newPage < 1 ||
+      newPage > totalPages ||
+      newPage === currentPage
+    )
+      return;
     onPageChange(newPage);
   };
 
   const start = Math.max(1, currentPage - 2);
-  const end   = Math.min(totalPages, start + 4);
+  const end = Math.min(totalPages, start + 4);
 
   const items = [];
 
@@ -31,18 +42,24 @@ const TablePaginator = ({ currentPage, totalPages, onPageChange, disabled = fals
       disabled={disabled || currentPage === 1}
     >
       <i className="bi bi-chevron-left"></i>
-    </Pagination.Prev>
+    </Pagination.Prev>,
   );
 
   // First Page + Ellipsis
   if (start > 1) {
     items.push(
-      <Pagination.Item key={1} onClick={() => handleClick(1)} disabled={disabled}>
+      <Pagination.Item
+        key={1}
+        onClick={() => handleClick(1)}
+        disabled={disabled}
+      >
         1
-      </Pagination.Item>
+      </Pagination.Item>,
     );
     if (start > 2) {
-      items.push(<Pagination.Ellipsis key="start-ellipsis" disabled className="px-1" />);
+      items.push(
+        <Pagination.Ellipsis key="start-ellipsis" disabled className="px-1" />,
+      );
     }
   }
 
@@ -56,19 +73,25 @@ const TablePaginator = ({ currentPage, totalPages, onPageChange, disabled = fals
         disabled={disabled}
       >
         {p}
-      </Pagination.Item>
+      </Pagination.Item>,
     );
   }
 
   // Last Page + Ellipsis
   if (end < totalPages) {
     if (end < totalPages - 1) {
-      items.push(<Pagination.Ellipsis key="end-ellipsis" disabled className="px-1" />);
+      items.push(
+        <Pagination.Ellipsis key="end-ellipsis" disabled className="px-1" />,
+      );
     }
     items.push(
-      <Pagination.Item key={totalPages} onClick={() => handleClick(totalPages)} disabled={disabled}>
+      <Pagination.Item
+        key={totalPages}
+        onClick={() => handleClick(totalPages)}
+        disabled={disabled}
+      >
         {totalPages}
-      </Pagination.Item>
+      </Pagination.Item>,
     );
   }
 
@@ -80,7 +103,7 @@ const TablePaginator = ({ currentPage, totalPages, onPageChange, disabled = fals
       disabled={disabled || currentPage === totalPages}
     >
       <i className="bi bi-chevron-right"></i>
-    </Pagination.Next>
+    </Pagination.Next>,
   );
 
   return (

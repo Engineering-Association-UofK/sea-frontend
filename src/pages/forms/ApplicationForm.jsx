@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Form, Button, Card, Image, Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import TextField from '../../components/FormFields/TextField';
-import MCField from '../../components/FormFields/mcField';
-import AssociationLogo from '../../assets/OIP.webp';
-import bgImage from '../../assets/uofk.png';
-import { endpoints, authFetch } from '../../config/api';
-import { useLanguage } from '../../context/LanguageContext';
+import React, { useState } from "react";
+import { Form, Button, Card, Image, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import TextField from "../../components/FormFields/TextField";
+import MCField from "../../components/FormFields/mcField";
+import AssociationLogo from "../../assets/OIP.webp";
+import bgImage from "../../assets/uofk.png";
+import { endpoints, authFetch } from "../../config/api";
+import { useLanguage } from "../../context/LanguageContext";
 const ApplicationForm = ({ schema }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
@@ -15,21 +15,21 @@ const ApplicationForm = ({ schema }) => {
   const totalPages = schema.pages.length;
   const { language } = useLanguage();
   const handleInputChange = (fieldId, value, isValid = true) => {
-    setAnswers(prev => ({ ...prev, [fieldId]: value }));
-    setFieldValidity(prev => ({ ...prev, [fieldId]: isValid }));
+    setAnswers((prev) => ({ ...prev, [fieldId]: value }));
+    setFieldValidity((prev) => ({ ...prev, [fieldId]: isValid }));
   };
 
   const handleNext = (e) => {
     e.preventDefault();
     const currentFields = schema.pages[currentPage].fields;
     const hasError = currentFields.find(
-      f => (f.isRequired && !answers[f.id]) || fieldValidity[f.id] === false
+      (f) => (f.isRequired && !answers[f.id]) || fieldValidity[f.id] === false,
     );
     if (hasError) {
       alert("Please ensure all required fields are filled before continuing.");
       return;
     }
-    setCurrentPage(prev => prev + 1);
+    setCurrentPage((prev) => prev + 1);
     window.scrollTo(0, 0);
   };
 
@@ -39,7 +39,7 @@ const ApplicationForm = ({ schema }) => {
     // Validate last page
     const currentFields = schema.pages[currentPage].fields;
     const hasError = currentFields.find(
-      f => (f.isRequired && !answers[f.id]) || fieldValidity[f.id] === false
+      (f) => (f.isRequired && !answers[f.id]) || fieldValidity[f.id] === false,
     );
     if (hasError) {
       alert("Please ensure all required fields are filled before submitting.");
@@ -49,54 +49,55 @@ const ApplicationForm = ({ schema }) => {
     // Format answers for backend
     // CHECKBOX sends array → split into separate answer objects
     const formattedAnswers = [];
-    Object.keys(answers).forEach(fieldId => {
+    Object.keys(answers).forEach((fieldId) => {
       const value = answers[fieldId];
       if (Array.isArray(value)) {
         // CHECKBOX — send each selected option as separate answer
-        value.forEach(v => {
+        value.forEach((v) => {
           formattedAnswers.push({
             question_id: parseInt(fieldId),
-            answer_value: v.toString()
+            answer_value: v.toString(),
           });
         });
       } else {
         formattedAnswers.push({
           question_id: parseInt(fieldId),
-          answer_value: value.toString()
+          answer_value: value.toString(),
         });
       }
     });
 
     const submissionPayload = {
       form_id: schema.id,
-      Answers: formattedAnswers
+      Answers: formattedAnswers,
     };
 
     console.log("Submitting:", JSON.stringify(submissionPayload));
 
     try {
       const response = await authFetch(endpoints.submit, {
-        method: 'POST',
-        body: JSON.stringify(submissionPayload)
+        method: "POST",
+        body: JSON.stringify(submissionPayload),
       });
 
       if (response.ok) {
-        navigate('/forms/success'); // redirect to success page
+        navigate("/forms/success"); // redirect to success page
       } else {
         const err = await response.text();
         console.error("Submit failed:", err);
         alert("Submission failed. Please try again.");
 
         if (response.status === 409) {
-    alert(language === 'ar' 
-      ? 'لقد قمت بتقديم هذا النموذج من قبل.' 
-      : 'You have already submitted this form.'
-    );
-    navigate('/forms');
-  } else {
-    console.error("Submit failed:", JSON.stringify(err));
-    alert("Submission failed. Please try again.");
-  }
+          alert(
+            language === "ar"
+              ? "لقد قمت بتقديم هذا النموذج من قبل."
+              : "You have already submitted this form.",
+          );
+          navigate("/forms");
+        } else {
+          console.error("Submit failed:", JSON.stringify(err));
+          alert("Submission failed. Please try again.");
+        }
       }
     } catch (error) {
       console.error("Submit Error:", error);
@@ -106,8 +107,7 @@ const ApplicationForm = ({ schema }) => {
 
   const renderField = (field) => {
     switch (field.type) {
-
-      case 'text':
+      case "text":
         return (
           <TextField
             label={field.label}
@@ -117,11 +117,12 @@ const ApplicationForm = ({ schema }) => {
           />
         );
 
-      case 'number':
+      case "number":
         return (
           <Form.Group className="mb-3 text-start">
             <Form.Label className="fw-bold">
-              {field.label} {field.isRequired && <span className="text-danger">*</span>}
+              {field.label}{" "}
+              {field.isRequired && <span className="text-danger">*</span>}
             </Form.Label>
             <Form.Control
               type="number"
@@ -129,7 +130,7 @@ const ApplicationForm = ({ schema }) => {
               max={field.options?.max ?? 100}
               required={field.isRequired}
               onChange={(e) => handleInputChange(field.id, e.target.value)}
-              style={{ borderRadius: '10px' }}
+              style={{ borderRadius: "10px" }}
             />
             {field.options && (
               <Form.Text className="text-muted">
@@ -139,44 +140,48 @@ const ApplicationForm = ({ schema }) => {
           </Form.Group>
         );
 
-      case 'choice':
-  return (
-    <MCField
-      label={field.label}
-      options={field.options}
-      isRequired={field.isRequired}
-      name={`field-${field.id}`}
-      type={field.subType} // ✅ RADIO, CHECKBOX, or DROPDOWN
-      onChange={(value) => handleInputChange(field.id, value)}
-    />
-  );
+      case "choice":
+        return (
+          <MCField
+            label={field.label}
+            options={field.options}
+            isRequired={field.isRequired}
+            name={`field-${field.id}`}
+            type={field.subType} // ✅ RADIO, CHECKBOX, or DROPDOWN
+            onChange={(value) => handleInputChange(field.id, value)}
+          />
+        );
 
-      case 'date':
+      case "date":
         return (
           <Form.Group className="mb-3 text-start">
             <Form.Label className="fw-bold">
-              {field.label} {field.isRequired && <span className="text-danger">*</span>}
+              {field.label}{" "}
+              {field.isRequired && <span className="text-danger">*</span>}
             </Form.Label>
             <Form.Control
               type="date"
               required={field.isRequired}
               onChange={(e) => handleInputChange(field.id, e.target.value)}
-              style={{ borderRadius: '10px' }}
+              style={{ borderRadius: "10px" }}
             />
           </Form.Group>
         );
 
-      case 'file':
+      case "file":
         return (
           <Form.Group className="mb-3 text-start">
             <Form.Label className="fw-bold">
-              {field.label} {field.isRequired && <span className="text-danger">*</span>}
+              {field.label}{" "}
+              {field.isRequired && <span className="text-danger">*</span>}
             </Form.Label>
             <Form.Control
               type="file"
               required={field.isRequired}
-              onChange={(e) => handleInputChange(field.id, e.target.files[0]?.name || '')}
-              style={{ borderRadius: '10px' }}
+              onChange={(e) =>
+                handleInputChange(field.id, e.target.files[0]?.name || "")
+              }
+              style={{ borderRadius: "10px" }}
             />
           </Form.Group>
         );
@@ -187,41 +192,71 @@ const ApplicationForm = ({ schema }) => {
   };
 
   return (
-    <div style={{
-      position: 'relative', minHeight: '100vh', width: '100%',
-      display: 'flex', justifyContent: 'center', alignItems: 'center',
-      padding: '40px 20px', overflow: 'hidden'
-    }}>
-
+    <div
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "40px 20px",
+        overflow: "hidden",
+      }}
+    >
       {/* BACKGROUND */}
-      <div style={{
-        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center 80%',
-        filter: 'blur(10px) brightness(0.9)',
-        transform: 'scale(1.15)',
-        zIndex: 1
-      }} />
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center 80%",
+          filter: "blur(10px) brightness(0.9)",
+          transform: "scale(1.15)",
+          zIndex: 1,
+        }}
+      />
 
-      <Container style={{ maxWidth: '820px', zIndex: 10, position: 'relative' }}>
-        <Card className="overflow-hidden shadow-lg" style={{
-          borderRadius: '28px',
-          background: 'rgba(255, 255, 255, 0.98)',
-          border: '2px solid #ececed'
-        }}>
-
+      <Container
+        style={{ maxWidth: "820px", zIndex: 10, position: "relative" }}
+      >
+        <Card
+          className="overflow-hidden shadow-lg"
+          style={{
+            borderRadius: "28px",
+            background: "rgba(255, 255, 255, 0.98)",
+            border: "2px solid #ececed",
+          }}
+        >
           {/* HEADER */}
           <div className="text-center px-4 px-md-5 pt-5 pb-4 border-bottom bg-white">
-            <div className="mx-auto mb-4 shadow-sm" style={{
-              width: '100px', height: '100px', borderRadius: '50%',
-              background: '#ffffff', display: 'flex', justifyContent: 'center',
-              alignItems: 'center', border: '3px solid #f1f5f9', overflow: 'hidden'
-            }}>
-              <Image src={AssociationLogo} style={{ width: '80%', objectFit: 'contain' }} />
+            <div
+              className="mx-auto mb-4 shadow-sm"
+              style={{
+                width: "100px",
+                height: "100px",
+                borderRadius: "50%",
+                background: "#ffffff",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                border: "3px solid #f1f5f9",
+                overflow: "hidden",
+              }}
+            >
+              <Image
+                src={AssociationLogo}
+                style={{ width: "80%", objectFit: "contain" }}
+              />
             </div>
 
-            <h2 className="fw-bold" style={{ color: '#1e293b' }}>{schema.title}</h2>
+            <h2 className="fw-bold" style={{ color: "#1e293b" }}>
+              {schema.title}
+            </h2>
             <p className="text-muted small">{schema.description}</p>
 
             {/* STEPPER */}
@@ -231,30 +266,44 @@ const ApplicationForm = ({ schema }) => {
                   <div
                     onClick={() => idx < currentPage && setCurrentPage(idx)}
                     style={{
-                      width: '32px', height: '32px', borderRadius: '50%',
-                      backgroundColor: idx <= currentPage ? '#2563eb' : '#e2e8f0',
-                      color: 'white', display: 'flex', alignItems: 'center',
-                      justifyContent: 'center', fontSize: '13px', fontWeight: 'bold',
-                      cursor: idx < currentPage ? 'pointer' : 'default', transition: '0.3s'
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      backgroundColor:
+                        idx <= currentPage ? "#2563eb" : "#e2e8f0",
+                      color: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "13px",
+                      fontWeight: "bold",
+                      cursor: idx < currentPage ? "pointer" : "default",
+                      transition: "0.3s",
                     }}
                   >
-                    {idx < currentPage ? '✓' : idx + 1}
+                    {idx < currentPage ? "✓" : idx + 1}
                   </div>
                   {idx < totalPages - 1 && (
-                    <div style={{
-                      flex: 1, height: '2px',
-                      backgroundColor: idx < currentPage ? '#2563eb' : '#e2e8f0',
-                      margin: '0 10px'
-                    }} />
+                    <div
+                      style={{
+                        flex: 1,
+                        height: "2px",
+                        backgroundColor:
+                          idx < currentPage ? "#2563eb" : "#e2e8f0",
+                        margin: "0 10px",
+                      }}
+                    />
                   )}
                 </React.Fragment>
               ))}
             </div>
 
-            <h6 className="mt-4 fw-bold" style={{ color: '#2563eb' }}>
+            <h6 className="mt-4 fw-bold" style={{ color: "#2563eb" }}>
               Step {currentPage + 1} of {totalPages}
             </h6>
-            <p className="text-muted small">{schema.pages[currentPage].title}</p>
+            <p className="text-muted small">
+              {schema.pages[currentPage].title}
+            </p>
           </div>
 
           {/* FORM BODY */}
@@ -267,7 +316,9 @@ const ApplicationForm = ({ schema }) => {
               ))}
 
               {schema.pages[currentPage].fields.length === 0 && (
-                <p className="text-muted text-center py-3">No questions on this page.</p>
+                <p className="text-muted text-center py-3">
+                  No questions on this page.
+                </p>
               )}
 
               {/* NAVIGATION BUTTONS */}
@@ -275,8 +326,8 @@ const ApplicationForm = ({ schema }) => {
                 <Button
                   variant="light"
                   disabled={currentPage === 0}
-                  onClick={() => setCurrentPage(prev => prev - 1)}
-                  style={{ borderRadius: '12px', padding: '10px 25px' }}
+                  onClick={() => setCurrentPage((prev) => prev - 1)}
+                  style={{ borderRadius: "12px", padding: "10px 25px" }}
                 >
                   ← Back
                 </Button>
@@ -286,8 +337,11 @@ const ApplicationForm = ({ schema }) => {
                     type="button"
                     onClick={handleNext}
                     style={{
-                      background: '#2563eb', border: 'none',
-                      borderRadius: '12px', padding: '12px 35px', fontWeight: 600
+                      background: "#2563eb",
+                      border: "none",
+                      borderRadius: "12px",
+                      padding: "12px 35px",
+                      fontWeight: 600,
                     }}
                   >
                     Continue →
@@ -296,8 +350,11 @@ const ApplicationForm = ({ schema }) => {
                   <Button
                     type="submit"
                     style={{
-                      background: '#16a34a', border: 'none',
-                      borderRadius: '12px', padding: '12px 35px', fontWeight: 600
+                      background: "#16a34a",
+                      border: "none",
+                      borderRadius: "12px",
+                      padding: "12px 35px",
+                      fontWeight: 600,
                     }}
                   >
                     Submit ✓

@@ -1,28 +1,28 @@
 /* Ensure the card doesn't clip the dropdown */
 .card {
-    /* overflow: visible !important; 
+  /* overflow: visible !important; 
     position: relative; */
 }
 .card:hover {
-    /* z-index: 10;
+  /* z-index: 10;
     transform: translateY(-5px); */
 }
 
 /* Ensure the Dropdown menu can flow outside the card boundaries */
 .dropdownMenu {
-    /* min-width: 160px;
+  /* min-width: 160px;
     z-index: 9999; Force it on top */
 }
 .dropBtn {
-    background-color: transparent;
+  background-color: transparent;
 }
 .dropBtn:hover {
-    background-color: var(--bs-btn-hover-bg);
+  background-color: var(--bs-btn-hover-bg);
 }
 .tableWrapper {
-    height: calc(100dvh - 55px - 48px - 42px - 48px);
+  height: calc(100dvh - 55px - 48px - 42px - 48px);
 }
 .gridWrapper {
-    height: calc(100dvh - 55px - 48px - 42px - 64px);
-    margin-bottom: 0;
+  height: calc(100dvh - 55px - 48px - 42px - 64px);
+  margin-bottom: 0;
 }

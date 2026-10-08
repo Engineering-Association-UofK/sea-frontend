@@ -25,13 +25,7 @@ const AutoDirection = Extension.create({
   addGlobalAttributes() {
     return [
       {
-        types: [
-          "paragraph",
-          "heading",
-          "blockquote",
-          "codeBlock",
-          "listItem",
-        ],
+        types: ["paragraph", "heading", "blockquote", "codeBlock", "listItem"],
 
         attributes: {
           dir: {
@@ -53,10 +47,7 @@ const AutoDirection = Extension.create({
   },
 });
 
-export default function TextEditor({
-  value = "",
-  onChange,
-}) {
+export default function TextEditor({ value = "", onChange }) {
   const [html, setHtml] = useState(value);
 
   const editor = useEditor({
@@ -145,33 +136,21 @@ export default function TextEditor({
   };
 
   const setHeading = (level) => {
-    editor
-      .chain()
-      .focus()
-      .setNode("heading", { level })
-      .run();
+    editor.chain().focus().setNode("heading", { level }).run();
   };
 
   /*
    * Set the current block back to paragraph.
    */
   const setParagraph = () => {
-    editor
-      .chain()
-      .focus()
-      .setParagraph()
-      .run();
+    editor.chain().focus().setParagraph().run();
   };
 
   /*
    * Code block.
    */
   const setCodeBlock = () => {
-    editor
-      .chain()
-      .focus()
-      .setCodeBlock()
-      .run();
+    editor.chain().focus().setCodeBlock().run();
   };
 
   return (
@@ -206,11 +185,7 @@ export default function TextEditor({
             title="Bold"
             active={editor.isActive("bold")}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .toggleBold()
-                .run();
+              editor.chain().focus().toggleBold().run();
             }}
           >
             B
@@ -221,11 +196,7 @@ export default function TextEditor({
             title="Italic"
             active={editor.isActive("italic")}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .toggleItalic()
-                .run();
+              editor.chain().focus().toggleItalic().run();
             }}
           >
             <i>I</i>
@@ -236,11 +207,7 @@ export default function TextEditor({
             title="Strike"
             active={editor.isActive("strike")}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .toggleStrike()
-                .run();
+              editor.chain().focus().toggleStrike().run();
             }}
           >
             <s>S</s>
@@ -251,11 +218,7 @@ export default function TextEditor({
             title="Inline Code"
             active={editor.isActive("code")}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .toggleCode()
-                .run();
+              editor.chain().focus().toggleCode().run();
             }}
           >
             {"</>"}
@@ -287,11 +250,7 @@ export default function TextEditor({
             title="Bullet List"
             active={editor.isActive("bulletList")}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .toggleBulletList()
-                .run();
+              editor.chain().focus().toggleBulletList().run();
             }}
           >
             • List
@@ -302,11 +261,7 @@ export default function TextEditor({
             title="Numbered List"
             active={editor.isActive("orderedList")}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .toggleOrderedList()
-                .run();
+              editor.chain().focus().toggleOrderedList().run();
             }}
           >
             1. List
@@ -317,11 +272,7 @@ export default function TextEditor({
             title="Blockquote"
             active={editor.isActive("blockquote")}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .toggleBlockquote()
-                .run();
+              editor.chain().focus().toggleBlockquote().run();
             }}
           >
             ❝
@@ -340,11 +291,7 @@ export default function TextEditor({
           <Button
             title="Horizontal Rule"
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .setHorizontalRule()
-                .run();
+              editor.chain().focus().setHorizontalRule().run();
             }}
           >
             ―
@@ -355,11 +302,7 @@ export default function TextEditor({
             title="Undo"
             disabled={!editor.can().undo()}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .undo()
-                .run();
+              editor.chain().focus().undo().run();
             }}
           >
             ↶
@@ -370,11 +313,7 @@ export default function TextEditor({
             title="Redo"
             disabled={!editor.can().redo()}
             onClick={() => {
-              editor
-                .chain()
-                .focus()
-                .redo()
-                .run();
+              editor.chain().focus().redo().run();
             }}
           >
             ↷

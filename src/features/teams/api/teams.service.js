@@ -1,7 +1,7 @@
-import apiClient from '../../../api/axiosClient';
-import { CONFIG } from '../../../config';
+import apiClient from "../../../api/axiosClient";
+import { CONFIG } from "../../../config";
 
-const ENDPOINT = '/v1/admin/team';
+const ENDPOINT = "/v1/admin/team";
 
 export const teamsService = {
   getAll: async () => {
@@ -23,4 +23,4 @@ export const teamsService = {
   delete: async (id) => {
     return await apiClient.delete(`${ENDPOINT}/${id}`);
   },
-}
+};

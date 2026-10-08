@@ -1,6 +1,6 @@
-import apiClient from '../../../api/axiosClient';
+import apiClient from "../../../api/axiosClient";
 
-const ENDPOINT = '/v1/admin';
+const ENDPOINT = "/v1/admin";
 
 export const adminUsersService = {
   getAll: async ({ page = 1, limit = 25 } = {}) => {
@@ -10,7 +10,7 @@ export const adminUsersService = {
   addManager: async (id) => {
     return await apiClient.post(`${ENDPOINT}/add-manager/${id}`);
   },
-  
+
   removeManager: async (id) => {
     return await apiClient.post(`${ENDPOINT}/remove-manager/${id}`);
   },

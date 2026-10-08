@@ -19,7 +19,7 @@
   align-self: flex-start;
 }
 
-.row.g-4>[class*="col-"] {
+.row.g-4 > [class*="col-"] {
   display: flex;
 }
 
@@ -30,7 +30,9 @@
 }
 
 .hover-card {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .hover-card:hover {

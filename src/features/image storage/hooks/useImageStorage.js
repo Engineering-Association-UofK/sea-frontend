@@ -1,12 +1,16 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { imageStorageService } from '../api/imageStorage.service';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { imageStorageService } from "../api/imageStorage.service";
 
 // Key for caching
 export const IMAGE_STORAGE_KEYS = {
-  all: ['image storage items'],
-  lists: () => [...IMAGE_STORAGE_KEYS.all, 'list'],
-  list: (page, limit) => [...IMAGE_STORAGE_KEYS.lists(), 'list', { page, limit }],
-  detail: (id) => [...IMAGE_STORAGE_KEYS.all, 'detail', id],
+  all: ["image storage items"],
+  lists: () => [...IMAGE_STORAGE_KEYS.all, "list"],
+  list: (page, limit) => [
+    ...IMAGE_STORAGE_KEYS.lists(),
+    "list",
+    { page, limit },
+  ],
+  detail: (id) => [...IMAGE_STORAGE_KEYS.all, "detail", id],
 };
 
 // Hook for fetching all image storage items
@@ -15,7 +19,7 @@ export const useImageStorageItems = (page = 1, limit = 25) => {
     queryKey: IMAGE_STORAGE_KEYS.list(page, limit),
     queryFn: () => imageStorageService.getAll({ page, limit }),
 
-    staleTime: 0, 
+    staleTime: 0,
     // Keep previous page data visible while the next page loads
     placeholderData: (prev) => prev,
   });
@@ -42,7 +46,7 @@ export const useClearUnused = () => {
     mutationFn: imageStorageService.clear,
     onSuccess: () => {
       // Refresh the list automatically
-      queryClient.invalidateQueries(['image storage items', 'list']);
+      queryClient.invalidateQueries(["image storage items", "list"]);
     },
   });
 };

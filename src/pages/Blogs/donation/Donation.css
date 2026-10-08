@@ -20,7 +20,9 @@
   padding: 1rem;
   border-radius: 10px;
   background: white;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   gap: 1rem;
 }
 
@@ -76,7 +78,7 @@
   transform: translateX(-3px);
 }
 
-.skeleton{
+.skeleton {
   gap: 1rem;
   padding: 1rem;
   background: white;

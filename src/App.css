@@ -16,8 +16,12 @@
 }
 
 @keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -39,7 +43,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   height: calc(100vh - 142px); /* Fallback rule */
-  height: calc(100dvh - 157px); 
+  height: calc(100dvh - 157px);
   margin-bottom: -24px;
 }
 
@@ -60,7 +64,9 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   width: 240px;
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .node-header {
@@ -102,9 +108,18 @@
 }
 
 /* Selection Modifiers */
-.node-selected-primary { border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15); }
-.node-selected-indigo { border-color: #6610f2; box-shadow: 0 0 0 3px rgba(102, 16, 242, 0.15); }
-.node-selected-warning { border-color: #ffc107; box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15); }
+.node-selected-primary {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+.node-selected-indigo {
+  border-color: #6610f2;
+  box-shadow: 0 0 0 3px rgba(102, 16, 242, 0.15);
+}
+.node-selected-warning {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
+}
 
 .variable-tag {
   background: #f1f2f6;
@@ -138,52 +153,55 @@
 
 /* Custom Modern Pagination Wrapper */
 .custom-pagination-container .pagination .page-item {
-    margin: 0 2px;
+  margin: 0 2px;
 }
 
 .custom-pagination-container .pagination .page-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 32px;
-    height: 32px;
-    border-radius: 50% !important; /* Forces circular shapes */
-    border: 1px solid var(--bs-border-color-translucent);
-    color: var(--bs-secondary-color);
-    background-color: var(--bs-body-bg);
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50% !important; /* Forces circular shapes */
+  border: 1px solid var(--bs-border-color-translucent);
+  color: var(--bs-secondary-color);
+  background-color: var(--bs-body-bg);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
 
 /* Hover States */
-.custom-pagination-container .pagination .page-item:not(.active):not(.disabled) .page-link:hover {
-    background-color: var(--bs-secondary-bg);
-    color: var(--bs-primary);
-    border-color: var(--bs-primary-border-subtle);
-    transform: translateY(-1px);
+.custom-pagination-container
+  .pagination
+  .page-item:not(.active):not(.disabled)
+  .page-link:hover {
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-primary);
+  border-color: var(--bs-primary-border-subtle);
+  transform: translateY(-1px);
 }
 
 /* Active Page Node */
 .custom-pagination-container .pagination .page-item.active .page-link {
-    background-color: var(--bs-primary);
-    border-color: var(--bs-primary);
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(var(--bs-primary-rgb), 0.25);
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Disabled Nodes */
 .custom-pagination-container .pagination .page-item.disabled .page-link {
-    background-color: var(--bs-tertiary-bg);
-    border-color: var(--bs-border-color-translucent);
-    color: var(--bs-secondary-text-emphasis);
-    opacity: 0.5;
+  background-color: var(--bs-tertiary-bg);
+  border-color: var(--bs-border-color-translucent);
+  color: var(--bs-secondary-text-emphasis);
+  opacity: 0.5;
 }
 
 /* Remove default focus bounding outlines */
 .custom-pagination-container .pagination .page-link:focus {
-    box-shadow: none;
-    background-color: var(--bs-secondary-bg);
+  box-shadow: none;
+  background-color: var(--bs-secondary-bg);
 }
 .custom-pagination-container .pagination .page-item.active .page-link:focus {
-    background-color: var(--bs-primary);
+  background-color: var(--bs-primary);
 }

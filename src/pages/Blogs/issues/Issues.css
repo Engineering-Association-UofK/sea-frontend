@@ -79,7 +79,9 @@
 .timeline-right .card {
   width: 100%;
   margin-bottom: 0;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   border-radius: 1rem;
   overflow: hidden;
 }

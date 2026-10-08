@@ -1,7 +1,7 @@
-import apiClient from '../../../api/axiosClient';
-import { CONFIG } from '../../../config';
+import apiClient from "../../../api/axiosClient";
+import { CONFIG } from "../../../config";
 
-const ENDPOINT = '/v1/admin/user';
+const ENDPOINT = "/v1/admin/user";
 
 export const usersService = {
   getAll: async ({ page = 1, limit = 25 } = {}) => {
@@ -25,21 +25,26 @@ export const usersService = {
   },
 
   suspend: async ({ user_id, reason, duration }) => {
-    return await apiClient.post(`${ENDPOINT}/suspend`, { user_id, reason, duration });
+    return await apiClient.post(`${ENDPOINT}/suspend`, {
+      user_id,
+      reason,
+      duration,
+    });
   },
 };
 
 export const assignPasscodesStream = async (onMessage, onError) => {
-  const token = localStorage.getItem('sea-token') || sessionStorage.getItem('sea-token');
+  const token =
+    localStorage.getItem("sea-token") || sessionStorage.getItem("sea-token");
   const response = await fetch(
-    `${CONFIG.API_NEW_BASE_URL+ENDPOINT}/assign-passcodes`,
+    `${CONFIG.API_NEW_BASE_URL + ENDPOINT}/assign-passcodes`,
     {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
-    }
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    },
   );
 
   if (!response.body) {
